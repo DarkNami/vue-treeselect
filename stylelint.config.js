@@ -15,5 +15,6 @@ module.exports = {
     'no-descending-specificity': null,
     'selector-max-compound-selectors': null,
     'block-no-empty': [ true, { ignore: [] } ],
+    'linebreaks': (process.platform === 'win32' ? 'windows' : 'unix'),
   },
 }
