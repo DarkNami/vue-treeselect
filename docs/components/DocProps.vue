@@ -316,7 +316,7 @@
         name: 'showCountOf',
         type: 'String',
         defaultValue: code('"ALL_CHILDREN"'),
-        description: `Used in conjunction with ${code('showCount')} to specify which type of count number should be displayed. <br>Acceptable values: ${code('"ALL_CHILDREN"')}, ${code('"ALL_DESCENDANTS"')}, ${code('"LEAF_CHILDREN"')} or ${code('"LEAF_DESCENDANTS"')}.`,
+        description: `Used in conjunction with ${code('showCount')} to specify which type of count number should be displayed. <br>Acceptable values: ${code('"ALL_CHILDREN"')}, ${code('"ALL_DESCENDANTS"')}, ${code('"LEAF_CHILDREN"')}, ${code('"LEAF_DESCENDANTS"')} or ${code('"MANUALLY_SELECTED_ONLY"')}.`,
       }, {
         name: 'showCountOnSearch',
         type: 'Boolean',

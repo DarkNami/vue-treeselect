@@ -17,7 +17,7 @@ import Option from '@src/components/Option'
 import MultiValueItem from '@src/components/MultiValueItem'
 import {
   UNCHECKED, CHECKED, INDETERMINATE,
-  ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE,
+  ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE, MANUALLY_SELECTED_ONLY,
 } from '@src/constants'
 
 describe('Props', () => {
@@ -1284,7 +1284,7 @@ describe('Props', () => {
       })
 
       describe('combined with valueConsistsOf (multi-select mode)', () => {
-        const types = [ 'ALL', 'BRANCH_PRIORITY', 'LEAF_PRIORITY', 'ALL_WITH_INDETERMINATE' ]
+        const types = [ 'ALL', 'BRANCH_PRIORITY', 'LEAF_PRIORITY', 'ALL_WITH_INDETERMINATE', 'MANUALLY_SELECTED_ONLY' ]
 
         types.forEach(valueConsistsOf => {
           it(`when valueConsistsOf=${valueConsistsOf}`, async () => {
@@ -2419,6 +2419,18 @@ describe('Props', () => {
         vm.select(vm.forest.nodeMap.ac)
         expect(vm.internalValue).toEqual([ 'aa', 'aaa', 'aab', 'ab', 'aba', 'abb', 'b', 'ac', 'a' ])
       })
+
+      it('when valueConsistsOf=MANUALLY_SELECTED_ONLY', () => {
+        wrapper.setProps({ valueConsistsOf: MANUALLY_SELECTED_ONLY })
+
+        expect(vm.internalValue).toEqual([ 'aa' ])
+        vm.select(vm.forest.nodeMap.ab)
+        expect(vm.internalValue).toEqual([ 'aa', 'ab' ])
+        vm.select(vm.forest.nodeMap.b)
+        expect(vm.internalValue).toEqual([ 'aa', 'ab', 'b' ])
+        vm.select(vm.forest.nodeMap.ac)
+        expect(vm.internalValue).toEqual([ 'aa', 'ab', 'b', 'ac' ])
+      })
     })
 
     describe('set value', () => {
@@ -2456,7 +2468,7 @@ describe('Props', () => {
       })
 
       describe('when multiple=false', () => {
-        const types = [ ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE ]
+        const types = [ ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE, MANUALLY_SELECTED_ONLY ]
         types.forEach(type => {
           it(`when valueConsistsOf=${type}`, () => {
             wrapper.setProps({ multiple: false })
@@ -2795,6 +2807,75 @@ describe('Props', () => {
           expect(vm.forest.selectedNodeIds).toEqual([ 'aaa', 'aab', 'aa' ])
           expect(vm.forest.checkedStateMap).toEqual({
             a: INDETERMINATE,
+            aa: CHECKED,
+            aaa: CHECKED,
+            aab: CHECKED,
+            ab: UNCHECKED,
+            b: UNCHECKED,
+            c: UNCHECKED,
+          })
+
+          wrapper.setProps({ value: [ 'c' ] })
+          expect(vm.internalValue).toEqual([ 'c' ])
+          expect(vm.forest.selectedNodeIds).toEqual([ 'c' ])
+          expect(vm.forest.checkedStateMap).toEqual({
+            a: UNCHECKED,
+            aa: UNCHECKED,
+            aaa: UNCHECKED,
+            aab: UNCHECKED,
+            ab: UNCHECKED,
+            b: UNCHECKED,
+            c: CHECKED,
+          })
+        })
+
+        it('when valueConsistsOf=MANUALLY_SELECTED_ONLY', () => {
+          wrapper.setProps({ valueConsistsOf: MANUALLY_SELECTED_ONLY })
+
+          wrapper.setProps({ value: [] })
+          expect(vm.internalValue).toEqual([])
+          expect(vm.forest.selectedNodeIds).toEqual([])
+          expect(vm.forest.checkedStateMap).toEqual({
+            a: UNCHECKED,
+            aa: UNCHECKED,
+            aaa: UNCHECKED,
+            aab: UNCHECKED,
+            ab: UNCHECKED,
+            b: UNCHECKED,
+            c: UNCHECKED,
+          })
+
+          wrapper.setProps({ value: [ 'ab' ] })
+          expect(vm.internalValue).toEqual([ 'ab' ])
+          expect(vm.forest.selectedNodeIds).toEqual([ 'ab' ])
+          expect(vm.forest.checkedStateMap).toEqual({
+            a: UNCHECKED,
+            aa: UNCHECKED,
+            aaa: UNCHECKED,
+            aab: UNCHECKED,
+            ab: CHECKED,
+            b: UNCHECKED,
+            c: UNCHECKED,
+          })
+
+          wrapper.setProps({ value: [ 'aa', 'aaa', 'a' ] })
+          expect(vm.internalValue).toEqual([ 'aaa', 'aa', 'a' ])
+          expect(vm.forest.selectedNodeIds).toEqual([ 'aaa', 'aa', 'a' ])
+          expect(vm.forest.checkedStateMap).toEqual({
+            a: CHECKED,
+            aa: CHECKED,
+            aaa: CHECKED,
+            aab: UNCHECKED,
+            ab: UNCHECKED,
+            b: UNCHECKED,
+            c: UNCHECKED,
+          })
+
+          wrapper.setProps({ value: [ 'a', 'aa', 'aaa', 'aab' ] })
+          expect(vm.internalValue).toEqual([ 'aaa', 'aab', 'aa', 'a' ])
+          expect(vm.forest.selectedNodeIds).toEqual([ 'aaa', 'aab', 'aa', 'a' ])
+          expect(vm.forest.checkedStateMap).toEqual({
+            a: CHECKED,
             aa: CHECKED,
             aaa: CHECKED,
             aab: CHECKED,

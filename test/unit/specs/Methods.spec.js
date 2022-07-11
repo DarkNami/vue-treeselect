@@ -370,6 +370,13 @@ describe('Methods', () => {
           vm.removeLastValue()
           expect(vm.internalValue).toEqual([])
         })
+
+        it('when valueConsistsOf=MANUALLY_SELECTED_ONLY', () => {
+          wrapper.setProps({ valueConsistsOf: 'MANUALLY_SELECTED_ONLY' })
+          expect(vm.internalValue).toEqual([ 'a' ])
+          vm.removeLastValue()
+          expect(vm.internalValue).toEqual([])
+        })
       })
     })
   })

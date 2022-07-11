@@ -12,7 +12,8 @@
       <label><input type="radio" value="ALL" v-model="valueConsistsOf">All</label><br>
       <label><input type="radio" value="BRANCH_PRIORITY" v-model="valueConsistsOf">Branch priority</label><br>
       <label><input type="radio" value="LEAF_PRIORITY" v-model="valueConsistsOf">Leaf priority</label><br>
-      <label><input type="radio" value="ALL_WITH_INDETERMINATE" v-model="valueConsistsOf">All with indeterminate</label>
+      <label><input type="radio" value="ALL_WITH_INDETERMINATE" v-model="valueConsistsOf">All with indeterminate</label><br>
+      <label><input type="radio" value="MANUALLY_SELECTED_ONLY" v-model="valueConsistsOf">Manually selected only</label>
     </p>
   </div>
 </template>
