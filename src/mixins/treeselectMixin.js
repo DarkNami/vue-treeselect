@@ -12,7 +12,7 @@ import {
   NO_PARENT_NODE,
   UNCHECKED, INDETERMINATE, CHECKED,
   LOAD_ROOT_OPTIONS, LOAD_CHILDREN_OPTIONS, ASYNC_SEARCH,
-  ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE,
+  ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE, MANUALLY_SELECTED_ONLY,
   ALL_CHILDREN, ALL_DESCENDANTS, LEAF_CHILDREN, LEAF_DESCENDANTS,
   ORDER_SELECTED, LEVEL, INDEX,
 } from '../constants'
@@ -607,12 +607,13 @@ export default {
      *   - "BRANCH_PRIORITY" (default) - If a branch node is checked, all its descendants will be excluded in the `value` array
      *   - "LEAF_PRIORITY" - If a branch node is checked, this node itself and its branch descendants will be excluded from the `value` array but its leaf descendants will be included
      *   - "ALL_WITH_INDETERMINATE" - Any node that is checked will be included in the `value` array, plus indeterminate nodes
+     *   - "MANUALLY_SELECTED_ONLY" - Any node that is manually checked will be included in the `value` array
      */
     valueConsistsOf: {
       type: String,
       default: BRANCH_PRIORITY,
       validator(value) {
-        const acceptableValues = [ ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE ]
+        const acceptableValues = [ ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE, MANUALLY_SELECTED_ONLY ]
         return includes(acceptableValues, value)
       },
     },
@@ -731,6 +732,8 @@ export default {
           })
         })
         internalValue.push(...indeterminateNodeIds)
+      } else if (this.valueConsistsOf === MANUALLY_SELECTED_ONLY) {
+        internalValue = this.forest.selectedNodeIds
       }
 
       if (this.sortValueBy === LEVEL) {
@@ -1067,6 +1070,8 @@ export default {
           if (!(node.parentNode.id in map)) map[node.parentNode.id] = node.parentNode.children.length
           if (--map[node.parentNode.id] === 0) queue.push(node.parentNode.id)
         }
+      } else if (this.valueConsistsOf === MANUALLY_SELECTED_ONLY) {
+        nextSelectedNodeIds = nodeIdListOfPrevValue
       }
 
       const hasChanged = quickDiff(this.forest.selectedNodeIds, nextSelectedNodeIds)
