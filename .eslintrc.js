@@ -1,9 +1,17 @@
 module.exports = {
   root: true,
-  extends: [ 'riophae/vue' ],
-  plugins: [ 'react' ],
+  extends: ['plugin:vue/essential', 'eslint:recommended'],
+  plugins: ['vue', 'import', 'unicorn'],
   globals: {
     PKG_VERSION: true,
+  },
+  env: {
+    'browser': true,
+    'es6': true,
+    'node': true
+  },
+  parserOptions: {
+    'sourceType': 'module'
   },
   settings: {
     'import/resolver': {
@@ -12,25 +20,17 @@ module.exports = {
         config: 'build/webpack-configs/base.js',
       },
     },
+    'import/extensions': ['.js', '.ts', '.json', '.vue'],
+    'import/ignore': ['node_modules', '\\.(coffee|scss|css|less|hbs|svg|json)$']
   },
   rules: {
-    'import/no-named-as-default': 0,
-    'unicorn/consistent-function-scoping': 0,
-    'vue/attributes-order': 0,
-    'vue/no-v-html': 0,
-    'no-confusing-arrow': 0,
-    'no-console': 0,
-    'no-warning-comments': 0,
-    'no-undefined': 0,
-    'prefer-destructuring': 0,
-	'linebreak-style': [0, 'error', 'windows'],
+    'no-console': ['error', { 'allow': ['warn', 'error'] }],
+    'no-constant-condition': ['error', { 'checkLoops': false }]
   },
-  overrides: [ {
-    files: [ 'src/**' ],
+  overrides: [{
+    files: ['src/**/*.vue'],
     rules: {
-      'unicorn/no-for-loop': 0,
-      'unicorn/prefer-includes': 0,
-      'unicorn/prefer-node-append': 0,
+      //indent: 'off', // not working well with .vue files so disable it
     },
-  } ],
+  }],
 }
