@@ -25,7 +25,12 @@ export function generateOptions(maxLevel) {
 }
 
 function createKeyObject(keyCode) {
-  return { which: keyCode, keyCode }
+  const obj = {};
+  Object.defineProperties(obj, {
+    which: { value: keyCode },
+    keyCode: { value: keyCode }
+  });
+  return obj
 }
 
 export function leftClick(wrapper) {
