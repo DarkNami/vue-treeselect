@@ -6,7 +6,7 @@ describe('Control', () => {
   it('should toggle the menu when the arrow is clicked', () => {
     const wrapper = mount(Treeselect, {
       sync: false,
-      attachToDocument: true,
+      attachTo: document.body,
       propsData: {
         options: [],
       },

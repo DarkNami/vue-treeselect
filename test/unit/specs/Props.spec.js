@@ -313,7 +313,7 @@ describe('Props', () => {
     it('basic', async () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        attachToDocument: true,
+        attachTo: document.body,
         propsData: {
           appendToBody: true,
           options: [],
@@ -332,7 +332,7 @@ describe('Props', () => {
     it('should remove portal target when component gets destroyed', async () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        attachToDocument: true,
+        attachTo: document.body,
         propsData: {
           appendToBody: true,
           options: [],
@@ -358,7 +358,7 @@ describe('Props', () => {
           appendToBody: false,
           options: [],
         },
-        attachToDocument: true,
+        attachTo: document.body,
       })
       const { vm } = wrapper
 
@@ -384,7 +384,7 @@ describe('Props', () => {
             label: 'a',
           } ],
         },
-        attachToDocument: true,
+        attachTo: document.body,
       })
       const { vm } = wrapper
 
@@ -410,7 +410,7 @@ describe('Props', () => {
           appendToBody: false,
           options: [],
         },
-        attachToDocument: true,
+        attachTo: document.body,
       })
       const { vm } = wrapper
 
@@ -429,7 +429,7 @@ describe('Props', () => {
           appendToBody: true,
           options: [],
         },
-        attachToDocument: true,
+        attachTo: document.body,
       })
       const { vm } = wrapper
 
@@ -466,7 +466,7 @@ describe('Props', () => {
   describe('autoFocus', () => {
     it('should focus the search input on mount', () => {
       const wrapper = mount(Treeselect, {
-        attachToDocument: true,
+        attachTo: document.body,
         propsData: {
           options: [],
           autoFocus: true,
@@ -1356,7 +1356,7 @@ describe('Props', () => {
 
       it('the control should reject all clicks', () => {
         const wrapper = mount(Treeselect, {
-          attachToDocument: true,
+          attachTo: document.body,
           propsData: {
             options: [],
             disabled: true,
@@ -1372,7 +1372,7 @@ describe('Props', () => {
 
       it('the control should be non-focusable', () => {
         const wrapper = mount(Treeselect, {
-          attachToDocument: true,
+          attachTo: document.body,
           propsData: {
             options: [],
             disabled: true,
@@ -1677,7 +1677,7 @@ describe('Props', () => {
     it('when openOnClick=false', () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        attachToDocument: true,
+        attachTo: document.body,
         propsData: {
           options: [],
           openOnClick: false,
@@ -1701,7 +1701,7 @@ describe('Props', () => {
     it('when openOnClick=true', () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        attachToDocument: true,
+        attachTo: document.body,
         propsData: {
           options: [],
           openOnClick: true,
@@ -1723,7 +1723,7 @@ describe('Props', () => {
     it('when openOnFocus=false', () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        attachToDocument: true,
+        attachTo: document.body,
         propsData: {
           options: [],
           openOnFocus: false,
@@ -1746,7 +1746,7 @@ describe('Props', () => {
 
     it('when openOnFocus=true', () => {
       const wrapper = mount(Treeselect, {
-        attachToDocument: true,
+        attachTo: document.body,
         propsData: {
           options: [],
           openOnFocus: true,
@@ -1766,7 +1766,7 @@ describe('Props', () => {
       it('when openOnFocus=false', () => {
         const wrapper = mount(Treeselect, {
           sync: false,
-          attachToDocument: true,
+          attachTo: document.body,
           propsData: {
             options: [],
             autoFocus: true,
@@ -1782,7 +1782,7 @@ describe('Props', () => {
       it('when openOnFocus=true', () => {
         const wrapper = mount(Treeselect, {
           sync: false,
-          attachToDocument: true,
+          attachTo: document.body,
           propsData: {
             options: [],
             autoFocus: true,
@@ -3104,7 +3104,7 @@ describe('Props', () => {
         zIndex: 1,
         options: [],
       },
-      attachToDocument: true,
+      attachTo: document.body,
     })
     const { vm } = wrapper
 

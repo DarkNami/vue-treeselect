@@ -35,7 +35,7 @@ describe('Search Input', () => {
         multiple: true,
         searchable: true,
       },
-      attachToDocument: true,
+      attachTo: document.body,
       sync: false,
     })
     const input = findInput(wrapper)

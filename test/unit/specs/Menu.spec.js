@@ -11,7 +11,7 @@ describe('Menu', () => {
   it('should blur the input & close the menu after clicking anywhere outside the component', async () => {
     const wrapper = mount(Treeselect, {
       sync: false,
-      attachToDocument: true,
+      attachTo: document.body,
       propsData: {
         options: [],
       },
@@ -30,7 +30,7 @@ describe('Menu', () => {
 
   it('should open the menu after clicking the control when focused', () => {
     const wrapper = mount(Treeselect, {
-      attachToDocument: true,
+      attachTo: document.body,
       propsData: {
         options: [],
       },
@@ -45,7 +45,7 @@ describe('Menu', () => {
   it('click on option arrow should toggle expanded', async () => {
     const wrapper = mount(Treeselect, {
       sync: false,
-      attachToDocument: true,
+      attachTo: document.body,
       propsData: {
         options: [ {
           id: 'a',
@@ -105,7 +105,7 @@ describe('Menu', () => {
         defaultExpandLevel: Infinity,
         maxHeight,
       },
-      attachToDocument: true,
+      attachTo: document.body,
     })
     const { vm } = wrapper
 
@@ -154,7 +154,7 @@ describe('Menu', () => {
 
   it('set appendToBody to true when alwaysOpen=true should not throw error', () => {
     const wrapper = mount(Treeselect, {
-      attachToDocument: true,
+      attachTo: document.body,
       propsData: {
         options: [],
         alwaysOpen: true,

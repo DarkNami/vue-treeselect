@@ -77,7 +77,7 @@ describe('Methods', () => {
 
   it('focusInput() & blurInput()', () => {
     const wrapper = mount(Treeselect, {
-      attachToDocument: true,
+      attachTo: document.body,
       propsData: {
         options: [],
         disabled: false,
@@ -104,7 +104,7 @@ describe('Methods', () => {
           appendToBody,
           options: [],
         },
-        attachToDocument: true,
+        attachTo: document.body,
       })
       vm = wrapper.vm
     }
