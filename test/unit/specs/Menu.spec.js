@@ -36,7 +36,7 @@ describe('Menu', () => {
       },
     })
     wrapper.vm.trigger.isFocused = true
-    const valueContainer = wrapper.find('.vue-treeselect__value-container')
+    const valueContainer = wrapper.findComponent('.vue-treeselect__value-container')
 
     leftClick(valueContainer)
     expect(wrapper.vm.menu.isOpen).toBe(true)
@@ -61,7 +61,7 @@ describe('Menu', () => {
     await vm.$nextTick()
 
     expect(a.isExpanded).toBe(false)
-    const optionArrow = findOptionByNodeId(wrapper, 'a').find('.vue-treeselect__option-arrow-container')
+    const optionArrow = findOptionByNodeId(wrapper, 'a').findComponent('.vue-treeselect__option-arrow-container')
     leftClick(optionArrow)
     expect(a.isExpanded).toBe(true)
     leftClick(optionArrow)
@@ -133,12 +133,12 @@ describe('Menu', () => {
       },
     })
     const { vm } = wrapper
-    const input = wrapper.find(Input)
+    const input = wrapper.findComponent(Input)
 
     const assertInputValue = expected => {
       expect(vm.trigger.searchQuery).toBe(expected)
       expect(input.vm.value).toBe(expected)
-      expect(input.find('input[type="text"]').element.value).toBe(expected)
+      expect(input.findComponent('input[type="text"]').element.value).toBe(expected)
     }
 
     vm.openMenu()

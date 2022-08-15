@@ -670,7 +670,7 @@ describe('Searching', () => {
       await typeSearchText(wrapper, 'keyword')
       expect(menu.text().trim().includes('test error')).toBe(true)
 
-      menu.find('.vue-treeselect__retry').trigger('click')
+      menu.findComponent('.vue-treeselect__retry').trigger('click')
       await vm.$nextTick()
       expect(menu.text().trim().includes('keyword')).toBe(true)
     })
@@ -735,7 +735,7 @@ describe('Searching', () => {
       })
       const { vm } = wrapper
       const assertMultiValueItemLabels = labels => {
-        const actualLabels = wrapper.findAll('.vue-treeselect__multi-value-label').wrappers
+        const actualLabels = wrapper.findAllComponents('.vue-treeselect__multi-value-label').wrappers
           .map(labelWrapper => labelWrapper.text().trim())
         expect(actualLabels).toEqual(labels)
       }

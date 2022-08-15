@@ -169,12 +169,12 @@ describe('Dynamical Loading', () => {
       childrenOptionList = findChildrenOptionListByNodeId(wrapper, 'a')
       // should show error tip
       expect(childrenOptionList.contains('.vue-treeselect__error-tip')).toBe(true)
-      const errorText = childrenOptionList.find('.vue-treeselect__error-tip-text').text()
+      const errorText = childrenOptionList.findComponent('.vue-treeselect__error-tip-text').text()
       expect(errorText.includes(ERROR_MESSAGE)).toBe(true)
       expect(vm.forest.nodeMap.a.childrenStates.loadingError).toBe(ERROR_MESSAGE)
 
       // 2nd try - click on retry
-      const retry = wrapper.find('.vue-treeselect__retry')
+      const retry = wrapper.findComponent('.vue-treeselect__retry')
       leftClick(retry)
       expect(spyForLoadOptions.calls.count()).toBe(2)
       // should reset state
@@ -340,7 +340,7 @@ describe('Dynamical Loading', () => {
         },
       })
       const { vm } = wrapper
-      const getValueText = () => wrapper.find('.vue-treeselect__single-value').text().trim()
+      const getValueText = () => wrapper.findComponent('.vue-treeselect__single-value').text().trim()
 
       expect(vm.forest.nodeMap.aa).toEqual(jasmine.objectContaining({
         id: 'aa',
@@ -606,7 +606,7 @@ describe('Dynamical Loading', () => {
       expect(vm.forest.nodeMap.branch.childrenStates.isLoaded).toBe(true)
       expect(vm.visibleOptionIds).toEqual([ 'branch', 'leaf' ])
 
-      const labels = menu.findAll('.vue-treeselect__option:not(.vue-treeselect__option--hide) .vue-treeselect__label')
+      const labels = menu.findAllComponents('.vue-treeselect__option:not(.vue-treeselect__option--hide) .vue-treeselect__label')
         .wrappers.map(label => label.text().trim())
       expect(labels).toEqual([ 'branch', 'leaf' ])
     })

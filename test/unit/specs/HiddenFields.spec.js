@@ -12,7 +12,7 @@ describe('Hidden Fields', () => {
     })
   })
 
-  const getHiddenFields = () => wrapper.findAll('input[type="hidden"]')
+  const getHiddenFields = () => wrapper.findAllComponents('input[type="hidden"]')
 
   it('must have value & name', () => {
     wrapper.setProps({ value: 'value' })
