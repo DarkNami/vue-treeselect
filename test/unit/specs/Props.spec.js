@@ -57,7 +57,7 @@ describe('Props', () => {
         })
 
         it('should hide "×" button', () => {
-          expect(wrapper.contains('.vue-treeselect__x')).toBe(false)
+          expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
         })
       })
 
@@ -67,13 +67,13 @@ describe('Props', () => {
         })
 
         it('should show "×" button ', () => {
-          expect(wrapper.contains('.vue-treeselect__x')).toBe(true)
+          expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(true)
         })
 
         it('clear() should only remove undisabled value', () => {
           vm.clear()
           expect(vm.internalValue).toEqual([ 'a' ])
-          expect(wrapper.contains('.vue-treeselect__x')).toBe(false)
+          expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
         })
       })
     })
@@ -89,13 +89,13 @@ describe('Props', () => {
         })
 
         it('should show "×" button', () => {
-          expect(wrapper.contains('.vue-treeselect__x')).toBe(true)
+          expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(true)
         })
 
         it('clear() should completely reset value', () => {
           vm.clear()
           expect(vm.internalValue).toEqual([])
-          expect(wrapper.contains('.vue-treeselect__x')).toBe(false)
+          expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
         })
       })
     })
@@ -205,7 +205,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       await vm.$nextTick() // the arrow exists on first render
-      expect(wrapper.contains('.vue-treeselect__control-arrow-container')).toBe(false)
+      expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(false)
     })
 
     it('the menu should be unclosable', () => {
@@ -273,7 +273,7 @@ describe('Props', () => {
         },
       })
 
-      expect(wrapper.contains('.vue-treeselect__control-arrow-container')).toBe(true)
+      expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(true)
     })
 
     it('set `alwaysOpen` from `false` to `true` should open the menu and hide the arrow', () => {
@@ -288,7 +288,7 @@ describe('Props', () => {
       expect(vm.menu.isOpen).toBe(false)
       wrapper.setProps({ alwaysOpen: true })
       expect(vm.menu.isOpen).toBe(true)
-      expect(wrapper.contains('.vue-treeselect__control-arrow-container')).toBe(false)
+      expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(false)
     })
 
     it('set `alwaysOpen` from `true` to `false` should close the menu and show the arrow', () => {
@@ -303,7 +303,7 @@ describe('Props', () => {
       expect(vm.menu.isOpen).toBe(true)
       wrapper.setProps({ alwaysOpen: false })
       expect(vm.menu.isOpen).toBe(false)
-      expect(wrapper.contains('.vue-treeselect__control-arrow-container')).toBe(true)
+      expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(true)
     })
   })
 
@@ -826,7 +826,7 @@ describe('Props', () => {
     })
 
     it('should show "×" button', () => {
-      expect(wrapper.contains('.vue-treeselect__x')).toBe(true)
+      expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(true)
     })
 
     it('should reset value on mousedown', async () => {
@@ -838,17 +838,17 @@ describe('Props', () => {
 
     it('should hide when no options selected', () => {
       wrapper.setProps({ value: null })
-      expect(wrapper.contains('.vue-treeselect__x')).toBe(false)
+      expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
     })
 
     it('should hide when disabled=true', () => {
       wrapper.setProps({ disabled: true })
-      expect(wrapper.contains('.vue-treeselect__x')).toBe(false)
+      expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
     })
 
     it('should hide when clearable=false', () => {
       wrapper.setProps({ clearable: false })
-      expect(wrapper.contains('.vue-treeselect__x')).toBe(false)
+      expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
     })
   })
 
@@ -1183,7 +1183,7 @@ describe('Props', () => {
 
         const labelContainerOfBranchNode = await getLabelContainerOfBranchNode()
 
-        expect(labelContainerOfBranchNode.contains('.vue-treeselect__checkbox')).toBe(true)
+        expect(labelContainerOfBranchNode.findComponent('.vue-treeselect__checkbox').exists()).toBe(true)
       })
 
       it('a leaf node should have checkbox too when multiple=true', async () => {
@@ -1191,7 +1191,7 @@ describe('Props', () => {
 
         const labelContainerOfLeafNode = await getLabelContainerOfLeafNode()
 
-        expect(labelContainerOfLeafNode.contains('.vue-treeselect__checkbox')).toBe(true)
+        expect(labelContainerOfLeafNode.findComponent('.vue-treeselect__checkbox').exists()).toBe(true)
       })
 
       it('click on label of a branch node should toggle checking state when multiple=true', async () => {
@@ -1232,14 +1232,14 @@ describe('Props', () => {
         wrapper.setProps({ multiple: true })
         const labelContainerOfBranchNode = await getLabelContainerOfBranchNode()
 
-        expect(labelContainerOfBranchNode.contains('.vue-treeselect__checkbox')).toBe(false)
+        expect(labelContainerOfBranchNode.findComponent('.vue-treeselect__checkbox').exists()).toBe(false)
       })
 
       it('a leaf node should have checkbox when multiple=true', async () => {
         wrapper.setProps({ multiple: true })
         const labelContainerOfLeafNode = await getLabelContainerOfLeafNode()
 
-        expect(labelContainerOfLeafNode.contains('.vue-treeselect__checkbox')).toBe(true)
+        expect(labelContainerOfLeafNode.findComponent('.vue-treeselect__checkbox').exists()).toBe(true)
       })
 
       it('click on label of a branch node should not toggle checking state when multiple=true', async () => {
@@ -1315,8 +1315,8 @@ describe('Props', () => {
         },
       })
 
-      expect(wrapper.contains('.vue-treeselect__input-container')).toBe(true)
-      expect(wrapper.contains('.vue-treeselect__input')).toBe(true)
+      expect(wrapper.findComponent('.vue-treeselect__input-container').exists()).toBe(true)
+      expect(wrapper.findComponent('.vue-treeselect__input').exists()).toBe(true)
     })
 
     describe('when disabled=true', () => {
@@ -1329,8 +1329,8 @@ describe('Props', () => {
           },
         })
 
-        expect(wrapper.contains('.vue-treeselect__input-container')).toBe(true)
-        expect(wrapper.contains('.vue-treeselect__input')).toBe(false)
+        expect(wrapper.findComponent('.vue-treeselect__input-container').exists()).toBe(true)
+        expect(wrapper.findComponent('.vue-treeselect__input').exists()).toBe(false)
       })
 
       it('should close the menu when setting disabled from false to true', async () => {
@@ -1490,7 +1490,7 @@ describe('Props', () => {
 
       expect(vm.forest.selectedNodeIds).toEqual([ 'a', 'b', 'c', 'd' ])
       expect(wrapper.findAllComponents(MultiValueItem).length).toBe(4)
-      expect(wrapper.contains('.vue-treeselect__limit-tip')).toBe(false)
+      expect(wrapper.findComponent('.vue-treeselect__limit-tip').exists()).toBe(false)
     })
 
     it('when limit=1', () => {
@@ -1518,7 +1518,7 @@ describe('Props', () => {
 
       expect(vm.forest.selectedNodeIds).toEqual([ 'a', 'b', 'c', 'd' ])
       expect(wrapper.findAllComponents(MultiValueItem).length).toBe(1)
-      expect(wrapper.contains('.vue-treeselect__limit-tip')).toBe(true)
+      expect(wrapper.findComponent('.vue-treeselect__limit-tip').exists()).toBe(true)
       expect(wrapper.findComponent('.vue-treeselect__limit-tip').text()).toBe('and 3 more')
     })
   })
@@ -1985,7 +1985,7 @@ describe('Props', () => {
             },
           })
 
-          expect(wrapper.contains('.vue-treeselect__input-container .vue-treeselect__input')).toBe(true)
+          expect(wrapper.findComponent('.vue-treeselect__input-container .vue-treeselect__input').exists()).toBe(true)
         })
 
         it('should auto resize when length of input value changes', () => {
@@ -2004,7 +2004,7 @@ describe('Props', () => {
             },
           })
 
-          expect(wrapper.contains('.vue-treeselect__input-container .vue-treeselect__input')).toBe(true)
+          expect(wrapper.findComponent('.vue-treeselect__input-container .vue-treeselect__input').exists()).toBe(true)
         })
       })
 
@@ -2081,7 +2081,7 @@ describe('Props', () => {
             },
           })
 
-          expect(wrapper.contains('.vue-treeselect__input-container')).toBe(true)
+          expect(wrapper.findComponent('.vue-treeselect__input-container').exists()).toBe(true)
           expect(wrapper.findComponent('.vue-treeselect__input-container').element.innerHTML).toBe('')
         })
       })
@@ -2096,7 +2096,7 @@ describe('Props', () => {
             },
           })
 
-          expect(wrapper.contains('.vue-treeselect__input-container')).toBe(true)
+          expect(wrapper.findComponent('.vue-treeselect__input-container').exists()).toBe(true)
           expect(wrapper.findComponent('.vue-treeselect__input-container').element.innerHTML).toBe('')
         })
       })
@@ -2146,19 +2146,19 @@ describe('Props', () => {
       wrapper.setProps({ showCountOnSearch: false })
 
       await typeSearchText(wrapper, 'a')
-      expect(wrapper.contains('.vue-treeselect__count')).toBe(false)
+      expect(wrapper.findComponent('.vue-treeselect__count').exists()).toBe(false)
     })
 
     it('when showCountOnSearch=true', async () => {
       wrapper.setProps({ showCountOnSearch: true })
 
       await typeSearchText(wrapper, 'a')
-      expect(wrapper.contains('.vue-treeselect__count')).toBe(true)
+      expect(wrapper.findComponent('.vue-treeselect__count').exists()).toBe(true)
     })
 
     it('when showCountOnSearch not specified', async () => {
       await typeSearchText(wrapper, 'a')
-      expect(wrapper.contains('.vue-treeselect__count')).toBe(true)
+      expect(wrapper.findComponent('.vue-treeselect__count').exists()).toBe(true)
     })
 
     it('should refresh count number after search changes', async () => {

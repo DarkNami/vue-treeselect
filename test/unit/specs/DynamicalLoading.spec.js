@@ -112,7 +112,7 @@ describe('Dynamical Loading', () => {
       await vm.$nextTick()
       childrenOptionList = findChildrenOptionListByNodeId(wrapper, 'a')
       // show loading spinner
-      expect(childrenOptionList.contains('.vue-treeselect__loading-tip')).toBe(true)
+      expect(childrenOptionList.findComponent('.vue-treeselect__loading-tip').exists()).toBe(true)
 
       // wait for `callback()` to be called
       await sleep(DELAY)
@@ -122,7 +122,7 @@ describe('Dynamical Loading', () => {
       expect(vm.forest.nodeMap.a.childrenStates.isLoading).toBe(false)
       childrenOptionList = findChildrenOptionListByNodeId(wrapper, 'a')
       // loading spinner should be hidden
-      expect(childrenOptionList.contains('.vue-treeselect__loading-tip')).toBe(false)
+      expect(childrenOptionList.findComponent('.vue-treeselect__loading-tip').exists()).toBe(false)
       // children options just loaded should be rendered
       expect(childrenOptionList.element.contains(findOptionByNodeId(wrapper, 'aa').element)).toBe(true)
     })
@@ -168,7 +168,7 @@ describe('Dynamical Loading', () => {
       await sleep(DELAY)
       childrenOptionList = findChildrenOptionListByNodeId(wrapper, 'a')
       // should show error tip
-      expect(childrenOptionList.contains('.vue-treeselect__error-tip')).toBe(true)
+      expect(childrenOptionList.findComponent('.vue-treeselect__error-tip').exists()).toBe(true)
       const errorText = childrenOptionList.findComponent('.vue-treeselect__error-tip-text').text()
       expect(errorText.includes(ERROR_MESSAGE)).toBe(true)
       expect(vm.forest.nodeMap.a.childrenStates.loadingError).toBe(ERROR_MESSAGE)
@@ -183,7 +183,7 @@ describe('Dynamical Loading', () => {
       await sleep(DELAY)
       childrenOptionList = findChildrenOptionListByNodeId(wrapper, 'a')
       // still shows the error tip
-      expect(childrenOptionList.contains('.vue-treeselect__error-tip')).toBe(true)
+      expect(childrenOptionList.findComponent('.vue-treeselect__error-tip').exists()).toBe(true)
 
       // 3nd try - collapse & re-expand
       optionArrowContainer = findOptionArrowContainerByNodeId(wrapper, 'a')
@@ -193,7 +193,7 @@ describe('Dynamical Loading', () => {
       await sleep(DELAY)
       childrenOptionList = findChildrenOptionListByNodeId(wrapper, 'a')
       // the error tip should be hidden
-      expect(childrenOptionList.contains('.vue-treeselect__error-tip')).toBe(false)
+      expect(childrenOptionList.findComponent('.vue-treeselect__error-tip').exists()).toBe(false)
       // the children options just loaded should be shown
       expect(childrenOptionList.element.contains(findOptionByNodeId(wrapper, 'aa').element)).toBe(true)
     })
