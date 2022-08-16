@@ -159,7 +159,7 @@ describe('Dynamical Loading', () => {
       let optionArrowContainer
       let childrenOptionList
 
-      vm.openMenu()
+      await vm.openMenu()
 
       // 1st try
       optionArrowContainer = findOptionArrowContainerByNodeId(wrapper, 'a')

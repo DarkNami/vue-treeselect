@@ -161,6 +161,6 @@ export function findLabelByNodeId(wrapper, nodeId) {
 
 export function findChildrenOptionListByNodeId(wrapper, nodeId) {
   return wrapper.findAllComponents(Option).wrappers
-    .findComponent(optionWrapper => optionWrapper.vm.node.id === nodeId)
+    .find(optionWrapper => optionWrapper.vm.node.id === nodeId)
     .findComponent('.vue-treeselect__list')
 }

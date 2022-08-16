@@ -89,7 +89,7 @@ describe('Searching', () => {
       })
       const { vm } = wrapper
 
-      vm.openMenu()
+      await vm.openMenu()
 
       // not rotated by default
       expectArrowToBeRotatedOrNot(false)

@@ -814,7 +814,7 @@ describe('Basic', () => {
     expect(vm.value).toEqual([])
   })
 
-  it('an option should be rendered with its id in the markup', () => {
+  it('an option should be rendered with its id in the markup', async () => {
     const wrapper = mount(Treeselect, {
       propsData: {
         options: [ {
@@ -829,12 +829,12 @@ describe('Basic', () => {
       },
     })
 
-    wrapper.vm.openMenu()
+    await wrapper.vm.openMenu()
 
     const optionsWrappers = wrapper.findAllComponents(Option).wrappers
-    const a = optionsWrappers.findComponent(optionWrapper => optionWrapper.vm.node.id === 'a')
+    const a = optionsWrappers.find(optionWrapper => optionWrapper.vm.node.id === 'a')
       .findComponent('.vue-treeselect__option')
-    const aa = optionsWrappers.findComponent(optionWrapper => optionWrapper.vm.node.id === 'aa')
+    const aa = optionsWrappers.find(optionWrapper => optionWrapper.vm.node.id === 'aa')
       .findComponent('.vue-treeselect__option')
 
     expect(a.attributes()['data-id']).toBe('a')

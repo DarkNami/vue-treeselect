@@ -22,7 +22,7 @@ describe('Events', () => {
       children: [ aa, ab ],
     }
 
-    beforeEach(() => {
+    beforeEach(async () => {
       wrapper = mount(Treeselect, {
         propsData: {
           options: [ a ],
@@ -31,7 +31,7 @@ describe('Events', () => {
           value: [ 'ab' ],
         },
       })
-      wrapper.vm.openMenu()
+      await wrapper.vm.openMenu()
     })
 
     it('click on option label or checkbox', () => {

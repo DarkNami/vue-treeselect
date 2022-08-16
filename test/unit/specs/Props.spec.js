@@ -1798,14 +1798,14 @@ describe('Props', () => {
   })
 
   describe('options', () => {
-    it('show tip when `options` is an empty array', () => {
+    it('show tip when `options` is an empty array', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           options: [],
         },
       })
 
-      wrapper.vm.openMenu()
+      await wrapper.vm.openMenu()
 
       const menu = wrapper.findComponent('.vue-treeselect__menu')
       const noOptionsTip = menu.findComponent('.vue-treeselect__no-options-tip')
