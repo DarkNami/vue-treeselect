@@ -1285,22 +1285,24 @@ describe('Props', () => {
       })
 
       describe('combined with valueConsistsOf (multi-select mode)', () => {
+
         const types = ['ALL', 'BRANCH_PRIORITY', 'LEAF_PRIORITY', 'ALL_WITH_INDETERMINATE', 'MANUALLY_SELECTED_ONLY']
 
-        types.forEach(valueConsistsOf => {
+        for (let i = 0; i < types.length; ++i) {
+          const valueConsistsOf = types[i]
           it(`when valueConsistsOf=${valueConsistsOf}`, async () => {
             await wrapper.setProps({
               multiple: true,
               valueConsistsOf,
               value: ['leaf'],
             })
-
             expect(vm.forest.checkedStateMap).toEqual({ branch: UNCHECKED, leaf: CHECKED })
             expect(vm.forest.selectedNodeMap).toEqual({ leaf: true })
             expect(vm.forest.selectedNodeIds).toEqual(['leaf'])
             expect(vm.internalValue).toEqual(['leaf'])
           })
-        })
+        }
+
       })
     })
   })
@@ -1639,7 +1641,7 @@ describe('Props', () => {
       }))
     })
 
-    it('with `loadOptions` prop', () => {
+    it('with `loadOptions` prop', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           options: [{
@@ -1669,6 +1671,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       vm.toggleExpanded(vm.forest.nodeMap.a)
+      await vm.$nextTick()
       expect(vm.forest.nodeMap.a.children).toBeNonEmptyArray()
     })
   })
@@ -1720,7 +1723,7 @@ describe('Props', () => {
   })
 
   describe('openOnFocus', () => {
-    it('when openOnFocus=false', () => {
+    it('when openOnFocus=false', async () => {
       const wrapper = mount(Treeselect, {
         sync: false,
         attachTo: document.body,
@@ -1736,6 +1739,7 @@ describe('Props', () => {
       expect(vm.menu.isOpen).toBe(false)
 
       wrapper.vm.focusInput()
+      await vm.$nextTick()
       expect(vm.trigger.isFocused).toBe(true)
       expect(vm.menu.isOpen).toBe(false)
 
@@ -2467,22 +2471,24 @@ describe('Props', () => {
         vm = wrapper.vm
       })
 
+      afterEach(() => {
+        wrapper.destroy()
+      })
+
       describe('when multiple=false', () => {
         const types = [ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE, MANUALLY_SELECTED_ONLY]
-        types.forEach(type => {
+        for (let i = 0; i < types.length; ++i) {
+          const type = types[i]
           it(`when valueConsistsOf=${type}`, async () => {
             await wrapper.setProps({ multiple: false })
-
             const values = ['aaa', 'aa', 'ab', 'a', 'b', 'c']
-
             for (let i = 0; i < values.length; ++i) {
-              await wrapper.setProps({ [values[i]]: values[i] })
+              await wrapper.setProps({ value: values[i] })
               expect(vm.internalValue).toEqual([values[i]])
               expect(vm.forest.selectedNodeIds).toEqual([values[i]])
             }
-
           })
-        })
+        }
       })
 
       describe('when multiple=true', () => {
