@@ -3,7 +3,7 @@
  */
 
 @import "~material-colors/dist/colors.less";
-@import "~easings-css/easings.less";
+@import "~easings-css/index.less";
 
 /**
  * Variables
@@ -215,7 +215,7 @@
   .create-queries() when (@cap >= 2) {
     .loop(@env) when (@env <= @cap) {
       @retinapath: replace(@path, "(\.\w+)$", "@@{env}x$1");
-      @media (min-resolution: @env * 96dpi) {
+      @media (min-resolution: (@env * 96dpi)) {
         background-image: url(@retinapath);
       }
 
