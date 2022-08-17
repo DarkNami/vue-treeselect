@@ -75,7 +75,7 @@ describe('Methods', () => {
     })
   })
 
-  it('focusInput() & blurInput()', () => {
+  it('focusInput() & blurInput()', async () => {
     const wrapper = mount(Treeselect, {
       attachTo: document.body,
       propsData: {
@@ -88,9 +88,11 @@ describe('Methods', () => {
     const { vm } = wrapper
 
     expect(vm.trigger.isFocused).toBe(false)
-    wrapper.vm.focusInput()
+    vm.focusInput()
+    await vm.$nextTick()
     expect(vm.trigger.isFocused).toBe(true)
-    wrapper.vm.blurInput()
+    vm.blurInput()
+    await vm.$nextTick()
     expect(vm.trigger.isFocused).toBe(false)
   })
 

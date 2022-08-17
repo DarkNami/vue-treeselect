@@ -21,8 +21,8 @@ describe('Menu', () => {
     vm.openMenu()
     await vm.$nextTick()
 
-    const event = document.createEvent('event')
-    event.initEvent('mousedown', true, true)
+    const event = new Event('mousedown', { 'bubbles': true, 'cancelable': true })
+
     document.body.dispatchEvent(event)
     expect(vm.trigger.isFocused).toBe(false)
     expect(vm.menu.isOpen).toBe(false)

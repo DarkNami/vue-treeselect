@@ -70,8 +70,9 @@ describe('Props', () => {
           expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(true)
         })
 
-        it('clear() should only remove undisabled value', () => {
+        it('clear() should only remove undisabled value', async () => {
           vm.clear()
+          await vm.$nextTick()
           expect(vm.internalValue).toEqual(['a'])
           expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
         })
@@ -92,8 +93,9 @@ describe('Props', () => {
           expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(true)
         })
 
-        it('clear() should completely reset value', () => {
+        it('clear() should completely reset value', async () => {
           vm.clear()
+          await vm.$nextTick()
           expect(vm.internalValue).toEqual([])
           expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
         })
@@ -396,8 +398,7 @@ describe('Props', () => {
       const label = $('.vue-treeselect__label', portalTarget)
       expect(label.textContent.trim()).toBe('a')
 
-      const event = document.createEvent('Event')
-      event.initEvent('mousedown', true, true)
+      const event = new Event('mousedown', { 'bubbles': true, 'cancelable': true })
       event.button = 0
       label.dispatchEvent(event)
       expect(vm.internalValue).toEqual(['a'])

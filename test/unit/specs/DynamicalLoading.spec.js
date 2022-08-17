@@ -608,7 +608,7 @@ describe('Dynamical Loading', () => {
       expect(vm.forest.nodeMap.branch.childrenStates.isLoaded).toBe(true)
       expect(vm.visibleOptionIds).toEqual(['branch', 'leaf'])
 
-      const labels = menu.findAllComponents('.vue-treeselect__option:not(.vue-treeselect__option--hide) .vue-treeselect__label')
+      const labels = menu.findAll('.vue-treeselect__option:not(.vue-treeselect__option--hide) .vue-treeselect__label')
         .wrappers.map(label => label.text().trim())
       expect(labels).toEqual(['branch', 'leaf'])
     })

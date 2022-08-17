@@ -151,8 +151,7 @@ describe('Utils', () => {
         parent.remove()
       }
       const trigger = ($el, type) => {
-        const event = document.createEvent('Event')
-        event.initEvent(type, true, true)
+        const event = new Event(type, { 'bubbles': true, 'cancelable': true })
         $el.dispatchEvent(event)
       }
       const test = async () => {

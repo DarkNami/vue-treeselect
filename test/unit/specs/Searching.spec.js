@@ -738,7 +738,7 @@ describe('Searching', () => {
       })
       const { vm } = wrapper
       const assertMultiValueItemLabels = labels => {
-        const actualLabels = wrapper.findAllComponents('.vue-treeselect__multi-value-label').wrappers
+        const actualLabels = wrapper.findAll('.vue-treeselect__multi-value-label').wrappers
           .map(labelWrapper => labelWrapper.text().trim())
         expect(actualLabels).toEqual(labels)
       }

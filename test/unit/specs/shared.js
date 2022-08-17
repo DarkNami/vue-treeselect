@@ -132,7 +132,7 @@ export function findMenu(wrapper) {
 }
 
 export function findVisibleOptions(wrapper) {
-  return wrapper.findAllComponents('.vue-treeselect__option:not(.vue-treeselect__option--hide)')
+  return wrapper.findAll('.vue-treeselect__option:not(.vue-treeselect__option--hide)')
 }
 
 export function findOptionByNodeId(wrapper, nodeId) {
