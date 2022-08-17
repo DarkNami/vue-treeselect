@@ -34,11 +34,11 @@ describe('Dynamical Loading', () => {
 
       mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'id',
             label: 'label',
             children: null,
-          } ],
+          }],
         },
       })
 
@@ -54,11 +54,11 @@ describe('Dynamical Loading', () => {
       const loadOptions = jasmine.createSpy()
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
             children: null,
-          } ],
+          }],
           loadOptions,
         },
       })
@@ -75,21 +75,21 @@ describe('Dynamical Loading', () => {
         expect(action).toBe('LOAD_CHILDREN_OPTIONS')
 
         setTimeout(() => {
-          parentNode.children = [ {
+          parentNode.children = [{
             id: 'aa',
             label: 'aa',
-          } ]
+          }]
           callback()
         }, DELAY)
       }
       const spyForLoadOptions = jasmine.createSpy('loadOptions', loadOptions).and.callThrough()
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
             children: null,
-          } ],
+          }],
           loadOptions: spyForLoadOptions,
         },
       })
@@ -135,10 +135,10 @@ describe('Dynamical Loading', () => {
       const loadOptions = ({ parentNode, callback }) => {
         setTimeout(() => {
           if (++called > 2) {
-            parentNode.children = [ {
+            parentNode.children = [{
               id: 'aa',
               label: 'aa',
-            } ]
+            }]
             callback()
           } else {
             callback(new Error(ERROR_MESSAGE))
@@ -148,11 +148,11 @@ describe('Dynamical Loading', () => {
       const spyForLoadOptions = jasmine.createSpy('loadOptions', loadOptions).and.callThrough()
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
             children: null, // declares an unloaded branch node
-          } ],
+          }],
           loadOptions: spyForLoadOptions,
         },
       })
@@ -204,21 +204,21 @@ describe('Dynamical Loading', () => {
       const DELAY = 60
       const loadOptions = ({ parentNode, callback }) => {
         setTimeout(() => {
-          parentNode.children = [ {
+          parentNode.children = [{
             id: 'aa',
             label: 'aa',
-          } ]
+          }]
           callback()
         }, DELAY)
       }
       const spyForLoadOptions = jasmine.createSpy('loadOptions', loadOptions).and.callThrough()
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
             children: null,
-          } ],
+          }],
           loadOptions: spyForLoadOptions,
         },
       })
@@ -242,11 +242,11 @@ describe('Dynamical Loading', () => {
       const wrapper = mount(Treeselect, {
         sync: false,
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
             children: null,
-          } ],
+          }],
           multiple: true,
           flat: false,
           valueFormat: 'id',
@@ -258,26 +258,26 @@ describe('Dynamical Loading', () => {
 
             if (parentNode.id === 'a') {
               expect(called).toBe(1)
-              parentNode.children = [ {
+              parentNode.children = [{
                 id: 'aa',
                 label: 'aa',
                 children: null,
               }, {
                 id: 'ab',
                 label: 'ab',
-              } ]
+              }]
               callback()
             }
 
             if (parentNode.id === 'aa') {
               expect(called).toBe(2)
-              parentNode.children = [ {
+              parentNode.children = [{
                 id: 'aaa',
                 label: 'aaa',
               }, {
                 id: 'aab',
                 label: 'aab',
-              } ]
+              }]
               callback()
             }
           },
@@ -286,8 +286,8 @@ describe('Dynamical Loading', () => {
       const { vm } = wrapper
 
       vm.select(vm.forest.nodeMap.a)
-      expect(vm.internalValue).toEqual([ 'a' ])
-      expect(vm.forest.selectedNodeIds).toEqual([ 'a' ])
+      expect(vm.internalValue).toEqual(['a'])
+      expect(vm.forest.selectedNodeIds).toEqual(['a'])
       expect(vm.forest.checkedStateMap).toEqual({
         a: CHECKED,
       })
@@ -295,8 +295,8 @@ describe('Dynamical Loading', () => {
       vm.toggleExpanded(vm.forest.nodeMap.a)
       expect(called).toBe(1)
       await vm.$nextTick()
-      expect(vm.internalValue).toEqual([ 'a' ])
-      expect(vm.forest.selectedNodeIds).toEqual([ 'a', 'aa', 'ab' ])
+      expect(vm.internalValue).toEqual(['a'])
+      expect(vm.forest.selectedNodeIds).toEqual(['a', 'aa', 'ab'])
       expect(vm.forest.checkedStateMap).toEqual({
         a: CHECKED,
         aa: CHECKED,
@@ -305,9 +305,9 @@ describe('Dynamical Loading', () => {
 
       vm.toggleExpanded(vm.forest.nodeMap.aa)
       expect(called).toBe(2)
-      expect(vm.internalValue).toEqual([ 'a' ])
+      expect(vm.internalValue).toEqual(['a'])
       await vm.$nextTick()
-      expect(vm.forest.selectedNodeIds).toEqual([ 'a', 'aa', 'ab', 'aaa', 'aab' ])
+      expect(vm.forest.selectedNodeIds).toEqual(['a', 'aa', 'ab', 'aaa', 'aab'])
       expect(vm.forest.checkedStateMap).toEqual({
         a: CHECKED,
         aa: CHECKED,
@@ -321,21 +321,21 @@ describe('Dynamical Loading', () => {
       const DELAY = 10
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
             children: null,
-          } ],
+          }],
           value: 'aa', // <- this creates a fallback node
           loadOptions({ parentNode, callback }) {
             setTimeout(() => {
-              parentNode.children = [ {
+              parentNode.children = [{
                 id: 'aa',
                 label: 'aa',
               }, {
                 id: 'ab',
                 label: 'ab',
-              } ]
+              }]
               callback()
             }, DELAY)
           },
@@ -366,42 +366,42 @@ describe('Dynamical Loading', () => {
         propsData: {
           instanceId: 1,
           loadOptions,
-          options: [ {
+          options: [{
             id: 'branch',
             label: 'branch',
             children: null,
-          } ],
+          }],
         },
       })
       const { vm: vm2 } = mount(Treeselect, {
         propsData: {
           instanceId: 2,
           loadOptions,
-          options: [ {
+          options: [{
             id: 'branch',
             label: 'branch',
             children: null,
-          } ],
+          }],
         },
       })
 
       vm1.toggleExpanded(vm1.forest.nodeMap.branch)
-      expect(loadOptions.calls.argsFor(0)).toEqual([ {
+      expect(loadOptions.calls.argsFor(0)).toEqual([{
         id: 1,
         instanceId: 1,
         action: 'LOAD_CHILDREN_OPTIONS',
         parentNode: jasmine.any(Object),
         callback: jasmine.any(Function),
-      } ])
+      }])
 
       vm2.toggleExpanded(vm2.forest.nodeMap.branch)
-      expect(loadOptions.calls.argsFor(1)).toEqual([ {
+      expect(loadOptions.calls.argsFor(1)).toEqual([{
         id: 2,
         instanceId: 2,
         action: 'LOAD_CHILDREN_OPTIONS',
         parentNode: jasmine.any(Object),
         callback: jasmine.any(Function),
-      } ])
+      }])
     })
 
     it('callback can be executed only once', () => {
@@ -412,11 +412,11 @@ describe('Dynamical Loading', () => {
       }).and.callThrough()
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
             children: null,
-          } ],
+          }],
           loadOptions,
         },
       })
@@ -432,11 +432,11 @@ describe('Dynamical Loading', () => {
       const DELAY = 10
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
             children: null,
-          } ],
+          }],
           async loadOptions({ parentNode }) {
             await sleep(DELAY)
             if (called) {
@@ -462,11 +462,11 @@ describe('Dynamical Loading', () => {
 
     // #97
     it('allows resetting a branch node to unloaded state by setting back `children: null`', async () => {
-      const options = [ {
+      const options = [{
         id: 'a',
         label: 'a',
         children: null,
-      } ]
+      }]
       let spy
       const expand = fn => {
         spy = fn
@@ -494,10 +494,10 @@ describe('Dynamical Loading', () => {
 
       // expand the branch node `a` and load its children
       expand((parentNode, callback) => {
-        parentNode.children = [ {
+        parentNode.children = [{
           id: 'aa',
           label: 'aa',
-        } ]
+        }]
         callback()
       })
       expect(vm.forest.nodeMap.a.childrenStates).toEqual({
@@ -542,19 +542,19 @@ describe('Dynamical Loading', () => {
     it('should keep the highlighted state after loading children options', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
           }, {
             id: 'b',
             label: 'b',
             children: null,
-          } ],
+          }],
           loadOptions({ parentNode, callback }) {
-            parentNode.children = [ {
+            parentNode.children = [{
               id: 'ba',
               label: 'ba',
-            } ]
+            }]
             callback()
           },
         },
@@ -576,19 +576,19 @@ describe('Dynamical Loading', () => {
     it('load children options when doing local search', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'branch',
             label: 'branch',
             children: null,
           }, {
             id: 'other',
             label: 'other',
-          } ],
+          }],
           loadOptions({ parentNode, callback }) {
-            parentNode.children = [ {
+            parentNode.children = [{
               id: 'leaf',
               label: 'leaf',
-            } ]
+            }]
             callback()
           },
         },
@@ -600,17 +600,17 @@ describe('Dynamical Loading', () => {
       const menu = findMenu(wrapper)
 
       await typeSearchText(wrapper, 'branch')
-      expect(vm.visibleOptionIds).toEqual([ 'branch' ])
+      expect(vm.visibleOptionIds).toEqual(['branch'])
 
       vm.toggleExpanded(vm.forest.nodeMap.branch)
       await vm.$nextTick()
 
       expect(vm.forest.nodeMap.branch.childrenStates.isLoaded).toBe(true)
-      expect(vm.visibleOptionIds).toEqual([ 'branch', 'leaf' ])
+      expect(vm.visibleOptionIds).toEqual(['branch', 'leaf'])
 
       const labels = menu.findAllComponents('.vue-treeselect__option:not(.vue-treeselect__option--hide) .vue-treeselect__label')
         .wrappers.map(label => label.text().trim())
-      expect(labels).toEqual([ 'branch', 'leaf' ])
+      expect(labels).toEqual(['branch', 'leaf'])
     })
   })
 
@@ -650,17 +650,17 @@ describe('Dynamical Loading', () => {
         expect(action).toBe('LOAD_ROOT_OPTIONS')
 
         setTimeout(() => {
-          app.options = [ {
+          app.options = [{
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'aa',
-            } ],
+            }],
           }, {
             id: 'b',
             label: 'b',
-          } ]
+          }]
           callback()
         }, DELAY)
       }
@@ -700,11 +700,11 @@ describe('Dynamical Loading', () => {
       // should hide the loading tip
       expect(menu.querySelector('.vue-treeselect__loading-tip')).toBe(null)
       // options should be registered
-      expect(Object.keys(vm.forest.nodeMap)).toEqual([ 'a', 'aa', 'b' ])
+      expect(Object.keys(vm.forest.nodeMap)).toEqual(['a', 'aa', 'b'])
       // root options should be rendered
       const labels = [].slice.call(menu.querySelectorAll('.vue-treeselect__label'))
         .map($label => $label.textContent.trim())
-      expect(labels).toEqual([ 'a', 'b' ])
+      expect(labels).toEqual(['a', 'b'])
     })
 
     it('handle error of loading root options & recover from it', async () => {
@@ -714,17 +714,17 @@ describe('Dynamical Loading', () => {
       const loadOptions = ({ callback }) => {
         setTimeout(() => {
           if (called) {
-            app.options = [ {
+            app.options = [{
               id: 'a',
               label: 'a',
-              children: [ {
+              children: [{
                 id: 'aa',
                 label: 'aa',
-              } ],
+              }],
             }, {
               id: 'b',
               label: 'b',
-            } ]
+            }]
             callback()
           } else {
             called = true
@@ -777,11 +777,11 @@ describe('Dynamical Loading', () => {
       menu = vm.getMenu()
       expect(menu.querySelector('.vue-treeselect__error-tip')).toBe(null)
       // options should be registered
-      expect(Object.keys(vm.forest.nodeMap)).toEqual([ 'a', 'aa', 'b' ])
+      expect(Object.keys(vm.forest.nodeMap)).toEqual(['a', 'aa', 'b'])
       // root options should be rendered
       const labels = [].slice.call(menu.querySelectorAll('.vue-treeselect__label'))
         .map($label => $label.textContent.trim())
-      expect(labels).toEqual([ 'a', 'b' ])
+      expect(labels).toEqual(['a', 'b'])
     })
 
     it('should avoid duplicate calling of `loadOptions` when there is already an in-flight request', async () => {
@@ -833,10 +833,10 @@ describe('Dynamical Loading', () => {
           value: 'a', // <- this creates a fallback node
           loadOptions({ callback }) {
             setTimeout(() => {
-              app.options = [ {
+              app.options = [{
                 id: 'a',
                 label: 'a',
-              } ]
+              }]
               callback()
             }, DELAY)
           },
@@ -890,21 +890,21 @@ describe('Dynamical Loading', () => {
 
       vm1.openMenu()
       await vm1.$nextTick()
-      expect(loadOptions.calls.argsFor(0)).toEqual([ {
+      expect(loadOptions.calls.argsFor(0)).toEqual([{
         id: 1,
         instanceId: 1,
         action: 'LOAD_ROOT_OPTIONS',
         callback: jasmine.any(Function),
-      } ])
+      }])
 
       vm2.openMenu()
       await vm2.$nextTick()
-      expect(loadOptions.calls.argsFor(1)).toEqual([ {
+      expect(loadOptions.calls.argsFor(1)).toEqual([{
         id: 2,
         instanceId: 2,
         action: 'LOAD_ROOT_OPTIONS',
         callback: jasmine.any(Function),
-      } ])
+      }])
     })
 
     it('callback can be executed only once', async () => {
@@ -934,10 +934,10 @@ describe('Dynamical Loading', () => {
           async loadOptions() {
             await sleep(DELAY)
             if (called) {
-              app.options = [ {
+              app.options = [{
                 id: 'a',
                 label: 'a',
-              } ]
+              }]
             } else {
               called = true
               throw new Error('test')
@@ -978,7 +978,7 @@ describe('Dynamical Loading', () => {
           loadOptions({ action, callback }) {
             if (action === 'LOAD_ROOT_OPTIONS') {
               setTimeout(() => {
-                app.options = [ 'a', 'b', 'c' ].map(option => ({
+                app.options = ['a', 'b', 'c'].map(option => ({
                   id: option,
                   label: option,
                 }))

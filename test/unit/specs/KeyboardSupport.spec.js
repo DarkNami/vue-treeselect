@@ -48,26 +48,26 @@ describe('Keyboard Support', () => {
     beforeEach(() => {
       wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
           }, {
             id: 'b',
             label: 'b',
-          } ],
+          }],
           multiple: true,
           backspaceRemoves: true,
-          value: [ 'a', 'b' ],
+          value: ['a', 'b'],
         },
       })
 
       expect(wrapper.vm.trigger.searchQuery).toBe('')
-      expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
+      expect(wrapper.vm.forest.selectedNodeIds).toEqual(['a', 'b'])
     })
 
     it('should remove the last value if search input is empty', () => {
       pressBackspaceKey(wrapper)
-      expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a' ])
+      expect(wrapper.vm.forest.selectedNodeIds).toEqual(['a'])
       pressBackspaceKey(wrapper)
       expect(wrapper.vm.forest.selectedNodeIds).toEqual([])
     })
@@ -76,13 +76,13 @@ describe('Keyboard Support', () => {
       await typeSearchText(wrapper, 'test')
       expect(wrapper.vm.trigger.searchQuery).toBe('test')
       pressBackspaceKey(wrapper)
-      expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
+      expect(wrapper.vm.forest.selectedNodeIds).toEqual(['a', 'b'])
     })
 
     it('should do nothing when backspaceRemoves=false', async () => {
       await wrapper.setProps({ backspaceRemoves: false })
       pressBackspaceKey(wrapper)
-      expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
+      expect(wrapper.vm.forest.selectedNodeIds).toEqual(['a', 'b'])
     })
   })
 
@@ -91,7 +91,7 @@ describe('Keyboard Support', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           alwaysOpen: true,
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
           }, {
@@ -105,7 +105,7 @@ describe('Keyboard Support', () => {
             id: 'd',
             label: 'd',
             children: [],
-          } ],
+          }],
         },
       })
       const { vm } = wrapper
@@ -124,14 +124,14 @@ describe('Keyboard Support', () => {
       await wrapper.setProps({ multiple: false })
 
       pressEnterKey(wrapper)
-      expect(vm.internalValue).toEqual([ 'a' ])
+      expect(vm.internalValue).toEqual(['a'])
       pressEnterKey(wrapper)
-      expect(vm.internalValue).toEqual([ 'a' ])
+      expect(vm.internalValue).toEqual(['a'])
 
       vm.setCurrentHighlightedOption(vm.forest.nodeMap.b)
       expect(vm.menu.current).toBe('b')
       pressEnterKey(wrapper)
-      expect(vm.internalValue).toEqual([ 'b' ])
+      expect(vm.internalValue).toEqual(['b'])
     })
 
     it('select or deselect option using enter key (multi-select)', async () => {
@@ -140,14 +140,14 @@ describe('Keyboard Support', () => {
       await wrapper.setProps({ multiple: true })
 
       pressEnterKey(wrapper)
-      expect(vm.internalValue).toEqual([ 'a' ])
+      expect(vm.internalValue).toEqual(['a'])
       pressEnterKey(wrapper)
       expect(vm.internalValue).toEqual([])
 
       vm.setCurrentHighlightedOption(vm.forest.nodeMap.b)
       expect(vm.menu.current).toBe('b')
       pressEnterKey(wrapper)
-      expect(vm.internalValue).toEqual([ 'b' ])
+      expect(vm.internalValue).toEqual(['b'])
     })
 
     it('pressing enter key on a disabled option should be no-op', async () => {
@@ -195,15 +195,15 @@ describe('Keyboard Support', () => {
       wrapper = mount(Treeselect, {
         sync: false,
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
           }, {
             id: 'b',
             label: 'b',
-          } ],
+          }],
           multiple: true,
-          value: [ 'a', 'b' ],
+          value: ['a', 'b'],
         },
       })
       vm = wrapper.vm
@@ -213,18 +213,18 @@ describe('Keyboard Support', () => {
       await typeSearchText(wrapper, 'test')
       pressEscapeKey(wrapper)
       expect(vm.trigger.searchQuery).toBe('')
-      expect(vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
+      expect(vm.forest.selectedNodeIds).toEqual(['a', 'b'])
     })
 
     it('should close the menu if input is empty', async () => {
       wrapper.vm.openMenu()
       await wrapper.vm.$nextTick()
       expect(vm.trigger.searchQuery).toBe('')
-      expect(vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
+      expect(vm.forest.selectedNodeIds).toEqual(['a', 'b'])
 
       pressEscapeKey(wrapper)
       expect(vm.trigger.searchQuery).toBe('')
-      expect(vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
+      expect(vm.forest.selectedNodeIds).toEqual(['a', 'b'])
       expect(vm.menu.isOpen).toBe(false)
     })
   })
@@ -232,10 +232,10 @@ describe('Keyboard Support', () => {
   describe('(home + end) keys', () => {
     const wrapper = mount(Treeselect, {
       propsData: {
-        options: [ 'a', 'b', 'c' ].map(major => ({
+        options: ['a', 'b', 'c'].map(major => ({
           id: major,
           label: major,
-          children: [ 'a', 'b' ].map(minor => ({
+          children: ['a', 'b'].map(minor => ({
             id: major + minor,
             label: major + minor,
           })),
@@ -262,7 +262,7 @@ describe('Keyboard Support', () => {
     })
 
     it('with nested options', () => {
-      [ 'a', 'b', 'c' ].forEach(branchNodeId => {
+      ['a', 'b', 'c'].forEach(branchNodeId => {
         const branchNode = vm.forest.nodeMap[branchNodeId]
         vm.toggleExpanded(branchNode)
         expect(branchNode.isExpanded).toBe(true)
@@ -315,35 +315,35 @@ describe('Keyboard Support', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           defaultExpandLevel: Infinity,
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'aa',
             }, {
               id: 'ab',
               label: 'ab',
-              children: [ {
+              children: [{
                 id: 'aba',
                 label: 'aba',
               }, {
                 id: 'abb',
                 label: 'abb',
-              } ],
-            } ],
+              }],
+            }],
           }, {
             id: 'b',
             label: 'b',
-            children: [ {
+            children: [{
               id: 'ba',
               label: 'ba',
-              children: [ {
+              children: [{
                 id: 'baa',
                 label: 'baa',
-              } ],
-            } ],
-          } ],
+              }],
+            }],
+          }],
         },
       })
       const { vm } = wrapper
@@ -352,16 +352,16 @@ describe('Keyboard Support', () => {
       await vm.$nextTick()
 
       expect(vm.menu.current).toBe('a')
-      moveAround(wrapper, [ 'a', 'aa', 'ab', 'aba', 'abb', 'b', 'ba', 'baa' ])
+      moveAround(wrapper, ['a', 'aa', 'ab', 'aba', 'abb', 'b', 'ba', 'baa'])
     })
 
     it('keyboard navigation when searching', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ 'a', 'b', 'c' ].map(major => ({
+          options: ['a', 'b', 'c'].map(major => ({
             id: major,
             label: major,
-            children: [ 'a', 'b' ].map(minor => ({
+            children: ['a', 'b'].map(minor => ({
               id: major + minor,
               label: major + minor,
             })),
@@ -377,32 +377,32 @@ describe('Keyboard Support', () => {
 
       await typeSearchText(wrapper, 'a')
       expect(vm.menu.current).toBe('a')
-      moveAround(wrapper, [ 'a', 'aa', 'ab', 'b', 'ba', 'c', 'ca' ])
+      moveAround(wrapper, ['a', 'aa', 'ab', 'b', 'ba', 'c', 'ca'])
 
       await typeSearchText(wrapper, 'bb')
       expect(vm.menu.current).toBe('b')
-      moveAround(wrapper, [ 'b', 'bb' ])
+      moveAround(wrapper, ['b', 'bb'])
     })
 
     it('keyboard navigation & delayed loading', async () => {
       const DELAY = 10
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
             children: null,
           }, {
             id: 'b',
             label: 'b',
-          } ],
+          }],
           loadOptions({ action, parentNode, callback }) {
             if (action === 'LOAD_CHILDREN_OPTIONS') {
               setTimeout(() => {
-                parentNode.children = [ {
+                parentNode.children = [{
                   id: 'aa',
                   label: 'aa',
-                } ]
+                }]
                 callback(null)
               }, DELAY)
             }
@@ -456,21 +456,21 @@ describe('Keyboard Support', () => {
     beforeEach(async () => {
       wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'aa',
             }, {
               id: 'ab',
               label: 'ab',
               children: [],
-            } ],
+            }],
           }, {
             id: 'b',
             label: 'b',
-          } ],
+          }],
         },
       })
       vm = wrapper.vm
@@ -598,26 +598,26 @@ describe('Keyboard Support', () => {
     beforeEach(() => {
       wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
           }, {
             id: 'b',
             label: 'b',
-          } ],
+          }],
           multiple: true,
           deleteRemoves: true,
-          value: [ 'a', 'b' ],
+          value: ['a', 'b'],
         },
       })
 
       expect(wrapper.vm.trigger.searchQuery).toBe('')
-      expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
+      expect(wrapper.vm.forest.selectedNodeIds).toEqual(['a', 'b'])
     })
 
     it('should remove the last value if search input is empty', () => {
       pressDeleteKey(wrapper)
-      expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a' ])
+      expect(wrapper.vm.forest.selectedNodeIds).toEqual(['a'])
       pressDeleteKey(wrapper)
       expect(wrapper.vm.forest.selectedNodeIds).toEqual([])
     })
@@ -626,32 +626,32 @@ describe('Keyboard Support', () => {
       await typeSearchText(wrapper, 'test')
       expect(wrapper.vm.trigger.searchQuery).toBe('test')
       pressDeleteKey(wrapper)
-      expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
+      expect(wrapper.vm.forest.selectedNodeIds).toEqual(['a', 'b'])
     })
 
     it('should do nothing when backspaceRemoves=false', async () => {
       await wrapper.setProps({ deleteRemoves: false })
       pressDeleteKey(wrapper)
-      expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
+      expect(wrapper.vm.forest.selectedNodeIds).toEqual(['a', 'b'])
     })
   })
 
   it('should ignore any key press combined with modifier key', () => {
-    [ 'ctrlKey', 'shiftKey', 'metaKey', 'altKey' ].forEach(modifierKey => {
+    ['ctrlKey', 'shiftKey', 'metaKey', 'altKey'].forEach(modifierKey => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-          } ],
+          }],
           multiple: true,
           escapeClearsValue: true,
-          value: [ 'a' ],
+          value: ['a'],
         },
       })
 
       pressEscapeKey(wrapper, modifierKey)
-      expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a' ])
+      expect(wrapper.vm.forest.selectedNodeIds).toEqual(['a'])
     })
   })
 

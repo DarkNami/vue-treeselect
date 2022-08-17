@@ -36,7 +36,7 @@ describe('Hidden Fields', () => {
   })
 
   it('multi-select mode', async () => {
-    await wrapper.setProps({ name: 'multiple', multiple: true, value: [ 1, 2, 3 ] })
+    await wrapper.setProps({ name: 'multiple', multiple: true, value: [1, 2, 3] })
     const hiddenFields = getHiddenFields()
     expect(hiddenFields.length).toBe(3)
     expect(hiddenFields.wrappers.map(hf => hf.html())).toEqual([
@@ -47,14 +47,14 @@ describe('Hidden Fields', () => {
   })
 
   it('join values', async () => {
-    await wrapper.setProps({ name: 'join-values', multiple: true, value: [ 'a', 'b', 'c' ], joinValues: true })
+    await wrapper.setProps({ name: 'join-values', multiple: true, value: ['a', 'b', 'c'], joinValues: true })
     const hiddenFields = getHiddenFields()
     expect(hiddenFields.length).toBe(1)
     expect(hiddenFields.at(0).html()).toBe('<input type="hidden" name="join-values" value="a,b,c">')
   })
 
   it('delimiter', async () => {
-    await wrapper.setProps({ name: 'delimiter', multiple: true, value: [ 1, 2, 3 ], joinValues: true, delimiter: ';' })
+    await wrapper.setProps({ name: 'delimiter', multiple: true, value: [1, 2, 3], joinValues: true, delimiter: ';' })
     const hiddenFields = getHiddenFields()
     expect(hiddenFields.length).toBe(1)
     expect(hiddenFields.at(0).html()).toBe('<input type="hidden" name="delimiter" value="1;2;3">')

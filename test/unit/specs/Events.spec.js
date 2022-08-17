@@ -19,16 +19,16 @@ describe('Events', () => {
       id: 'a',
       label: 'a',
       isDefaultExpanded: true,
-      children: [ aa, ab ],
+      children: [aa, ab],
     }
 
     beforeEach(async () => {
       wrapper = mount(Treeselect, {
         propsData: {
-          options: [ a ],
+          options: [a],
           instanceId: 'test',
           multiple: true,
-          value: [ 'ab' ],
+          value: ['ab'],
         },
       })
       wrapper.vm.openMenu()
@@ -38,12 +38,12 @@ describe('Events', () => {
     it('click on option label or checkbox', () => {
       leftClick(findLabelContainerByNodeId(wrapper, 'aa'))
       expect(wrapper.emitted().select).toEqual([
-        [ aa, 'test' ],
+        [aa, 'test'],
       ])
 
       leftClick(findCheckboxByNodeId(wrapper, 'aa'))
       expect(wrapper.emitted().deselect).toEqual([
-        [ aa, 'test' ],
+        [aa, 'test'],
       ])
     })
 
@@ -53,12 +53,12 @@ describe('Events', () => {
     })
 
     it('click on value remove icon', async () => {
-      await wrapper.setProps({ value: [ 'a' ] })
+      await wrapper.setProps({ value: ['a'] })
 
       // click on "×" of a
       leftClick(wrapper.findComponent('.vue-treeselect__value-remove'))
       expect(wrapper.emitted().deselect).toEqual([
-        [ a, 'test' ],
+        [a, 'test'],
       ])
     })
   })

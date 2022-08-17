@@ -17,7 +17,7 @@ export function generateOptions(maxLevel) {
   const generate = (i, level) => {
     const id = String.fromCharCode(97 + i).repeat(level)
     const option = { id, label: id.toUpperCase() }
-    if (level < maxLevel) option.children = [ generate(i, level + 1) ]
+    if (level < maxLevel) option.children = [generate(i, level + 1)]
     return option
   }
 

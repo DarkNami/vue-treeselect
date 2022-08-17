@@ -273,8 +273,8 @@ describe('Utils', () => {
       })
 
       it('array', () => {
-        expect(includes([ 'a', 'b', 'c' ], 'b')).toBe(true)
-        expect(includes([ 'x', 'y', 'z' ], 'b')).toBe(false)
+        expect(includes(['a', 'b', 'c'], 'b')).toBe(true)
+        expect(includes(['x', 'y', 'z'], 'b')).toBe(false)
       })
     })
 
@@ -282,21 +282,21 @@ describe('Utils', () => {
       const { find } = utils
 
       it('should return the element if matched', () => {
-        expect(find([ 1, 2, 3 ], n => n % 2 === 0)).toBe(2)
+        expect(find([1, 2, 3], n => n % 2 === 0)).toBe(2)
       })
 
       it('should return undefined if not matched', () => {
-        expect(find([ 1 ], n => n < 0)).toBe(undefined)
+        expect(find([1], n => n < 0)).toBe(undefined)
       })
     })
 
     it('removeFromArray', () => {
       const { removeFromArray } = utils
-      const arr = [ 1, 2, 3 ]
+      const arr = [1, 2, 3]
       removeFromArray(arr, 2)
-      expect(arr).toEqual([ 1, 3 ])
+      expect(arr).toEqual([1, 3])
       removeFromArray(arr, 9)
-      expect(arr).toEqual([ 1, 3 ])
+      expect(arr).toEqual([1, 3])
     })
   })
 
@@ -305,9 +305,9 @@ describe('Utils', () => {
       const { quickDiff } = utils
       const obj = {}
       expect(quickDiff([], [])).toBe(false)
-      expect(quickDiff([ 1 ], [])).toBe(true)
-      expect(quickDiff([ {} ], [ {} ])).toBe(true)
-      expect(quickDiff([ obj ], [ obj ])).toBe(false)
+      expect(quickDiff([1], [])).toBe(true)
+      expect(quickDiff([{}], [{}])).toBe(true)
+      expect(quickDiff([obj], [obj])).toBe(false)
     })
   })
 })

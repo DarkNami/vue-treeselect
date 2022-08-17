@@ -7,14 +7,14 @@ describe('Methods', () => {
     it('basic', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'aa',
-            } ],
-          } ],
+            }],
+          }],
         },
       })
       const { vm } = wrapper
@@ -32,7 +32,7 @@ describe('Methods', () => {
     beforeEach(() => {
       wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
           }, {
@@ -42,7 +42,7 @@ describe('Methods', () => {
             id: 'c',
             label: 'c',
             isDisabled: true,
-          } ],
+          }],
         },
       })
       vm = wrapper.vm
@@ -64,14 +64,14 @@ describe('Methods', () => {
     it('when multiple=true', async () => {
       await wrapper.setProps({ multiple: true })
 
-      await wrapper.setProps({ value: [ 'a', 'b' ] })
+      await wrapper.setProps({ value: ['a', 'b'] })
       vm.clear()
       expect(vm.internalValue).toEqual([])
 
       // Should not clear disabled value.
-      await wrapper.setProps({ value: [ 'a', 'b', 'c' ] })
+      await wrapper.setProps({ value: ['a', 'b', 'c'] })
       vm.clear()
-      expect(vm.internalValue).toEqual([ 'c' ])
+      expect(vm.internalValue).toEqual(['c'])
     })
   })
 
@@ -197,10 +197,10 @@ describe('Methods', () => {
     beforeEach(() => {
       wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-          } ],
+          }],
         },
       })
     })
@@ -228,10 +228,10 @@ describe('Methods', () => {
         propsData: {
           value: 'a',
           multiple: false,
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-          } ],
+          }],
         },
       })
       const { vm } = wrapper
@@ -251,18 +251,18 @@ describe('Methods', () => {
             propsData: {
               flat: true,
               multiple: true,
-              value: [ 'c', 'aaa', 'bb' ],
-              options: [ 'a', 'b', 'c' ].map(letter => ({
+              value: ['c', 'aaa', 'bb'],
+              options: ['a', 'b', 'c'].map(letter => ({
                 id: letter,
                 label: letter,
-                children: [ {
+                children: [{
                   id: letter.repeat(2),
                   label: letter.repeat(2),
-                  children: [ {
+                  children: [{
                     id: letter.repeat(3),
                     label: letter.repeat(3),
-                  } ],
-                } ],
+                  }],
+                }],
               })),
             },
           })
@@ -271,33 +271,33 @@ describe('Methods', () => {
 
         it('when sortValueBy=ORDER_SELECTED', async () => {
           await wrapper.setProps({ sortValueBy: 'ORDER_SELECTED' })
-          expect(vm.internalValue).toEqual([ 'c', 'aaa', 'bb' ])
+          expect(vm.internalValue).toEqual(['c', 'aaa', 'bb'])
           vm.removeLastValue()
-          expect(vm.internalValue).toEqual([ 'c', 'aaa' ])
+          expect(vm.internalValue).toEqual(['c', 'aaa'])
           vm.removeLastValue()
-          expect(vm.internalValue).toEqual([ 'c' ])
+          expect(vm.internalValue).toEqual(['c'])
           vm.removeLastValue()
           expect(vm.internalValue).toEqual([])
         })
 
         it('when sortValueBy=LEVEL', async () => {
           await wrapper.setProps({ sortValueBy: 'LEVEL' })
-          expect(vm.internalValue).toEqual([ 'c', 'bb', 'aaa' ])
+          expect(vm.internalValue).toEqual(['c', 'bb', 'aaa'])
           vm.removeLastValue()
-          expect(vm.internalValue).toEqual([ 'c', 'bb' ])
+          expect(vm.internalValue).toEqual(['c', 'bb'])
           vm.removeLastValue()
-          expect(vm.internalValue).toEqual([ 'c' ])
+          expect(vm.internalValue).toEqual(['c'])
           vm.removeLastValue()
           expect(vm.internalValue).toEqual([])
         })
 
         it('when sortValueBy=INDEX', async () => {
           await wrapper.setProps({ sortValueBy: 'INDEX' })
-          expect(vm.internalValue).toEqual([ 'aaa', 'bb', 'c' ])
+          expect(vm.internalValue).toEqual(['aaa', 'bb', 'c'])
           vm.removeLastValue()
-          expect(vm.internalValue).toEqual([ 'aaa', 'bb' ])
+          expect(vm.internalValue).toEqual(['aaa', 'bb'])
           vm.removeLastValue()
-          expect(vm.internalValue).toEqual([ 'aaa' ])
+          expect(vm.internalValue).toEqual(['aaa'])
           vm.removeLastValue()
           expect(vm.internalValue).toEqual([])
         })
@@ -310,25 +310,25 @@ describe('Methods', () => {
           wrapper = mount(Treeselect, {
             propsData: {
               multiple: true,
-              value: [ 'a' ],
-              options: [ {
+              value: ['a'],
+              options: [{
                 id: 'a',
                 label: 'a',
-                children: [ {
+                children: [{
                   id: 'aa',
                   label: 'aa',
-                  children: [ {
+                  children: [{
                     id: 'aaa',
                     label: 'aaa',
                   }, {
                     id: 'aab',
                     label: 'aab',
-                  } ],
+                  }],
                 }, {
                   id: 'ab',
                   label: 'ab',
-                } ],
-              } ],
+                }],
+              }],
             },
           })
           vm = wrapper.vm
@@ -336,29 +336,29 @@ describe('Methods', () => {
 
         it('when valueConsistsOf=ALL', async () => {
           await wrapper.setProps({ valueConsistsOf: 'ALL' })
-          expect(vm.internalValue).toEqual([ 'a', 'aa', 'ab', 'aaa', 'aab' ])
+          expect(vm.internalValue).toEqual(['a', 'aa', 'ab', 'aaa', 'aab'])
           vm.removeLastValue()
-          expect(vm.internalValue).toEqual([ 'ab', 'aaa' ])
+          expect(vm.internalValue).toEqual(['ab', 'aaa'])
           vm.removeLastValue()
-          expect(vm.internalValue).toEqual([ 'ab' ])
+          expect(vm.internalValue).toEqual(['ab'])
           vm.removeLastValue()
           expect(vm.internalValue).toEqual([])
         })
 
         it('when valueConsistsOf=BRANCH_PRIORITY', async () => {
           await wrapper.setProps({ valueConsistsOf: 'BRANCH_PRIORITY' })
-          expect(vm.internalValue).toEqual([ 'a' ])
+          expect(vm.internalValue).toEqual(['a'])
           vm.removeLastValue()
           expect(vm.internalValue).toEqual([])
         })
 
         it('when valueConsistsOf=LEAF_PRIORITY', async () => {
           await wrapper.setProps({ valueConsistsOf: 'LEAF_PRIORITY' })
-          expect(vm.internalValue).toEqual([ 'ab', 'aaa', 'aab' ])
+          expect(vm.internalValue).toEqual(['ab', 'aaa', 'aab'])
           vm.removeLastValue()
-          expect(vm.internalValue).toEqual([ 'ab', 'aaa' ])
+          expect(vm.internalValue).toEqual(['ab', 'aaa'])
           vm.removeLastValue()
-          expect(vm.internalValue).toEqual([ 'ab' ])
+          expect(vm.internalValue).toEqual(['ab'])
           vm.removeLastValue()
           expect(vm.internalValue).toEqual([])
         })
@@ -366,18 +366,18 @@ describe('Methods', () => {
         it('when valueConsistsOf=ALL_WITH_INDETERMINATE', async () => {
           // TODO: the order is still strange
           await wrapper.setProps({ valueConsistsOf: 'ALL_WITH_INDETERMINATE' })
-          expect(vm.internalValue).toEqual([ 'a', 'aa', 'ab', 'aaa', 'aab' ])
+          expect(vm.internalValue).toEqual(['a', 'aa', 'ab', 'aaa', 'aab'])
           vm.removeLastValue()
-          expect(vm.internalValue).toEqual([ 'ab', 'aaa', 'a', 'aa' ])
+          expect(vm.internalValue).toEqual(['ab', 'aaa', 'a', 'aa'])
           vm.removeLastValue()
-          expect(vm.internalValue).toEqual([ 'ab', 'a' ])
+          expect(vm.internalValue).toEqual(['ab', 'a'])
           vm.removeLastValue()
           expect(vm.internalValue).toEqual([])
         })
 
         it('when valueConsistsOf=MANUALLY_SELECTED_ONLY', async () => {
           await wrapper.setProps({ valueConsistsOf: 'MANUALLY_SELECTED_ONLY' })
-          expect(vm.internalValue).toEqual([ 'a' ])
+          expect(vm.internalValue).toEqual(['a'])
           vm.removeLastValue()
           expect(vm.internalValue).toEqual([])
         })
@@ -395,20 +395,20 @@ describe('Methods', () => {
     beforeEach(() => {
       wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
           }, {
             id: 'b',
             label: 'b',
-            children: [ {
+            children: [{
               id: 'ba',
               label: 'ba',
             }, {
               id: 'bb',
               label: 'bb',
-            } ],
-          } ],
+            }],
+          }],
         },
       })
       vm = wrapper.vm
@@ -436,7 +436,7 @@ describe('Methods', () => {
       expect(vm.menu.current).toBe('a')
 
       await typeSearchText(wrapper, 'bb')
-      expect(vm.visibleOptionIds).toEqual([ 'b', 'bb' ])
+      expect(vm.visibleOptionIds).toEqual(['b', 'bb'])
       expect(vm.menu.current).toBe('b')
 
       vm.setCurrentHighlightedOption(vm.forest.nodeMap.bb)
@@ -444,7 +444,7 @@ describe('Methods', () => {
 
       await typeSearchText(wrapper, 'a')
       // the previous highlighted option `bb` is not present in the list now
-      expect(vm.visibleOptionIds).toEqual([ 'a', 'b', 'ba' ])
+      expect(vm.visibleOptionIds).toEqual(['a', 'b', 'ba'])
       expect(vm.menu.current).toBe('a')
     })
   })

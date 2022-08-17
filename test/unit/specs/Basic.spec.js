@@ -9,10 +9,10 @@ describe('Basic', () => {
     it('should be able to obtain normalized node by id', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'id',
             label: 'label',
-          } ],
+          }],
         },
       })
       const { vm } = wrapper
@@ -27,16 +27,16 @@ describe('Basic', () => {
     it('shape', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             // branch node
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               // leaf node
               id: 'aa',
               label: 'aa',
-            } ],
-          } ],
+            }],
+          }],
         },
       })
       const leafNodeShape = {
@@ -88,10 +88,10 @@ describe('Basic', () => {
     it('id & label', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-          } ],
+          }],
         },
       })
       const { vm } = wrapper
@@ -103,10 +103,10 @@ describe('Basic', () => {
     it('lowerCased', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'A',
-          } ],
+          }],
         },
       })
       const { vm } = wrapper
@@ -116,38 +116,38 @@ describe('Basic', () => {
     })
 
     describe('isDisabled', () => {
-      const options = [ {
+      const options = [{
         id: 'a',
         label: 'a',
         isDisabled: true,
-        children: [ {
+        children: [{
           id: 'aa',
           label: 'aa',
-        } ],
+        }],
       }, {
         id: 'b',
         label: 'b',
-        children: [ {
+        children: [{
           id: 'ba',
           label: 'ba',
           isDisabled: true,
         }, {
           id: 'bb',
           label: 'bb',
-        } ],
+        }],
       }, {
         id: 'c',
         label: 'c',
-        children: [ {
+        children: [{
           id: 'ca',
           label: 'ca',
           isDisabled: true,
-          children: [ {
+          children: [{
             id: 'caa',
             label: 'caa',
-          } ],
-        } ],
-      } ]
+          }],
+        }],
+      }]
 
       const whenNonFlatMode = vm => {
         const { a, aa, b, ba, bb, c, ca, caa } = vm.forest.nodeMap
@@ -225,19 +225,19 @@ describe('Basic', () => {
         propsData: {
           flat: true,
           multiple: true,
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'aa',
               isDisabled: true,
-              children: [ {
+              children: [{
                 id: 'aaa',
                 label: 'aaa',
-              } ],
-            } ],
-          } ],
+              }],
+            }],
+          }],
         },
       })
       const { vm } = wrapper
@@ -250,7 +250,7 @@ describe('Basic', () => {
     it('isLeaf & isBranch & childrenStates', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             // leaf node
             id: 'a',
             label: 'a',
@@ -264,7 +264,7 @@ describe('Basic', () => {
             id: 'c',
             label: 'c',
             children: null,
-          } ],
+          }],
           loadOptions() { /* empty */ },
         },
       })
@@ -302,7 +302,7 @@ describe('Basic', () => {
     it('isDefaultExpanded', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
             isDefaultExpanded: true,
@@ -315,13 +315,13 @@ describe('Basic', () => {
           }, {
             id: 'c',
             label: 'c',
-            children: [ {
+            children: [{
               id: 'ca',
               label: 'ca',
               isDefaultExpanded: true,
               children: [],
-            } ],
-          } ],
+            }],
+          }],
         },
       })
       const { a, b, c, ca } = wrapper.vm.forest.nodeMap
@@ -335,14 +335,14 @@ describe('Basic', () => {
     it('isRootNode', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'aa',
-            } ],
-          } ],
+            }],
+          }],
         },
       })
       const { vm } = wrapper
@@ -355,18 +355,18 @@ describe('Basic', () => {
     it('parentNode & ancestors & level', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'aa',
-              children: [ {
+              children: [{
                 id: 'aaa',
                 label: 'aaa',
-              } ],
-            } ],
-          } ],
+              }],
+            }],
+          }],
         },
       })
       const { vm } = wrapper
@@ -377,8 +377,8 @@ describe('Basic', () => {
       expect(aaa.parentNode).toBe(aa)
 
       expect(a.ancestors).toEqual([])
-      expect(aa.ancestors).toEqual([ a ])
-      expect(aaa.ancestors).toEqual([ aa, a ])
+      expect(aa.ancestors).toEqual([a])
+      expect(aaa.ancestors).toEqual([aa, a])
 
       expect(a.level).toBe(0)
       expect(aa.level).toBe(1)
@@ -388,74 +388,74 @@ describe('Basic', () => {
     it('index', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'aa',
-              children: [ {
+              children: [{
                 id: 'aaa',
                 label: 'aaa',
-              } ],
+              }],
             }, {
               id: 'ab',
               label: 'ab',
-            } ],
+            }],
           }, {
             id: 'b',
             label: 'b',
-            children: [ {
+            children: [{
               id: 'ba',
               label: 'ba',
             }, {
               id: 'bb',
               label: 'bb',
-              children: [ {
+              children: [{
                 id: 'bba',
                 label: 'bba',
-              } ],
-            } ],
-          } ],
+              }],
+            }],
+          }],
         },
       })
       const { vm } = wrapper
       const { a, aa, aaa, ab, b, ba, bb, bba } = vm.forest.nodeMap
 
-      expect(a.index).toEqual([ 0 ])
-      expect(aa.index).toEqual([ 0, 0 ])
-      expect(aaa.index).toEqual([ 0, 0, 0 ])
-      expect(ab.index).toEqual([ 0, 1 ])
-      expect(b.index).toEqual([ 1 ])
-      expect(ba.index).toEqual([ 1, 0 ])
-      expect(bb.index).toEqual([ 1, 1 ])
-      expect(bba.index).toEqual([ 1, 1, 0 ])
+      expect(a.index).toEqual([0])
+      expect(aa.index).toEqual([0, 0])
+      expect(aaa.index).toEqual([0, 0, 0])
+      expect(ab.index).toEqual([0, 1])
+      expect(b.index).toEqual([1])
+      expect(ba.index).toEqual([1, 0])
+      expect(bb.index).toEqual([1, 1])
+      expect(bba.index).toEqual([1, 1, 0])
     })
 
     it('count', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'aa',
-              children: [ {
+              children: [{
                 id: 'aaa',
                 label: 'aaa',
               }, {
                 id: 'aab',
                 label: 'aab',
-              } ],
+              }],
             }, {
               id: 'ab',
               label: 'ab',
-            } ],
+            }],
           }, {
             id: 'b',
             label: 'b',
-          } ],
+          }],
         },
       })
       const { vm } = wrapper
@@ -488,11 +488,11 @@ describe('Basic', () => {
       const rawA = {
         id: 'a',
         label: 'a',
-        children: [ rawAa ],
+        children: [rawAa],
       }
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ rawA ],
+          options: [rawA],
         },
       })
       const { vm } = wrapper
@@ -506,23 +506,23 @@ describe('Basic', () => {
   it('rootOptions', () => {
     const wrapper = mount(Treeselect, {
       propsData: {
-        options: [ {
+        options: [{
           id: 'a',
           label: 'a',
-          children: [ {
+          children: [{
             id: 'aa',
             label: 'aa',
-          } ],
+          }],
         }, {
           id: 'b',
           label: 'b',
-        } ],
+        }],
       },
     })
     const { vm } = wrapper
     const { a, b } = vm.forest.nodeMap
 
-    expect(vm.forest.normalizedOptions).toEqual([ a, b ])
+    expect(vm.forest.normalizedOptions).toEqual([a, b])
     vm.forest.normalizedOptions.forEach(normalized => {
       expect(normalized.isRootNode).toBe(true)
     })
@@ -550,7 +550,7 @@ describe('Basic', () => {
         isBranch: false,
         isDisabled: false,
         isNew: false,
-        index: [ -1 ],
+        index: [-1],
         level: 0,
         raw: {
           id: 'test',
@@ -598,23 +598,23 @@ describe('Basic', () => {
   })
 
   it('should accept undefined/null as value', () => {
-    [ true, false ].forEach(multiple => {
-      [ undefined, null ].forEach(value => {
+    [true, false].forEach(multiple => {
+      [undefined, null].forEach(value => {
         const wrapper = mount(Treeselect, {
           propsData: {
             multiple,
             value,
-            options: [ {
+            options: [{
               id: 'a',
               label: 'a',
-              children: [ {
+              children: [{
                 id: 'aa',
                 label: 'aa',
-              } ],
+              }],
             }, {
               id: 'b',
               label: 'b',
-            } ],
+            }],
           },
         })
         const { vm } = wrapper
@@ -629,18 +629,18 @@ describe('Basic', () => {
 
     mount(Treeselect, {
       propsData: {
-        options: [ {
+        options: [{
           id: 'branch',
           label: 'branch',
           isBranch: true,
-        } ],
+        }],
       },
     })
 
     expect(console.error).toHaveBeenCalledWith(
       '[Vue-Treeselect Warning]',
       'Are you meant to declare an unloaded branch node? ' +
-        '`isBranch: true` is no longer supported, please use `children: null` instead.',
+      '`isBranch: true` is no longer supported, please use `children: null` instead.',
     )
   })
 
@@ -650,20 +650,20 @@ describe('Basic', () => {
 
       mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'same_id',
             label: 'a',
           }, {
             id: 'same_id',
             label: 'b',
-          } ],
+          }],
         },
       })
 
       expect(console.error).toHaveBeenCalledWith(
         '[Vue-Treeselect Warning]',
         'Detected duplicate presence of node id "same_id". ' +
-          'Their labels are "a" and "b" respectively.',
+        'Their labels are "a" and "b" respectively.',
       )
     })
 
@@ -672,21 +672,21 @@ describe('Basic', () => {
 
       mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'same_id',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'same_id',
               label: 'b',
-            } ],
-          } ],
+            }],
+          }],
         },
       })
 
       expect(console.error).toHaveBeenCalledWith(
         '[Vue-Treeselect Warning]',
         'Detected duplicate presence of node id "same_id". ' +
-          'Their labels are "a" and "b" respectively.',
+        'Their labels are "a" and "b" respectively.',
       )
     })
   })
@@ -702,10 +702,10 @@ describe('Basic', () => {
         options: null,
         loadOptions({ callback }) {
           setTimeout(() => {
-            app.options = [ {
+            app.options = [{
               id: 'a',
               label: 'a',
-            } ]
+            }]
             callback()
           }, DELAY)
         },
@@ -732,16 +732,16 @@ describe('Basic', () => {
   it('should rebuild state after swithching from single to multiple', async () => {
     const wrapper = mount(Treeselect, {
       propsData: {
-        options: [ {
+        options: [{
           id: 'a',
           label: 'a',
-          children: [ {
+          children: [{
             id: 'aa',
             label: 'aa',
-          } ],
-        } ],
+          }],
+        }],
         multiple: false,
-        value: [ 'a' ],
+        value: ['a'],
       },
     })
     const { vm } = wrapper
@@ -754,14 +754,14 @@ describe('Basic', () => {
   it('should rebuild state after value changed externally when multiple=true', async () => {
     const wrapper = mount(Treeselect, {
       propsData: {
-        options: [ {
+        options: [{
           id: 'a',
           label: 'a',
-          children: [ {
+          children: [{
             id: 'aa',
             label: 'aa',
-          } ],
-        } ],
+          }],
+        }],
         multiple: true,
         value: [],
       },
@@ -772,7 +772,7 @@ describe('Basic', () => {
       a: 0,
       aa: 0,
     })
-    await wrapper.setProps({ value: [ 'a' ] })
+    await wrapper.setProps({ value: ['a'] })
     expect(vm.forest.checkedStateMap).toEqual({
       a: 2,
       aa: 2,
@@ -786,13 +786,13 @@ describe('Basic', () => {
       components: { Treeselect },
       data: {
         value: [],
-        options: [ {
+        options: [{
           id: 'a',
           label: 'a',
         }, {
           id: 'b',
           label: 'b',
-        } ],
+        }],
       },
       template: `
         <div>
@@ -808,7 +808,7 @@ describe('Basic', () => {
 
     comp.select(comp.forest.nodeMap.a)
     await comp.$nextTick()
-    expect(vm.value).toEqual([ 'a' ])
+    expect(vm.value).toEqual(['a'])
     comp.select(comp.forest.nodeMap.a)
     await comp.$nextTick()
     expect(vm.value).toEqual([])
@@ -817,14 +817,14 @@ describe('Basic', () => {
   it('an option should be rendered with its id in the markup', async () => {
     const wrapper = mount(Treeselect, {
       propsData: {
-        options: [ {
+        options: [{
           id: 'a',
           label: 'a',
-          children: [ {
+          children: [{
             id: 'aa',
             label: 'aa',
-          } ],
-        } ],
+          }],
+        }],
         defaultExpandLevel: Infinity,
       },
     })

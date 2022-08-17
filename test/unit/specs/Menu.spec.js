@@ -47,11 +47,11 @@ describe('Menu', () => {
       sync: false,
       attachTo: document.body,
       propsData: {
-        options: [ {
+        options: [{
           id: 'a',
           label: 'a',
           children: [],
-        } ],
+        }],
       },
     })
     const { vm } = wrapper
@@ -71,13 +71,13 @@ describe('Menu', () => {
   it('should highlight the option when the cursor hovering over it', async () => {
     const wrapper = mount(Treeselect, {
       propsData: {
-        options: [ {
+        options: [{
           id: 'a',
           label: 'a',
         }, {
           id: 'b',
           label: 'b',
-        } ],
+        }],
       },
     })
     const { vm } = wrapper

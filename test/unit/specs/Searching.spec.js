@@ -10,20 +10,20 @@ describe('Searching', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           searchable: true,
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'aa',
             }, {
               id: 'ab',
               label: 'ab',
-            } ],
+            }],
           }, {
             id: 'b',
             label: 'b',
-          } ],
+          }],
         },
       })
       const { vm } = wrapper
@@ -47,13 +47,13 @@ describe('Searching', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           searchable: true,
-          options: [ {
+          options: [{
             id: 'a',
             label: 'James Blunt',
           }, {
             id: 'b',
             label: 'Cheer Chen',
-          } ],
+          }],
         },
       })
       const { vm } = wrapper
@@ -77,14 +77,14 @@ describe('Searching', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           searchable: true,
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'aa',
-            } ],
-          } ],
+            }],
+          }],
         },
       })
       const { vm } = wrapper
@@ -132,10 +132,10 @@ describe('Searching', () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           searchable: true,
-          options: [ {
+          options: [{
             id: 'branch',
             label: 'branch',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'aa',
             }, {
@@ -144,12 +144,12 @@ describe('Searching', () => {
             }, {
               id: 'ac',
               label: 'ac',
-              children: [ {
+              children: [{
                 id: 'aca',
                 label: 'aca',
-              } ],
-            } ],
-          } ],
+              }],
+            }],
+          }],
         },
       })
       const { vm } = wrapper
@@ -188,20 +188,20 @@ describe('Searching', () => {
     it('should highlight first option after search query changes', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
           }, {
             id: 'b',
             label: 'b',
-            children: [ {
+            children: [{
               id: 'ba',
               label: 'ba',
             }, {
               id: 'bb',
               label: 'bb',
-            } ],
-          } ],
+            }],
+          }],
         },
       })
       const { vm } = wrapper
@@ -241,17 +241,17 @@ describe('Searching', () => {
         propsData: {
           searchable: true,
           searchNested: false,
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
-            children: [ {
+            children: [{
               id: 'aa',
               label: 'x',
             }, {
               id: 'ab',
               label: 'a x',
-            } ],
-          } ],
+            }],
+          }],
         },
       })
       const { vm } = wrapper
@@ -270,14 +270,14 @@ describe('Searching', () => {
             searchable: true,
             searchNested: true,
             disableFuzzyMatching: false,
-            options: [ {
+            options: [{
               id: 'a',
               label: 'abc',
-              children: [ {
+              children: [{
                 id: 'aa',
                 label: 'xyz',
-              } ],
-            } ],
+              }],
+            }],
           },
         })
         vm = wrapper.vm
@@ -317,9 +317,9 @@ describe('Searching', () => {
     it('match more properties than only `label`', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
-          matchKeys: [ 'label', 'value' ],
+          matchKeys: ['label', 'value'],
           searchable: true,
-          options: [ {
+          options: [{
             id: 'a',
             label: 'a',
             value: '1',
@@ -329,14 +329,14 @@ describe('Searching', () => {
             label: 'b',
             value: '2',
             extra: 'y',
-          } ],
+          }],
         },
       })
 
-      await typeAndAssert(wrapper, 'a', [ 'a' ])
-      await typeAndAssert(wrapper, 'b', [ 'b' ])
-      await typeAndAssert(wrapper, '1', [ 'a' ])
-      await typeAndAssert(wrapper, '2', [ 'b' ])
+      await typeAndAssert(wrapper, 'a', ['a'])
+      await typeAndAssert(wrapper, 'b', ['b'])
+      await typeAndAssert(wrapper, '1', ['a'])
+      await typeAndAssert(wrapper, '2', ['b'])
       await typeAndAssert(wrapper, 'x', [])
       await typeAndAssert(wrapper, 'y', [])
     })
@@ -350,7 +350,7 @@ describe('Searching', () => {
       ]
       const wrapper = mount(Treeselect, {
         propsData: {
-          matchKeys: [ 'value' ],
+          matchKeys: ['value'],
           searchable: true,
           options: specialValues.map((value, index) => ({
             id: String(index),
@@ -360,7 +360,7 @@ describe('Searching', () => {
         },
       })
 
-      await typeAndAssert(wrapper, '1', [ '0' ])
+      await typeAndAssert(wrapper, '1', ['0'])
       await typeAndAssert(wrapper, 'NaN', [])
       await typeAndAssert(wrapper, 'null', [])
       await typeAndAssert(wrapper, 'undefined', [])
@@ -379,32 +379,32 @@ describe('Searching', () => {
             id: node.key,
             label: node.name,
           }),
-          options: [ {
+          options: [{
             key: 'a',
             name: 'a',
           }, {
             key: 'b',
             name: 'b',
-          } ],
+          }],
         },
       })
 
-      await typeAndAssert(wrapper, 'a', [ 'a' ])
-      await typeAndAssert(wrapper, 'b', [ 'b' ])
+      await typeAndAssert(wrapper, 'a', ['a'])
+      await typeAndAssert(wrapper, 'b', ['b'])
     })
 
     it('should reinitialize options after the value of `matchKeys` prop changes', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           searchable: true,
-          matchKeys: [ 'label' ],
-          options: [ {
+          matchKeys: ['label'],
+          options: [{
             id: 'A',
             label: 'x',
           }, {
             id: 'b',
             label: 'Y',
-          } ],
+          }],
         },
       })
       const { vm } = wrapper
@@ -418,7 +418,7 @@ describe('Searching', () => {
         }),
       })
 
-      await wrapper.setProps({ matchKeys: [ 'id' ] })
+      await wrapper.setProps({ matchKeys: ['id'] })
       expect(vm.forest.nodeMap).toEqual({
         A: jasmine.objectContaining({
           lowerCased: { id: 'a' },
@@ -446,29 +446,29 @@ describe('Searching', () => {
 
     const wrapper = mount(Treeselect, {
       propsData: {
-        options: [ {
+        options: [{
           id: 'a',
           label: 'a',
-          children: [ {
+          children: [{
             id: 'aa',
             label: 'aa',
           }, {
             id: 'ab',
             label: 'ab',
-          } ],
+          }],
         }, {
           id: 'b',
           label: 'b',
-        } ],
+        }],
         flattenSearchResults: true,
       },
     })
 
     wrapper.vm.openMenu()
     await wrapper.vm.$nextTick()
-    await typeAndAssert('a', [ 'a', 'aa', 'ab' ])
-    await typeAndAssert('ab', [ 'ab' ])
-    await typeAndAssert('b', [ 'ab', 'b' ])
+    await typeAndAssert('a', ['a', 'aa', 'ab'])
+    await typeAndAssert('ab', ['ab'])
+    await typeAndAssert('b', ['ab', 'b'])
   })
 
   describe('async search', () => {
@@ -482,10 +482,10 @@ describe('Searching', () => {
           loadOptions({ action, searchQuery, callback }) {
             if (action === 'ASYNC_SEARCH') {
               setTimeout(() => {
-                callback(null, [ {
+                callback(null, [{
                   id: id++,
                   label: searchQuery,
-                } ])
+                }])
               }, DELAY)
             }
           },
@@ -504,10 +504,10 @@ describe('Searching', () => {
       await sleep(DELAY)
 
       expect(menu.text().trim()).toBe('a')
-      expect(vm.forest.normalizedOptions).toEqual([ jasmine.objectContaining({
+      expect(vm.forest.normalizedOptions).toEqual([jasmine.objectContaining({
         id: 0,
         label: 'a',
-      }) ])
+      })])
 
       await typeSearchText(wrapper, '')
       expect(menu.text().trim()).toBe('Type to search...')
@@ -517,10 +517,10 @@ describe('Searching', () => {
       await sleep(DELAY)
 
       expect(menu.text().trim()).toBe('b')
-      expect(vm.forest.normalizedOptions).toEqual([ jasmine.objectContaining({
+      expect(vm.forest.normalizedOptions).toEqual([jasmine.objectContaining({
         id: 1,
         label: 'b',
-      }) ])
+      })])
     })
 
     describe('default options', () => {
@@ -531,16 +531,16 @@ describe('Searching', () => {
             async: true,
             loadOptions({ action, searchQuery, callback }) {
               if (action === 'ASYNC_SEARCH') {
-                callback(null, [ {
+                callback(null, [{
                   id: searchQuery,
                   label: searchQuery,
-                } ])
+                }])
               }
             },
-            defaultOptions: [ {
+            defaultOptions: [{
               id: 'default',
               label: 'default',
-            } ],
+            }],
           },
         })
         const { vm } = wrapper
@@ -571,10 +571,10 @@ describe('Searching', () => {
                   const option = searchQuery === ''
                     ? 'default'
                     : searchQuery
-                  callback(null, [ {
+                  callback(null, [{
                     id: option,
                     label: option,
-                  } ])
+                  }])
                 }, DELAY)
               }
             },
@@ -617,10 +617,10 @@ describe('Searching', () => {
             async: true,
             loadOptions({ action, searchQuery, callback }) {
               if (action === 'ASYNC_SEARCH') {
-                callback(null, [ {
+                callback(null, [{
                   id: searchQuery,
                   label: searchQuery,
-                } ])
+                }])
               }
             },
             defaultOptions: false,
@@ -652,10 +652,10 @@ describe('Searching', () => {
           loadOptions({ action, searchQuery, callback }) {
             if (action === 'ASYNC_SEARCH') {
               if (called[searchQuery]) {
-                callback(null, [ {
+                callback(null, [{
                   id: searchQuery,
                   label: searchQuery,
-                } ])
+                }])
               } else {
                 called[searchQuery] = true
                 callback(new Error('test error'))
@@ -687,10 +687,10 @@ describe('Searching', () => {
           loadOptions({ action, searchQuery, callback }) {
             if (action === 'ASYNC_SEARCH') {
               setTimeout(() => {
-                callback(null, [ {
+                callback(null, [{
                   id: searchQuery,
                   label: searchQuery,
-                } ])
+                }])
               }, DELAY)
             }
           },
@@ -728,10 +728,10 @@ describe('Searching', () => {
           multiple: true,
           loadOptions({ action, searchQuery, callback }) {
             if (action === 'ASYNC_SEARCH') {
-              callback(null, [ {
+              callback(null, [{
                 id: searchQuery,
                 label: searchQuery,
-              } ])
+              }])
             }
           },
         },
@@ -747,20 +747,20 @@ describe('Searching', () => {
       expect(vm.remoteSearch.a.isLoaded).toBe(true)
 
       vm.select(vm.forest.nodeMap.a)
-      expect(vm.forest.selectedNodeIds).toEqual([ 'a' ])
+      expect(vm.forest.selectedNodeIds).toEqual(['a'])
 
       await typeSearchText(wrapper, 'b')
       expect(vm.remoteSearch.b.isLoaded).toBe(true)
 
       vm.select(vm.forest.nodeMap.b)
       await vm.$nextTick()
-      expect(vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
+      expect(vm.forest.selectedNodeIds).toEqual(['a', 'b'])
       expect(vm.forest.nodeMap.a).toEqual(jasmine.objectContaining({
         id: 'a',
         label: 'a',
         isFallbackNode: true,
       }))
-      assertMultiValueItemLabels([ 'a', 'b' ])
+      assertMultiValueItemLabels(['a', 'b'])
 
       await typeSearchText(wrapper, 'a')
       expect(vm.forest.nodeMap.b).toEqual(jasmine.objectContaining({
@@ -768,7 +768,7 @@ describe('Searching', () => {
         label: 'b',
         isFallbackNode: true,
       }))
-      assertMultiValueItemLabels([ 'a', 'b' ])
+      assertMultiValueItemLabels(['a', 'b'])
     })
 
     describe('cache options', () => {
@@ -789,10 +789,10 @@ describe('Searching', () => {
             loadOptions({ action, searchQuery, callback }) {
               if (action === 'ASYNC_SEARCH') {
                 calls.push(searchQuery)
-                callback(null, [ {
+                callback(null, [{
                   id: searchQuery,
                   label: searchQuery,
-                } ])
+                }])
               }
             },
           },
@@ -845,8 +845,8 @@ describe('Searching', () => {
         schedules.forEach(s => s[0] *= DELAY)
 
         while (schedules.length) {
-          const [ t, fn ] = schedules.shift()
-          const [ next ] = schedules[0] || []
+          const [t, fn] = schedules.shift()
+          const [next] = schedules[0] || []
           while (Date.now() - start <= t) await sleep(d)
           if (next && Date.now() - start >= next) throw new Error(`time error @ ${t}`)
           await fn()
@@ -871,53 +871,53 @@ describe('Searching', () => {
       const { vm } = wrapper
 
       await run([
-        [ 0, async () => {
+        [0, async () => {
           const p = typeSearchText(wrapper, 'a')
           await vm.$nextTick()
-          expect(calls).toEqual([ 'a' ])
+          expect(calls).toEqual(['a'])
           return p
-        } ],
-        [ 1 / 3, async () => {
+        }],
+        [1 / 3, async () => {
           const p = typeSearchText(wrapper, 'b')
           await vm.$nextTick()
-          expect(calls).toEqual([ 'a', 'b' ])
+          expect(calls).toEqual(['a', 'b'])
           return p
-        } ],
-        [ 2 / 3, async () => {
+        }],
+        [2 / 3, async () => {
           expect(vm.remoteSearch.a.isLoading).toBe(true)
           const p = typeSearchText(wrapper, 'a')
           await vm.$nextTick()
-          expect(calls).toEqual([ 'a', 'b' ])
+          expect(calls).toEqual(['a', 'b'])
           return p
-        } ],
-        [ 1, async () => {
+        }],
+        [1, async () => {
           expect(vm.remoteSearch.a.isLoaded).toBe(true)
           expect(vm.remoteSearch.b.isLoading).toBe(true)
           const p = typeSearchText(wrapper, 'b')
           await vm.$nextTick()
-          expect(calls).toEqual([ 'a', 'b' ])
+          expect(calls).toEqual(['a', 'b'])
           return p
-        } ],
-        [ 4 / 3, async () => {
+        }],
+        [4 / 3, async () => {
           expect(vm.remoteSearch.b.isLoaded).toBe(true)
           const p = typeSearchText(wrapper, 'a')
           await vm.$nextTick()
-          expect(calls).toEqual([ 'a', 'b', 'a' ])
+          expect(calls).toEqual(['a', 'b', 'a'])
           return p
-        } ],
-        [ 5 / 3, async () => {
+        }],
+        [5 / 3, async () => {
           const p = typeSearchText(wrapper, 'b')
           await vm.$nextTick()
-          expect(calls).toEqual([ 'a', 'b', 'a', 'b' ])
+          expect(calls).toEqual(['a', 'b', 'a', 'b'])
           return p
-        } ],
-        [ 2, () => 'done' ],
+        }],
+        [2, () => 'done'],
       ])
     })
 
     it('should highlight first option after search query changes', async () => {
       const DELAY = 10
-      const keywords = [ 'a', 'b', 'c' ]
+      const keywords = ['a', 'b', 'c']
       const wrapper = mount(Treeselect, {
         sync: false,
         propsData: {
@@ -925,7 +925,7 @@ describe('Searching', () => {
           loadOptions({ action, searchQuery, callback }) {
             if (action === 'ASYNC_SEARCH') {
               setTimeout(() => {
-                callback(null, [ 1, 2, 3 ].map(i => {
+                callback(null, [1, 2, 3].map(i => {
                   const option = searchQuery + '-' + i
                   return { id: option, label: option }
                 }))
@@ -955,21 +955,21 @@ describe('Searching', () => {
           loadOptions({ action, parentNode, /*searchQuery, */callback }) {
             if (action === 'ASYNC_SEARCH') {
               setTimeout(() => {
-                callback(null, [ {
+                callback(null, [{
                   id: 'a',
                   label: 'a',
                 }, {
                   id: 'b',
                   label: 'b',
                   children: null,
-                } ])
+                }])
               }, DELAY)
             } else if (action === 'LOAD_CHILDREN_OPTIONS') {
               setTimeout(() => {
-                parentNode.children = [ {
+                parentNode.children = [{
                   id: 'ba',
                   label: 'ba',
-                } ]
+                }]
                 callback()
               }, DELAY)
             }
