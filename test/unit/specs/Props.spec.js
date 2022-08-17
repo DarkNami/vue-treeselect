@@ -47,13 +47,13 @@ describe('Props', () => {
     })
 
     describe('when allowClearingDisabled=false', () => {
-      beforeEach(() => {
-        wrapper.setProps({ allowClearingDisabled: false })
+      beforeEach(async () => {
+        await wrapper.setProps({ allowClearingDisabled: false })
       })
 
       describe('when all selected nodes are disabled', () => {
-        beforeEach(() => {
-          wrapper.setProps({ value: [ 'a', 'c' ] })
+        beforeEach(async () => {
+          await wrapper.setProps({ value: [ 'a', 'c' ] })
         })
 
         it('should hide "×" button', () => {
@@ -62,8 +62,8 @@ describe('Props', () => {
       })
 
       describe('when not all selected nodes are disabled', () => {
-        beforeEach(() => {
-          wrapper.setProps({ value: [ 'a', 'b' ] })
+        beforeEach(async () => {
+          await wrapper.setProps({ value: [ 'a', 'b' ] })
         })
 
         it('should show "×" button ', () => {
@@ -79,13 +79,13 @@ describe('Props', () => {
     })
 
     describe('when allowClearingDisabled=true', () => {
-      beforeEach(() => {
-        wrapper.setProps({ allowClearingDisabled: true })
+      beforeEach(async () => {
+        await wrapper.setProps({ allowClearingDisabled: true })
       })
 
       describe('when all selected nodes are disabled', () => {
-        beforeEach(() => {
-          wrapper.setProps({ value: [ 'a', 'c' ] })
+        beforeEach(async () => {
+          await wrapper.setProps({ value: [ 'a', 'c' ] })
         })
 
         it('should show "×" button', () => {
@@ -134,48 +134,48 @@ describe('Props', () => {
     })
 
     describe('when allowSelectingDisabledDescendants=false', () => {
-      beforeEach(() => {
-        wrapper.setProps({ allowSelectingDisabledDescendants: false })
+      beforeEach(async () => {
+        await wrapper.setProps({ allowSelectingDisabledDescendants: false })
       })
 
-      it('should not also select disabled descendants', () => {
-        wrapper.setProps({ value: [] })
+      it('should not also select disabled descendants', async () => {
+        await wrapper.setProps({ value: [] })
         vm.select(vm.forest.nodeMap.a)
         expect(vm.internalValue).toEqual([ 'ac' ])
       })
 
-      it('should not also deselect disabled descendants', () => {
-        wrapper.setProps({ value: [ 'a' ] })
+      it('should not also deselect disabled descendants', async () => {
+        await wrapper.setProps({ value: [ 'a' ] })
         vm.select(vm.forest.nodeMap.a)
         expect(vm.internalValue).toEqual([ 'aa', 'ab' ])
       })
     })
 
     describe('when allowSelectingDisabledDescendants=true', () => {
-      beforeEach(() => {
-        wrapper.setProps({ allowSelectingDisabledDescendants: true })
+      beforeEach(async () => {
+        await wrapper.setProps({ allowSelectingDisabledDescendants: true })
       })
 
-      it('should also select disabled descendants', () => {
-        wrapper.setProps({ value: [] })
+      it('should also select disabled descendants', async () => {
+        await wrapper.setProps({ value: [] })
         vm.select(vm.forest.nodeMap.a)
         expect(vm.internalValue).toEqual([ 'a' ])
       })
 
-      it('should also deselect disabled descendants', () => {
-        wrapper.setProps({ value: [ 'a' ] })
+      it('should also deselect disabled descendants', async () => {
+        await wrapper.setProps({ value: [ 'a' ] })
         vm.select(vm.forest.nodeMap.a)
         expect(vm.internalValue).toEqual([])
       })
 
-      it('disabled branch nodes are still unselectable', () => {
-        wrapper.setProps({ value: [] })
+      it('disabled branch nodes are still unselectable', async () => {
+        await wrapper.setProps({ value: [] })
         vm.select(vm.forest.nodeMap.aa)
         expect(vm.internalValue).toEqual([])
       })
 
-      it('disabled branch nodes are still undeselectable', () => {
-        wrapper.setProps({ value: [ 'aa' ] })
+      it('disabled branch nodes are still undeselectable', async () => {
+        await wrapper.setProps({ value: [ 'aa' ] })
         vm.select(vm.forest.nodeMap.aa)
         expect(vm.internalValue).toEqual([ 'aa' ])
       })
@@ -208,7 +208,7 @@ describe('Props', () => {
       expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(false)
     })
 
-    it('the menu should be unclosable', () => {
+    it('the menu should be unclosable', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           options: [],
@@ -218,6 +218,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       vm.closeMenu()
+      await vm.$nextTick()
       expect(vm.menu.isOpen).toBe(true)
     })
 
@@ -234,7 +235,7 @@ describe('Props', () => {
       expect(vm.menu.isOpen).toBe(false)
     })
 
-    it('set disabled=true should close the already opened menu', () => {
+    it('set disabled=true should close the already opened menu', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           options: [],
@@ -245,11 +246,11 @@ describe('Props', () => {
       const { vm } = wrapper
 
       expect(vm.menu.isOpen).toBe(true)
-      wrapper.setProps({ disabled: true })
+      await wrapper.setProps({ disabled: true })
       expect(vm.menu.isOpen).toBe(false)
     })
 
-    it('set `disabled` from true to false should open the menu', () => {
+    it('set `disabled` from true to false should open the menu', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           options: [],
@@ -260,7 +261,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       expect(vm.menu.isOpen).toBe(false)
-      wrapper.setProps({ disabled: false })
+      await wrapper.setProps({ disabled: false })
       expect(vm.menu.isOpen).toBe(true)
     })
 
@@ -276,7 +277,7 @@ describe('Props', () => {
       expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(true)
     })
 
-    it('set `alwaysOpen` from `false` to `true` should open the menu and hide the arrow', () => {
+    it('set `alwaysOpen` from `false` to `true` should open the menu and hide the arrow', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           options: [],
@@ -286,12 +287,12 @@ describe('Props', () => {
       const { vm } = wrapper
 
       expect(vm.menu.isOpen).toBe(false)
-      wrapper.setProps({ alwaysOpen: true })
+      await wrapper.setProps({ alwaysOpen: true })
       expect(vm.menu.isOpen).toBe(true)
       expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(false)
     })
 
-    it('set `alwaysOpen` from `true` to `false` should close the menu and show the arrow', () => {
+    it('set `alwaysOpen` from `true` to `false` should close the menu and show the arrow', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           options: [],
@@ -301,7 +302,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       expect(vm.menu.isOpen).toBe(true)
-      wrapper.setProps({ alwaysOpen: false })
+      await wrapper.setProps({ alwaysOpen: false })
       expect(vm.menu.isOpen).toBe(false)
       expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(true)
     })
@@ -524,8 +525,8 @@ describe('Props', () => {
       vm = wrapper.vm
     })
 
-    it('autoSelectAncestors', () => {
-      wrapper.setProps({
+    it('autoSelectAncestors', async () => {
+      await wrapper.setProps({
         autoSelectAncestors: true,
         value: [ 'aa' ],
       })
@@ -535,8 +536,8 @@ describe('Props', () => {
       expect(vm.internalValue).toEqual([ 'aa', 'aaa', 'a' ])
     })
 
-    it('autoSelectAncestors + disabled nodes', () => {
-      wrapper.setProps({
+    it('autoSelectAncestors + disabled nodes', async () => {
+      await wrapper.setProps({
         autoSelectAncestors: true,
         value: [],
       })
@@ -546,8 +547,8 @@ describe('Props', () => {
       expect(vm.internalValue).toEqual([ 'baa', 'b' ])
     })
 
-    it('autoSelectDescendants', () => {
-      wrapper.setProps({
+    it('autoSelectDescendants', async () => {
+      await wrapper.setProps({
         autoSelectDescendants: true,
         value: [ 'aa' ],
       })
@@ -557,8 +558,8 @@ describe('Props', () => {
       expect(vm.internalValue).toEqual([ 'aa', 'a', 'ab', 'aaa', 'aab' ])
     })
 
-    it('autoSelectDescendants + disabled nodes', () => {
-      wrapper.setProps({
+    it('autoSelectDescendants + disabled nodes', async () => {
+      await wrapper.setProps({
         autoSelectDescendants: true,
         value: [],
       })
@@ -568,8 +569,8 @@ describe('Props', () => {
       expect(vm.internalValue).toEqual([ 'b', 'baa' ])
     })
 
-    it('autoDeselectAncestors', () => {
-      wrapper.setProps({
+    it('autoDeselectAncestors', async () => {
+      await wrapper.setProps({
         autoDeselectAncestors: true,
         value: [ 'aa', 'aaa', 'aab' ],
       })
@@ -579,8 +580,8 @@ describe('Props', () => {
       expect(vm.internalValue).toEqual([ 'aab' ])
     })
 
-    it('autoDeselectAncestors + disabled nodes', () => {
-      wrapper.setProps({
+    it('autoDeselectAncestors + disabled nodes', async () => {
+      await wrapper.setProps({
         autoDeselectAncestors: true,
         value: [ 'b', 'ba', 'baa' ],
       })
@@ -590,8 +591,8 @@ describe('Props', () => {
       expect(vm.internalValue).toEqual([ 'ba' ])
     })
 
-    it('autoDeselectDescendants', () => {
-      wrapper.setProps({
+    it('autoDeselectDescendants', async () => {
+      await wrapper.setProps({
         autoDeselectDescendants: true,
         value: [ 'a', 'aaa', 'aab' ],
       })
@@ -601,8 +602,8 @@ describe('Props', () => {
       expect(vm.internalValue).toEqual([])
     })
 
-    it('autoDeselectDescendants + disabled nodes', () => {
-      wrapper.setProps({
+    it('autoDeselectDescendants + disabled nodes', async () => {
+      await wrapper.setProps({
         autoDeselectDescendants: true,
         value: [ 'b', 'ba', 'baa' ],
       })
@@ -731,7 +732,7 @@ describe('Props', () => {
       expect(vm.forest.nodeMap.b.children.map(node => node.id)).toEqual([ 'bb', 'ba', 'bc' ])
     })
 
-    it('index', () => {
+    it('index', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           options: [ {
@@ -754,7 +755,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       // TODO
-      // wrapper.setProps({ branchNodesFirst: true })
+      // await wrapper.setProps({ branchNodesFirst: true })
       // expect(vm.forest.nodeMap).toEqual({
       //   a: jasmine.objectContaining({ index: [ 1 ] }),
       //   b: jasmine.objectContaining({ index: [ 0 ] }),
@@ -762,7 +763,7 @@ describe('Props', () => {
       //   bb: jasmine.objectContaining({ index: [ 0, 0 ] }),
       // })
 
-      wrapper.setProps({ branchNodesFirst: false })
+      await wrapper.setProps({ branchNodesFirst: false })
       expect(vm.forest.nodeMap).toEqual({
         a: jasmine.objectContaining({ index: [ 0 ] }),
         b: jasmine.objectContaining({ index: [ 1 ] }),
@@ -771,7 +772,7 @@ describe('Props', () => {
       })
     })
 
-    it('should resort nodes after value of `branchNodesFirst` changes', () => {
+    it('should resort nodes after value of `branchNodesFirst` changes', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           branchNodesFirst: false,
@@ -803,7 +804,7 @@ describe('Props', () => {
       expect(vm.forest.normalizedOptions.map(node => node.id)).toEqual([ 'a', 'b', 'c' ])
       expect(vm.forest.nodeMap.b.children.map(node => node.id)).toEqual([ 'ba', 'bb', 'bc' ])
 
-      wrapper.setProps({ branchNodesFirst: true })
+      await wrapper.setProps({ branchNodesFirst: true })
 
       expect(vm.forest.normalizedOptions.map(node => node.id)).toEqual([ 'b', 'a', 'c' ])
       expect(vm.forest.nodeMap.b.children.map(node => node.id)).toEqual([ 'bb', 'ba', 'bc' ])
@@ -836,18 +837,18 @@ describe('Props', () => {
       expect(vm.forest.selectedNodeIds).toEqual([])
     })
 
-    it('should hide when no options selected', () => {
-      wrapper.setProps({ value: null })
+    it('should hide when no options selected', async () => {
+      await wrapper.setProps({ value: null })
       expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
     })
 
-    it('should hide when disabled=true', () => {
-      wrapper.setProps({ disabled: true })
+    it('should hide when disabled=true', async () => {
+      await wrapper.setProps({ disabled: true })
       expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
     })
 
-    it('should hide when clearable=false', () => {
-      wrapper.setProps({ clearable: false })
+    it('should hide when clearable=false', async () => {
+      await wrapper.setProps({ clearable: false })
       expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
     })
   })
@@ -1174,12 +1175,12 @@ describe('Props', () => {
     }
 
     describe('when disableBranchNodes=false', () => {
-      beforeEach(() => {
-        wrapper.setProps({ disableBranchNodes: false })
+      beforeEach(async () => {
+        await wrapper.setProps({ disableBranchNodes: false })
       })
 
       it('a branch node should have checkbox when multiple=true', async () => {
-        wrapper.setProps({ multiple: true })
+        await wrapper.setProps({ multiple: true })
 
         const labelContainerOfBranchNode = await getLabelContainerOfBranchNode()
 
@@ -1187,7 +1188,7 @@ describe('Props', () => {
       })
 
       it('a leaf node should have checkbox too when multiple=true', async () => {
-        wrapper.setProps({ multiple: true })
+        await wrapper.setProps({ multiple: true })
 
         const labelContainerOfLeafNode = await getLabelContainerOfLeafNode()
 
@@ -1195,7 +1196,7 @@ describe('Props', () => {
       })
 
       it('click on label of a branch node should toggle checking state when multiple=true', async () => {
-        wrapper.setProps({ multiple: true })
+        await wrapper.setProps({ multiple: true })
 
         expect(vm.isSelected(vm.forest.nodeMap.branch)).toBe(false)
         await clickOnLabelOfBranchNode()
@@ -1205,7 +1206,7 @@ describe('Props', () => {
       })
 
       it('click on label of a branch node should not toggle expanding state when multiple=true', async () => {
-        wrapper.setProps({ multiple: true })
+        await wrapper.setProps({ multiple: true })
 
         expect(vm.forest.nodeMap.branch.isExpanded).toBe(true)
         await clickOnLabelOfBranchNode()
@@ -1213,7 +1214,7 @@ describe('Props', () => {
       })
 
       it('click on label of a branch node should close the dropdown when multiple=false & closeOnSelect=true', async () => {
-        wrapper.setProps({ multiple: false, closeOnSelect: true })
+        await wrapper.setProps({ multiple: false, closeOnSelect: true })
         vm.openMenu()
         await vm.$nextTick()
 
@@ -1224,26 +1225,26 @@ describe('Props', () => {
     })
 
     describe('when disableBranchNodes=true', () => {
-      beforeEach(() => {
-        wrapper.setProps({ disableBranchNodes: true })
+      beforeEach(async () => {
+        await wrapper.setProps({ disableBranchNodes: true })
       })
 
       it('a branch node should not have checkbox when multiple=true', async () => {
-        wrapper.setProps({ multiple: true })
+        await wrapper.setProps({ multiple: true })
         const labelContainerOfBranchNode = await getLabelContainerOfBranchNode()
 
         expect(labelContainerOfBranchNode.findComponent('.vue-treeselect__checkbox').exists()).toBe(false)
       })
 
       it('a leaf node should have checkbox when multiple=true', async () => {
-        wrapper.setProps({ multiple: true })
+        await wrapper.setProps({ multiple: true })
         const labelContainerOfLeafNode = await getLabelContainerOfLeafNode()
 
         expect(labelContainerOfLeafNode.findComponent('.vue-treeselect__checkbox').exists()).toBe(true)
       })
 
       it('click on label of a branch node should not toggle checking state when multiple=true', async () => {
-        wrapper.setProps({ multiple: true })
+        await wrapper.setProps({ multiple: true })
 
         expect(vm.isSelected(vm.forest.nodeMap.branch)).toBe(false)
         await clickOnLabelOfBranchNode()
@@ -1251,7 +1252,7 @@ describe('Props', () => {
       })
 
       it('click on label of a branch node should toggle expanding state when multiple=true', async () => {
-        wrapper.setProps({ multiple: true })
+        await wrapper.setProps({ multiple: true })
 
         expect(vm.forest.nodeMap.branch.isExpanded).toBe(true)
         await clickOnLabelOfBranchNode()
@@ -1261,7 +1262,7 @@ describe('Props', () => {
       })
 
       it('click on label of a branch node should not close the dropdown when multiple=false & closeOnSelect=true', async () => {
-        wrapper.setProps({ multiple: false, closeOnSelect: true })
+        await wrapper.setProps({ multiple: false, closeOnSelect: true })
         vm.openMenu()
         await vm.$nextTick()
 
@@ -1271,7 +1272,7 @@ describe('Props', () => {
       })
 
       it('should not auto-select ancestor nodes like flat mode', async () => {
-        wrapper.setProps({ multiple: true })
+        await wrapper.setProps({ multiple: true })
         await vm.$nextTick()
 
         vm.select(vm.forest.nodeMap.leaf)
@@ -1288,12 +1289,11 @@ describe('Props', () => {
 
         types.forEach(valueConsistsOf => {
           it(`when valueConsistsOf=${valueConsistsOf}`, async () => {
-            wrapper.setProps({
+            await wrapper.setProps({
               multiple: true,
               valueConsistsOf,
               value: [ 'leaf' ],
             })
-            await vm.$nextTick()
 
             expect(vm.forest.checkedStateMap).toEqual({ branch: UNCHECKED, leaf: CHECKED })
             expect(vm.forest.selectedNodeMap).toEqual({ leaf: true })
@@ -1348,8 +1348,7 @@ describe('Props', () => {
 
         expect(wrapper.vm.menu.isOpen).toBe(true)
 
-        wrapper.setProps({ disabled: true })
-        await vm.$nextTick()
+        await wrapper.setProps({ disabled: true })
 
         expect(wrapper.vm.menu.isOpen).toBe(false)
       })
@@ -1384,7 +1383,7 @@ describe('Props', () => {
         expect(vm.trigger.isFocused).toBe(false)
       })
 
-      it('should be uanble to open the menu', () => {
+      it('should be uanble to open the menu', async () => {
         const wrapper = mount(Treeselect, {
           propsData: {
             options: [],
@@ -1394,6 +1393,7 @@ describe('Props', () => {
         const { vm } = wrapper
 
         wrapper.vm.openMenu()
+        await wrapper.vm.$nextTick()
         expect(vm.menu.isOpen).toBe(false)
       })
     })
@@ -1415,13 +1415,13 @@ describe('Props', () => {
     })
 
     it('when disableFuzzyMatching=false', async () => {
-      wrapper.setProps({ disableFuzzyMatching: false })
+      await wrapper.setProps({ disableFuzzyMatching: false })
       await typeSearchText(wrapper, 'jb')
       expect(vm.forest.nodeMap.jamesblunt.isMatched).toBe(true)
     })
 
     it('when disableFuzzyMatching=true', async () => {
-      wrapper.setProps({ disableFuzzyMatching: true })
+      await wrapper.setProps({ disableFuzzyMatching: true })
       await typeSearchText(wrapper, 'jb')
       expect(vm.forest.nodeMap.jamesblunt.isMatched).toBe(false)
     })
@@ -1813,7 +1813,7 @@ describe('Props', () => {
     })
 
     describe('should be reactive', () => {
-      it('should override fallback node', () => {
+      it('should override fallback node', async () => {
         const wrapper = mount(Treeselect, {
           propsData: {
             options: [],
@@ -1827,7 +1827,7 @@ describe('Props', () => {
           label: 'a (unknown)',
         }))
 
-        wrapper.setProps({
+        await wrapper.setProps({
           options: [ {
             id: 'a',
             label: 'a',
@@ -1856,7 +1856,7 @@ describe('Props', () => {
         expect(comp.forest.nodeMap.a.label).toBe('xxx')
       })
 
-      it('should keep state', () => {
+      it('should keep state', async () => {
         const wrapper = mount(Treeselect, {
           propsData: {
             multiple: true,
@@ -1881,7 +1881,7 @@ describe('Props', () => {
           aa: CHECKED,
         })
 
-        wrapper.setProps({
+        await wrapper.setProps({
           options: [ {
             id: 'a',
             label: 'a',
@@ -1909,7 +1909,7 @@ describe('Props', () => {
         })
       })
 
-      it('should keep the state of selected nodes even if they are not present in `nodeMap`', () => {
+      it('should keep the state of selected nodes even if they are not present in `nodeMap`', async () => {
         const wrapper = mount(Treeselect, {
           propsData: {
             options: [ {
@@ -1923,7 +1923,7 @@ describe('Props', () => {
 
         expect(vm.forest.nodeMap.a.label).toBe('a')
 
-        wrapper.setProps({
+        await wrapper.setProps({
           options: [ {
             id: 'b',
             label: 'b',
@@ -1954,20 +1954,20 @@ describe('Props', () => {
     })
 
     describe('when required=true', () => {
-      it('the input should have `required` attribute if having no value', () => {
-        wrapper.setProps({ required: true })
+      it('the input should have `required` attribute if having no value', async () => {
+        await wrapper.setProps({ required: true })
         expect(input.attributes().required).toBe('required')
       })
 
-      it('the input should not have `required` attribute if value is present', () => {
-        wrapper.setProps({ value: 'a', required: true })
+      it('the input should not have `required` attribute if value is present', async () => {
+        await wrapper.setProps({ value: 'a', required: true })
         expect(input.attributes()).not.toHaveMember('required')
       })
     })
 
     describe('when required=false', () => {
-      it('the input should not have `required` attribute even if value is present', () => {
-        wrapper.setProps({ value: 'a', required: false })
+      it('the input should not have `required` attribute even if value is present', async () => {
+        await wrapper.setProps({ value: 'a', required: false })
         expect(input.attributes()).not.toHaveMember('required')
       })
     })
@@ -2143,14 +2143,14 @@ describe('Props', () => {
     })
 
     it('when showCountOnSearch=false', async () => {
-      wrapper.setProps({ showCountOnSearch: false })
+      await wrapper.setProps({ showCountOnSearch: false })
 
       await typeSearchText(wrapper, 'a')
       expect(wrapper.findComponent('.vue-treeselect__count').exists()).toBe(false)
     })
 
     it('when showCountOnSearch=true', async () => {
-      wrapper.setProps({ showCountOnSearch: true })
+      await wrapper.setProps({ showCountOnSearch: true })
 
       await typeSearchText(wrapper, 'a')
       expect(wrapper.findComponent('.vue-treeselect__count').exists()).toBe(true)
@@ -2162,7 +2162,7 @@ describe('Props', () => {
     })
 
     it('should refresh count number after search changes', async () => {
-      wrapper.setProps({ showCountOnSearch: true })
+      await wrapper.setProps({ showCountOnSearch: true })
 
       await typeSearchText(wrapper, 'a')
       expect(findOptionByNodeId(wrapper, 'a').findComponent('.vue-treeselect__count').text()).toEqual('(2)')
@@ -2188,8 +2188,8 @@ describe('Props', () => {
       vm = wrapper.vm
     })
 
-    it('when sortValueBy="ORDER_SELECTED"', () => {
-      wrapper.setProps({ sortValueBy: 'ORDER_SELECTED' })
+    it('when sortValueBy="ORDER_SELECTED"', async () => {
+      await wrapper.setProps({ sortValueBy: 'ORDER_SELECTED' })
 
       vm.select(vm.forest.nodeMap.bb)
       expect(vm.internalValue).toEqual([ 'bb' ])
@@ -2201,8 +2201,8 @@ describe('Props', () => {
       expect(vm.internalValue).toEqual([ 'bb', 'a', 'dddd', 'ccc' ])
     })
 
-    it('when sortValueBy="LEVEL"', () => {
-      wrapper.setProps({ sortValueBy: 'LEVEL' })
+    it('when sortValueBy="LEVEL"', async () => {
+      await wrapper.setProps({ sortValueBy: 'LEVEL' })
 
       vm.select(vm.forest.nodeMap.bb)
       expect(vm.internalValue).toEqual([ 'bb' ])
@@ -2216,8 +2216,8 @@ describe('Props', () => {
       expect(vm.internalValue).toEqual([ 'c', 'aa', 'bb', 'aaa', 'dddd' ])
     })
 
-    it('when sortValueBy="INDEX"', () => {
-      wrapper.setProps({ sortValueBy: 'INDEX' })
+    it('when sortValueBy="INDEX"', async () => {
+      await wrapper.setProps({ sortValueBy: 'INDEX' })
 
       vm.select(vm.forest.nodeMap.d)
       expect(vm.internalValue).toEqual([ 'd' ])
@@ -2229,40 +2229,40 @@ describe('Props', () => {
       expect(vm.internalValue).toEqual([ 'aaaa', 'bbb', 'cc', 'd' ])
     })
 
-    it('should re-sort value after prop value changes', () => {
-      wrapper.setProps({
+    it('should re-sort value after prop value changes', async () => {
+      await wrapper.setProps({
         sortValueBy: 'ORDER_SELECTED',
         value: [ 'bb', 'c', 'aaa' ],
       })
 
-      wrapper.setProps({ sortValueBy: 'INDEX' })
+      await wrapper.setProps({ sortValueBy: 'INDEX' })
       expect(vm.internalValue).toEqual([ 'aaa', 'bb', 'c' ])
-      wrapper.setProps({ sortValueBy: 'LEVEL' })
+      await wrapper.setProps({ sortValueBy: 'LEVEL' })
       expect(vm.internalValue).toEqual([ 'c', 'bb', 'aaa' ])
-      wrapper.setProps({ sortValueBy: 'ORDER_SELECTED' })
+      await wrapper.setProps({ sortValueBy: 'ORDER_SELECTED' })
       expect(vm.internalValue).toEqual([ 'bb', 'c', 'aaa' ])
     })
 
-    it('more cases', () => {
-      wrapper.setProps({
+    it('more cases', async () => {
+      await wrapper.setProps({
         sortValueBy: 'INDEX',
         value: [ 'aa', 'aaa' ],
       })
       expect(vm.internalValue).toEqual([ 'aa', 'aaa' ])
 
-      wrapper.setProps({
+      await wrapper.setProps({
         sortValueBy: 'INDEX',
         value: [ 'aaa', 'aa' ],
       })
       expect(vm.internalValue).toEqual([ 'aa', 'aaa' ])
 
-      wrapper.setProps({
+      await wrapper.setProps({
         sortValueBy: 'INDEX',
         value: [ 'aa', 'bb' ],
       })
       expect(vm.internalValue).toEqual([ 'aa', 'bb' ])
 
-      wrapper.setProps({
+      await wrapper.setProps({
         sortValueBy: 'INDEX',
         value: [ 'bb', 'aa' ],
       })
@@ -2372,8 +2372,8 @@ describe('Props', () => {
         vm = wrapper.vm
       })
 
-      it('when valueConsistsOf=ALL', () => {
-        wrapper.setProps({ valueConsistsOf: ALL })
+      it('when valueConsistsOf=ALL', async () => {
+        await wrapper.setProps({ valueConsistsOf: ALL })
 
         expect(vm.internalValue).toEqual([ 'aa', 'aaa', 'aab' ])
         vm.select(vm.forest.nodeMap.ab)
@@ -2384,8 +2384,8 @@ describe('Props', () => {
         expect(vm.internalValue).toEqual([ 'aa', 'aaa', 'aab', 'ab', 'aba', 'abb', 'b', 'ac', 'a' ])
       })
 
-      it('when valueConsistsOf=BRANCH_PRIORITY', () => {
-        wrapper.setProps({ valueConsistsOf: BRANCH_PRIORITY })
+      it('when valueConsistsOf=BRANCH_PRIORITY', async () => {
+        await wrapper.setProps({ valueConsistsOf: BRANCH_PRIORITY })
 
         expect(vm.internalValue).toEqual([ 'aa' ])
         vm.select(vm.forest.nodeMap.ab)
@@ -2396,8 +2396,8 @@ describe('Props', () => {
         expect(vm.internalValue).toEqual([ 'b', 'a' ])
       })
 
-      it('when valueConsistsOf=LEAF_PRIORITY', () => {
-        wrapper.setProps({ valueConsistsOf: LEAF_PRIORITY })
+      it('when valueConsistsOf=LEAF_PRIORITY', async () => {
+        await wrapper.setProps({ valueConsistsOf: LEAF_PRIORITY })
 
         expect(vm.internalValue).toEqual([ 'aaa', 'aab' ])
         vm.select(vm.forest.nodeMap.ab)
@@ -2408,8 +2408,8 @@ describe('Props', () => {
         expect(vm.internalValue).toEqual([ 'aaa', 'aab', 'aba', 'abb', 'b', 'ac' ])
       })
 
-      it('when valueConsistsOf=ALL_WITH_INDETERMINATE', () => {
-        wrapper.setProps({ valueConsistsOf: ALL_WITH_INDETERMINATE })
+      it('when valueConsistsOf=ALL_WITH_INDETERMINATE', async () => {
+        await wrapper.setProps({ valueConsistsOf: ALL_WITH_INDETERMINATE })
 
         expect(vm.internalValue).toEqual([ 'aa', 'aaa', 'aab', 'a' ])
         vm.select(vm.forest.nodeMap.ab)
@@ -2420,8 +2420,8 @@ describe('Props', () => {
         expect(vm.internalValue).toEqual([ 'aa', 'aaa', 'aab', 'ab', 'aba', 'abb', 'b', 'ac', 'a' ])
       })
 
-      it('when valueConsistsOf=MANUALLY_SELECTED_ONLY', () => {
-        wrapper.setProps({ valueConsistsOf: MANUALLY_SELECTED_ONLY })
+      it('when valueConsistsOf=MANUALLY_SELECTED_ONLY', async () => {
+        await wrapper.setProps({ valueConsistsOf: MANUALLY_SELECTED_ONLY })
 
         expect(vm.internalValue).toEqual([ 'aa' ])
         vm.select(vm.forest.nodeMap.ab)
@@ -2470,28 +2470,30 @@ describe('Props', () => {
       describe('when multiple=false', () => {
         const types = [ ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE, MANUALLY_SELECTED_ONLY ]
         types.forEach(type => {
-          it(`when valueConsistsOf=${type}`, () => {
-            wrapper.setProps({ multiple: false })
+          it(`when valueConsistsOf=${type}`, async () => {
+            await wrapper.setProps({ multiple: false })
 
             const values = [ 'aaa', 'aa', 'ab', 'a', 'b', 'c' ]
-            values.forEach(value => {
-              wrapper.setProps({ value })
-              expect(vm.internalValue).toEqual([ value ])
-              expect(vm.forest.selectedNodeIds).toEqual([ value ])
-            })
+
+            for (let i = 0; i < values.length; ++i) {
+              await wrapper.setProps({ [values[i]]: values[i] })
+              expect(vm.internalValue).toEqual([ values[i] ])
+              expect(vm.forest.selectedNodeIds).toEqual([ values[i] ])
+            }
+
           })
         })
       })
 
       describe('when multiple=true', () => {
-        beforeEach(() => {
-          wrapper.setProps({ multiple: true })
+        beforeEach(async () => {
+          await wrapper.setProps({ multiple: true })
         })
 
-        it('when valueConsistsOf=ALL', () => {
-          wrapper.setProps({ valueConsistsOf: ALL })
+        it('when valueConsistsOf=ALL', async () => {
+          await wrapper.setProps({ valueConsistsOf: ALL })
 
-          wrapper.setProps({ value: [] })
+          await wrapper.setProps({ value: [] })
           expect(vm.internalValue).toEqual([])
           expect(vm.forest.selectedNodeIds).toEqual([])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2504,7 +2506,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'ab' ] })
+          await wrapper.setProps({ value: [ 'ab' ] })
           expect(vm.internalValue).toEqual([ 'ab' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'ab' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2517,7 +2519,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'aa', 'aaa', 'aab' ] })
+          await wrapper.setProps({ value: [ 'aa', 'aaa', 'aab' ] })
           expect(vm.internalValue).toEqual([ 'aa', 'aaa', 'aab' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'aa', 'aaa', 'aab' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2530,7 +2532,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'b', 'aa', 'aaa', 'aab', 'a', 'ab' ] })
+          await wrapper.setProps({ value: [ 'b', 'aa', 'aaa', 'aab', 'a', 'ab' ] })
           expect(vm.internalValue).toEqual([ 'b', 'aa', 'aaa', 'aab', 'a', 'ab' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'b', 'aa', 'aaa', 'aab', 'a', 'ab' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2543,7 +2545,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'c' ] })
+          await wrapper.setProps({ value: [ 'c' ] })
           expect(vm.internalValue).toEqual([ 'c' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'c' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2557,10 +2559,10 @@ describe('Props', () => {
           })
         })
 
-        it('when valueConsistsOf=BRANCH_PRIORITY', () => {
-          wrapper.setProps({ valueConsistsOf: BRANCH_PRIORITY })
+        it('when valueConsistsOf=BRANCH_PRIORITY', async () => {
+          await wrapper.setProps({ valueConsistsOf: BRANCH_PRIORITY })
 
-          wrapper.setProps({ value: [] })
+          await wrapper.setProps({ value: [] })
           expect(vm.internalValue).toEqual([])
           expect(vm.forest.selectedNodeIds).toEqual([])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2573,7 +2575,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'ab' ] })
+          await wrapper.setProps({ value: [ 'ab' ] })
           expect(vm.internalValue).toEqual([ 'ab' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'ab' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2586,7 +2588,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'aaa' ] })
+          await wrapper.setProps({ value: [ 'aaa' ] })
           expect(vm.internalValue).toEqual([ 'aaa' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'aaa' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2599,7 +2601,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'aa' ] })
+          await wrapper.setProps({ value: [ 'aa' ] })
           expect(vm.internalValue).toEqual([ 'aa' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'aa', 'aaa', 'aab' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2612,7 +2614,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'a' ] })
+          await wrapper.setProps({ value: [ 'a' ] })
           expect(vm.internalValue).toEqual([ 'a' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'a', 'aa', 'ab', 'aaa', 'aab' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2625,7 +2627,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'aaa', 'ab', 'b' ] })
+          await wrapper.setProps({ value: [ 'aaa', 'ab', 'b' ] })
           expect(vm.internalValue).toEqual([ 'aaa', 'ab', 'b' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'aaa', 'ab', 'b' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2638,7 +2640,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'b', 'aa' ] })
+          await wrapper.setProps({ value: [ 'b', 'aa' ] })
           expect(vm.internalValue).toEqual([ 'b', 'aa' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'b', 'aa', 'aaa', 'aab' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2651,7 +2653,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'b', 'aab' ] })
+          await wrapper.setProps({ value: [ 'b', 'aab' ] })
           expect(vm.internalValue).toEqual([ 'b', 'aab' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'b', 'aab' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2664,7 +2666,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'c' ] })
+          await wrapper.setProps({ value: [ 'c' ] })
           expect(vm.internalValue).toEqual([ 'c' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'c' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2678,10 +2680,10 @@ describe('Props', () => {
           })
         })
 
-        it('when valueConsistsOf=LEAF_PRIORITY', () => {
-          wrapper.setProps({ valueConsistsOf: LEAF_PRIORITY })
+        it('when valueConsistsOf=LEAF_PRIORITY', async () => {
+          await wrapper.setProps({ valueConsistsOf: LEAF_PRIORITY })
 
-          wrapper.setProps({ value: [] })
+          await wrapper.setProps({ value: [] })
           expect(vm.internalValue).toEqual([])
           expect(vm.forest.selectedNodeIds).toEqual([])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2694,7 +2696,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'ab' ] })
+          await wrapper.setProps({ value: [ 'ab' ] })
           expect(vm.internalValue).toEqual([ 'ab' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'ab' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2707,7 +2709,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'aab' ] })
+          await wrapper.setProps({ value: [ 'aab' ] })
           expect(vm.internalValue).toEqual([ 'aab' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'aab' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2720,7 +2722,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'aab', 'aaa' ] })
+          await wrapper.setProps({ value: [ 'aab', 'aaa' ] })
           expect(vm.internalValue).toEqual([ 'aab', 'aaa' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'aab', 'aaa', 'aa' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2733,7 +2735,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'aaa', 'ab', 'aab' ] })
+          await wrapper.setProps({ value: [ 'aaa', 'ab', 'aab' ] })
           expect(vm.internalValue).toEqual([ 'aaa', 'ab', 'aab' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'aaa', 'ab', 'aab', 'aa', 'a' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2746,7 +2748,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'c' ] })
+          await wrapper.setProps({ value: [ 'c' ] })
           expect(vm.internalValue).toEqual([ 'c' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'c' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2760,10 +2762,10 @@ describe('Props', () => {
           })
         })
 
-        it('when valueConsistsOf=ALL_WITH_INDETERMINATE', () => {
-          wrapper.setProps({ valueConsistsOf: ALL_WITH_INDETERMINATE })
+        it('when valueConsistsOf=ALL_WITH_INDETERMINATE', async () => {
+          await wrapper.setProps({ valueConsistsOf: ALL_WITH_INDETERMINATE })
 
-          wrapper.setProps({ value: [] })
+          await wrapper.setProps({ value: [] })
           expect(vm.internalValue).toEqual([])
           expect(vm.forest.selectedNodeIds).toEqual([])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2776,7 +2778,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'ab' ] })
+          await wrapper.setProps({ value: [ 'ab' ] })
           expect(vm.internalValue).toEqual([ 'ab', 'a' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'ab' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2789,7 +2791,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'aa', 'aaa', 'a' ] })
+          await wrapper.setProps({ value: [ 'aa', 'aaa', 'a' ] })
           expect(vm.internalValue).toEqual([ 'aaa', 'aa', 'a' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'aaa' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2802,7 +2804,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'a', 'aa', 'aaa', 'aab' ] })
+          await wrapper.setProps({ value: [ 'a', 'aa', 'aaa', 'aab' ] })
           expect(vm.internalValue).toEqual([ 'aaa', 'aab', 'aa', 'a' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'aaa', 'aab', 'aa' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2815,7 +2817,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'c' ] })
+          await wrapper.setProps({ value: [ 'c' ] })
           expect(vm.internalValue).toEqual([ 'c' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'c' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2829,10 +2831,10 @@ describe('Props', () => {
           })
         })
 
-        it('when valueConsistsOf=MANUALLY_SELECTED_ONLY', () => {
-          wrapper.setProps({ valueConsistsOf: MANUALLY_SELECTED_ONLY })
+        it('when valueConsistsOf=MANUALLY_SELECTED_ONLY', async () => {
+          await wrapper.setProps({ valueConsistsOf: MANUALLY_SELECTED_ONLY })
 
-          wrapper.setProps({ value: [] })
+          await wrapper.setProps({ value: [] })
           expect(vm.internalValue).toEqual([])
           expect(vm.forest.selectedNodeIds).toEqual([])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2845,7 +2847,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'ab' ] })
+          await wrapper.setProps({ value: [ 'ab' ] })
           expect(vm.internalValue).toEqual([ 'ab' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'ab' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2858,7 +2860,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'aa', 'aaa', 'a' ] })
+          await wrapper.setProps({ value: [ 'aa', 'aaa', 'a' ] })
           expect(vm.internalValue).toEqual([ 'aaa', 'aa', 'a' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'aaa', 'aa', 'a' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2871,7 +2873,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'a', 'aa', 'aaa', 'aab' ] })
+          await wrapper.setProps({ value: [ 'a', 'aa', 'aaa', 'aab' ] })
           expect(vm.internalValue).toEqual([ 'aaa', 'aab', 'aa', 'a' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'aaa', 'aab', 'aa', 'a' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2884,7 +2886,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          wrapper.setProps({ value: [ 'c' ] })
+          await wrapper.setProps({ value: [ 'c' ] })
           expect(vm.internalValue).toEqual([ 'c' ])
           expect(vm.forest.selectedNodeIds).toEqual([ 'c' ])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -3115,8 +3117,7 @@ describe('Props', () => {
 
     expect(menuContainer.element.style.zIndex).toBe('1')
 
-    wrapper.setProps({ zIndex: 2 })
-    await vm.$nextTick()
+    await wrapper.setProps({ zIndex: 2 })
 
     expect(menuContainer.element.style.zIndex).toBe('2')
   })

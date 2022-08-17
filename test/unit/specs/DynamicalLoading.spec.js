@@ -97,6 +97,7 @@ describe('Dynamical Loading', () => {
       let childrenOptionList
 
       vm.openMenu()
+      await vm.$nextTick()
 
       // children awaits to be loaded
       expect(vm.forest.nodeMap.a.children).toBeEmptyArray()
@@ -159,7 +160,8 @@ describe('Dynamical Loading', () => {
       let optionArrowContainer
       let childrenOptionList
 
-      await vm.openMenu()
+      vm.openMenu()
+      await vm.$nextTick()
 
       // 1st try
       optionArrowContainer = findOptionArrowContainerByNodeId(wrapper, 'a')
@@ -625,7 +627,7 @@ describe('Dynamical Loading', () => {
       expect(loadOptions).toHaveBeenCalled()
     })
 
-    it('with autoLoadRootOptions=false, opening the menu should trigger loading root options', () => {
+    it('with autoLoadRootOptions=false, opening the menu should trigger loading root options', async () => {
       const loadOptions = jasmine.createSpy()
       const wrapper = mount(Treeselect, {
         propsData: {
@@ -638,6 +640,7 @@ describe('Dynamical Loading', () => {
 
       expect(loadOptions).not.toHaveBeenCalled()
       vm.openMenu()
+      await vm.$nextTick()
       expect(loadOptions).toHaveBeenCalled()
     })
 
@@ -751,6 +754,7 @@ describe('Dynamical Loading', () => {
 
       // 1st try
       vm.openMenu()
+      await vm.$nextTick()
       expect(spyForLoadOptions.calls.count()).toBe(1)
       await sleep(DELAY)
       expect(vm.rootOptionsStates.isLoading).toBe(false)
@@ -762,7 +766,9 @@ describe('Dynamical Loading', () => {
 
       // 2nd try
       vm.closeMenu()
+      await vm.$nextTick()
       vm.openMenu()
+      await vm.$nextTick()
       // reset state
       expect(vm.rootOptionsStates.loadingError).toBe('')
       await sleep(DELAY)
@@ -806,6 +812,7 @@ describe('Dynamical Loading', () => {
       const vm = app.$children[0]
 
       vm.openMenu()
+      await vm.$nextTick()
       expect(spyForLoadOptions.calls.count()).toBe(1)
 
       await sleep(DELAY / 2)
@@ -862,7 +869,7 @@ describe('Dynamical Loading', () => {
       }))
     })
 
-    it('multiple instances share the same `loadOptions` function', () => {
+    it('multiple instances share the same `loadOptions` function', async () => {
       const loadOptions = jasmine.createSpy('loadOptions')
       const { vm: vm1 } = mount(Treeselect, {
         propsData: {
@@ -882,6 +889,7 @@ describe('Dynamical Loading', () => {
       })
 
       vm1.openMenu()
+      await vm1.$nextTick()
       expect(loadOptions.calls.argsFor(0)).toEqual([ {
         id: 1,
         instanceId: 1,
@@ -890,6 +898,7 @@ describe('Dynamical Loading', () => {
       } ])
 
       vm2.openMenu()
+      await vm2.$nextTick()
       expect(loadOptions.calls.argsFor(1)).toEqual([ {
         id: 2,
         instanceId: 2,
@@ -898,7 +907,7 @@ describe('Dynamical Loading', () => {
       } ])
     })
 
-    it('callback can be executed only once', () => {
+    it('callback can be executed only once', async () => {
       const { vm } = mount(Treeselect, {
         propsData: {
           loadOptions({ callback }) {
@@ -911,6 +920,7 @@ describe('Dynamical Loading', () => {
       })
 
       vm.openMenu()
+      await vm.$nextTick()
       expect(vm.rootOptionsStates.loadingError).toBe('test')
     })
 
@@ -947,11 +957,14 @@ describe('Dynamical Loading', () => {
       const vm = app.$children[0]
 
       vm.openMenu()
+      await vm.$nextTick()
       await sleep(DELAY)
       expect(vm.rootOptionsStates.loadingError).toBe('test')
 
       vm.closeMenu()
+      await vm.$nextTick()
       vm.openMenu()
+      await vm.$nextTick()
       await sleep(DELAY)
       expect(vm.rootOptionsStates.isLoaded).toBe(true)
     })

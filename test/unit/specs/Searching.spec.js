@@ -89,7 +89,8 @@ describe('Searching', () => {
       })
       const { vm } = wrapper
 
-      await vm.openMenu()
+      vm.openMenu()
+      await vm.$nextTick()
 
       // not rotated by default
       expectArrowToBeRotatedOrNot(false)
@@ -153,8 +154,9 @@ describe('Searching', () => {
       })
       const { vm } = wrapper
 
-      it('preparation', () => {
+      it('preparation', async () => {
         vm.openMenu()
+        await vm.$nextTick()
         expect(vm.menu.isOpen).toBe(true)
       })
 
@@ -391,7 +393,7 @@ describe('Searching', () => {
       await typeAndAssert(wrapper, 'b', [ 'b' ])
     })
 
-    it('should reinitialize options after the value of `matchKeys` prop changes', () => {
+    it('should reinitialize options after the value of `matchKeys` prop changes', async () => {
       const wrapper = mount(Treeselect, {
         propsData: {
           searchable: true,
@@ -416,7 +418,7 @@ describe('Searching', () => {
         }),
       })
 
-      wrapper.setProps({ matchKeys: [ 'id' ] })
+      await wrapper.setProps({ matchKeys: [ 'id' ] })
       expect(vm.forest.nodeMap).toEqual({
         A: jasmine.objectContaining({
           lowerCased: { id: 'a' },
@@ -462,7 +464,8 @@ describe('Searching', () => {
       },
     })
 
-    await wrapper.vm.openMenu()
+    wrapper.vm.openMenu()
+    await wrapper.vm.$nextTick()
     await typeAndAssert('a', [ 'a', 'aa', 'ab' ])
     await typeAndAssert('ab', [ 'ab' ])
     await typeAndAssert('b', [ 'ab', 'b' ])
@@ -798,7 +801,7 @@ describe('Searching', () => {
       })
 
       it('when cacheOptions=false', async () => {
-        wrapper.setProps({ cacheOptions: false })
+        await wrapper.setProps({ cacheOptions: false })
         await typeAndAssert('a', false)
         await typeAndAssert('b', false)
         await typeAndAssert('a', false)
@@ -806,7 +809,7 @@ describe('Searching', () => {
       })
 
       it('when cacheOptions=true', async () => {
-        wrapper.setProps({ cacheOptions: true })
+        await wrapper.setProps({ cacheOptions: true })
         await typeAndAssert('a', false)
         await typeAndAssert('b', false)
         await typeAndAssert('a', true)
@@ -814,19 +817,19 @@ describe('Searching', () => {
       })
 
       it('change value of cacheOptions', async () => {
-        wrapper.setProps({ cacheOptions: true })
+        await wrapper.setProps({ cacheOptions: true })
         await typeAndAssert('a', false)
         await typeAndAssert('b', false)
         await typeAndAssert('a', true)
         await typeAndAssert('b', true)
 
-        wrapper.setProps({ cacheOptions: false })
+        await wrapper.setProps({ cacheOptions: false })
         await typeAndAssert('a', false)
         await typeAndAssert('b', false)
         await typeAndAssert('a', false)
         await typeAndAssert('b', false)
 
-        wrapper.setProps({ cacheOptions: true })
+        await wrapper.setProps({ cacheOptions: true })
         await typeAndAssert('a', true)
         await typeAndAssert('b', true)
         await typeAndAssert('a', true)

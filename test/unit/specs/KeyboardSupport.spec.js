@@ -79,8 +79,8 @@ describe('Keyboard Support', () => {
       expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
     })
 
-    it('should do nothing when backspaceRemoves=false', () => {
-      wrapper.setProps({ backspaceRemoves: false })
+    it('should do nothing when backspaceRemoves=false', async () => {
+      await wrapper.setProps({ backspaceRemoves: false })
       pressBackspaceKey(wrapper)
       expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
     })
@@ -121,7 +121,7 @@ describe('Keyboard Support', () => {
     it('select or deselect option using enter key (single-select)', async () => {
       const { wrapper, vm } = await createInstance()
 
-      wrapper.setProps({ multiple: false })
+      await wrapper.setProps({ multiple: false })
 
       pressEnterKey(wrapper)
       expect(vm.internalValue).toEqual([ 'a' ])
@@ -137,7 +137,7 @@ describe('Keyboard Support', () => {
     it('select or deselect option using enter key (multi-select)', async () => {
       const { wrapper, vm } = await createInstance()
 
-      wrapper.setProps({ multiple: true })
+      await wrapper.setProps({ multiple: true })
 
       pressEnterKey(wrapper)
       expect(vm.internalValue).toEqual([ 'a' ])
@@ -163,7 +163,7 @@ describe('Keyboard Support', () => {
     it('pressing enter key on a branch node when disabledBranchNodes=true should be no-op', async () => {
       const { wrapper, vm } = await createInstance()
 
-      wrapper.setProps({ disableBranchNodes: true })
+      await wrapper.setProps({ disableBranchNodes: true })
 
       vm.setCurrentHighlightedOption(vm.forest.nodeMap.d)
       expect(vm.menu.current).toBe('d')
@@ -216,8 +216,9 @@ describe('Keyboard Support', () => {
       expect(vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
     })
 
-    it('should close the menu if input is empty', () => {
+    it('should close the menu if input is empty', async () => {
       wrapper.vm.openMenu()
+      await wrapper.vm.$nextTick()
       expect(vm.trigger.searchQuery).toBe('')
       expect(vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
 
@@ -243,8 +244,9 @@ describe('Keyboard Support', () => {
     })
     const { vm } = wrapper
 
-    it('preparation', () => {
+    it('preparation', async () => {
       vm.openMenu()
+      await vm.$nextTick()
       vm.setCurrentHighlightedOption(vm.forest.nodeMap.b)
       expect(vm.menu.current).toBe('b')
     })
@@ -574,6 +576,7 @@ describe('Keyboard Support', () => {
     const { vm } = wrapper.findComponent(Treeselect)
 
     vm.openMenu()
+    await vm.$nextTick()
 
     // operate before delayed loading completes
     pressHomeKey(wrapper)
@@ -626,8 +629,8 @@ describe('Keyboard Support', () => {
       expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
     })
 
-    it('should do nothing when backspaceRemoves=false', () => {
-      wrapper.setProps({ deleteRemoves: false })
+    it('should do nothing when backspaceRemoves=false', async () => {
+      await wrapper.setProps({ deleteRemoves: false })
       pressDeleteKey(wrapper)
       expect(wrapper.vm.forest.selectedNodeIds).toEqual([ 'a', 'b' ])
     })

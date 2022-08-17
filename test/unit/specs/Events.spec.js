@@ -31,7 +31,8 @@ describe('Events', () => {
           value: [ 'ab' ],
         },
       })
-      await wrapper.vm.openMenu()
+      wrapper.vm.openMenu()
+      await wrapper.vm.$nextTick()
     })
 
     it('click on option label or checkbox', () => {
@@ -51,8 +52,8 @@ describe('Events', () => {
       expect(wrapper.emitted().deselect).toBeUndefined()
     })
 
-    it('click on value remove icon', () => {
-      wrapper.setProps({ value: [ 'a' ] })
+    it('click on value remove icon', async () => {
+      await wrapper.setProps({ value: [ 'a' ] })
 
       // click on "×" of a
       leftClick(wrapper.findComponent('.vue-treeselect__value-remove'))
