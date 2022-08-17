@@ -124,15 +124,10 @@ describe('Utils', () => {
         cleanup()
       }
 
-      it('for browsers other than IE9', async () => {
+      it('for modern browsers', async () => {
         await test()
       })
 
-      it('for IE9', async () => {
-        document.documentMode = 9
-        await test()
-        delete document.documentMode
-      })
     })
 
     it('setupResizeAndScrollEventListeners', async () => {
