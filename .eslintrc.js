@@ -10,8 +10,12 @@ module.exports = {
     'es6': true,
     'node': true
   },
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    'sourceType': 'module'
+    'sourceType': 'module',
+    'ecmaFeatures': {
+      'jsx': true
+    }
   },
   settings: {
     'import/resolver': {
@@ -25,7 +29,8 @@ module.exports = {
   },
   rules: {
     'no-console': ['error', { 'allow': ['warn', 'error'] }],
-    'no-constant-condition': ['error', { 'checkLoops': false }]
+    'no-constant-condition': ['error', { 'checkLoops': false }],
+    'vue/multi-word-component-names': 'off'
   },
   overrides: [{
     files: ['src/**/*.vue'],

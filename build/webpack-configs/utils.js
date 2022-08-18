@@ -1,22 +1,12 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const resolve = exports.resolve = dir => (
+exports.resolve = dir => (
   path.join(__dirname, '../..', dir)
 )
 
-exports.eslintLoader = dir => ({
-  test: /\.(js|vue)$/,
-  loader: 'eslint-loader',
-  enforce: 'pre',
-  include: [ resolve(dir) ],
-  options: {
-    formatter: require('eslint-friendly-formatter'),
-    cache: true,
-  },
-})
-
 exports.styleLoaders = (options = {}) => {
+
   const loaders = [ 'cache-loader', {
     loader: 'css-loader',
     options: {
@@ -46,9 +36,11 @@ exports.styleLoaders = (options = {}) => {
     test: /\.(css|less)$/,
     use: loaders,
   }
+
 }
 
 exports.withCacheLoader = rule => {
+
   // Disable cache-loader when running tests.
   if (process.env.NODE_ENV === 'testing') {
     return rule
@@ -65,4 +57,5 @@ exports.withCacheLoader = rule => {
     use: [ 'cache-loader', ...loaders ],
     ...rest,
   }
+
 }
