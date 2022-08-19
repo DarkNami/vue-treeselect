@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const ESLintPlugin = require('eslint-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const config = require('../../config')
@@ -22,7 +23,6 @@ module.exports = merge(require('./base'), {
 
   module: {
     rules: [
-      utils.eslintLoader('src'),
       utils.styleLoaders({
         sourceMap: false,
       }),
@@ -33,6 +33,10 @@ module.exports = merge(require('./base'), {
   devtool: 'cheap-module-eval-source-map',
 
   plugins: [
+    new ESLintPlugin({
+      'context': utils.resolve('src'),
+      'extensions': ['js', 'vue']
+    }),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
