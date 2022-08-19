@@ -60,34 +60,34 @@ const webpackConfig = merge(require('./base'), {
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency',
       templateParameters: {
         NODE_ENV: 'production',
       },
     }),
     new WebpackCdnPlugin({
-      modules: [ {
+      modules: [{
         name: 'vue',
         var: 'Vue',
         path: 'dist/vue.min.js',
         prodUrl: '//cdn.jsdelivr.net/npm/:name@:version/:path',
-      } ],
+      }],
       publicPath: '/node_modules',
     }),
-    new CopyWebpackPlugin([ {
-      from: utils.resolve('static'),
-      to: utils.resolve('gh-pages/static'),
-    }, {
-      from: utils.resolve('docs/CNAME'),
-      to: utils.resolve('gh-pages'),
-    }, {
-      from: utils.resolve('docs/browserconfig.xml'),
-      to: utils.resolve('gh-pages'),
-    }, {
-      from: utils.resolve('.circleci'),
-      to: utils.resolve('gh-pages/.circleci'),
-    } ]),
+    new CopyWebpackPlugin({
+      patterns: [{
+          from: utils.resolve('static'),
+          to: utils.resolve('gh-pages/static'),
+        }, {
+          from: utils.resolve('docs/CNAME'),
+          to: utils.resolve('gh-pages'),
+        }, {
+          from: utils.resolve('docs/browserconfig.xml'),
+          to: utils.resolve('gh-pages'),
+        }, {
+          from: utils.resolve('.circleci'),
+          to: utils.resolve('gh-pages/.circleci'),
+      }]
+    }),
   ],
 
   optimization: {
