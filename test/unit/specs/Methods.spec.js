@@ -377,12 +377,6 @@ describe('Methods', () => {
           expect(vm.internalValue).toEqual([])
         })
 
-        it('when valueConsistsOf=MANUALLY_SELECTED_ONLY', async () => {
-          await wrapper.setProps({ valueConsistsOf: 'MANUALLY_SELECTED_ONLY' })
-          expect(vm.internalValue).toEqual(['a'])
-          vm.removeLastValue()
-          expect(vm.internalValue).toEqual([])
-        })
       })
     })
   })

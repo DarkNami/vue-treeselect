@@ -22,7 +22,6 @@ export const ALL = 'ALL'
 export const BRANCH_PRIORITY = 'BRANCH_PRIORITY'
 export const LEAF_PRIORITY = 'LEAF_PRIORITY'
 export const ALL_WITH_INDETERMINATE = 'ALL_WITH_INDETERMINATE'
-export const MANUALLY_SELECTED_ONLY = 'MANUALLY_SELECTED_ONLY'
 
 // Acceptable values of `sortValueBy` prop.
 export const ORDER_SELECTED = 'ORDER_SELECTED'
