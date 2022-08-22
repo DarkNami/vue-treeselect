@@ -17,6 +17,7 @@ const assetsPath = path => [
 ].join('/')
 
 const webpackConfig = merge(require('./base'), {
+
   mode: 'production',
 
   entry: {
@@ -74,7 +75,8 @@ const webpackConfig = merge(require('./base'), {
       publicPath: '/node_modules',
     }),
     new CopyWebpackPlugin({
-      patterns: [{
+      patterns: [
+        {
           from: utils.resolve('static'),
           to: utils.resolve('gh-pages/static'),
         }, {
@@ -86,7 +88,8 @@ const webpackConfig = merge(require('./base'), {
         }, {
           from: utils.resolve('.circleci'),
           to: utils.resolve('gh-pages/.circleci'),
-      }]
+        }
+      ]
     }),
   ],
 
@@ -99,6 +102,7 @@ const webpackConfig = merge(require('./base'), {
       new OptimizeCSSPlugin(),
     ],
   },
+
 })
 
 if (config.docs.bundleAnalyzerReport) {

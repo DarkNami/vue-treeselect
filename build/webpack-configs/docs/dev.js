@@ -7,6 +7,7 @@ const config = require('../../config')
 const utils = require('../utils')
 
 module.exports = merge(require('./base'), {
+
   mode: 'development',
 
   entry: {
@@ -48,4 +49,5 @@ module.exports = merge(require('./base'), {
     }),
     new FriendlyErrorsPlugin(),
   ],
+
 })

@@ -8,6 +8,7 @@ const utils = require('../utils')
 const ENABLE_SOURCE_MAP = true
 
 module.exports = webpackConfig => merge(webpackConfig, {
+
   mode: 'production',
 
   output: {
@@ -41,4 +42,5 @@ module.exports = webpackConfig => merge(webpackConfig, {
       new OptimizeCSSPlugin(),
     ],
   },
+
 })

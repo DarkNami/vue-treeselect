@@ -6,6 +6,7 @@ const utils = require('../utils')
 const IS_ENABLE_SOURCE_MAP = true
 
 module.exports = webpackConfig => merge(webpackConfig, {
+
   mode: 'none',
 
   output: {
@@ -33,4 +34,5 @@ module.exports = webpackConfig => merge(webpackConfig, {
   optimization: {
     flagIncludedChunks: true,
   },
+
 })

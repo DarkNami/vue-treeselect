@@ -7,23 +7,26 @@ exports.resolve = dir => (
 
 exports.styleLoaders = (options = {}) => {
 
-  const loaders = [ 'cache-loader', {
-    loader: 'css-loader',
-    options: {
-      importLoaders: 1,
-      sourceMap: options.sourceMap,
-    },
-  }, {
-    loader: 'postcss-loader',
-    options: {
-      sourceMap: options.sourceMap,
-    },
-  }, {
-    loader: 'less-loader',
-    options: {
-      sourceMap: options.sourceMap,
-    },
-  } ]
+  const loaders = [
+    'cache-loader',
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 1,
+        sourceMap: options.sourceMap,
+      },
+    }, {
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: options.sourceMap,
+      },
+    }, {
+      loader: 'less-loader',
+      options: {
+        sourceMap: options.sourceMap,
+      },
+    }
+  ]
 
   // These should go before `cache-loader`.
   if (options.extract) {
@@ -50,11 +53,11 @@ exports.withCacheLoader = rule => {
   const loaders = Array.isArray(use)
     ? use
     : typeof loader === 'string' && !options
-      ? [ loader ]
-      : [ { loader, options } ]
+      ? [loader]
+      : [{ loader, options }]
 
   return {
-    use: [ 'cache-loader', ...loaders ],
+    use: ['cache-loader', ...loaders],
     ...rest,
   }
 

@@ -46,4 +46,4 @@ const done = err => {
   }
 }
 
-runSeries([ prepare, build ], done)
+runSeries([prepare, build], done)

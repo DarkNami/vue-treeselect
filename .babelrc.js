@@ -1,9 +1,11 @@
 module.exports = api => {
+
   api.cache.never()
 
   const presets = [
-    [ '@babel/preset-env', { modules: false } ],
+    ['@babel/preset-env', { modules: false }],
   ]
+
   const plugins = [
     'transform-vue-jsx',
     '@babel/plugin-transform-runtime',
@@ -14,4 +16,5 @@ module.exports = api => {
   }
 
   return { presets, plugins, comments: false }
+
 }

@@ -1,14 +1,13 @@
+# Mac OS
 .DS_Store
-
-*debug.log*
-*error.log*
-
-.eslintcache
-
+# npm, yarn
 node_modules/
 yarn.lock
-
+# log, temporary, cache, reports
+*debug.log*
+*error.log*
+.eslintcache
+test/unit/coverage
+# generated
 dist
 gh-pages
-
-test/unit/coverage

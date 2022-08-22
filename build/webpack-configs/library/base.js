@@ -7,6 +7,7 @@ const banner = require('../banner')
 const baseWebpackConfig = require('../base')
 
 const baseLibraryWebpackConfig = merge(baseWebpackConfig, {
+
   entry: {
     VueTreeselect: utils.resolve('src/index.js'),
   },
@@ -20,6 +21,7 @@ const baseLibraryWebpackConfig = merge(baseWebpackConfig, {
   plugins: [
     new webpack.BannerPlugin(banner),
   ],
+
 })
 
 if (config.library.bundleAnalyzerReport) {
