@@ -107,9 +107,7 @@
         const menuContainerStyle = this.$refs.menu.$refs['menu-container'].style
         const transformVariations = [ 'transform', 'webkitTransform', 'MozTransform', 'msTransform' ]
         const transform = find(transformVariations, t => t in document.body.style)
-
-        // IE9 doesn't support `translate3d()`.
-        menuContainerStyle[transform] = `translate(${left}, ${top})`
+        menuContainerStyle[transform] = `translate3d(${left}, ${top})`
       },
     },
 
