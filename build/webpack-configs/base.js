@@ -7,6 +7,8 @@ module.exports = {
   // resets the default mode
   mode: 'none',
 
+  cache: (process.env.NODE_ENV !== 'testing'),
+
   resolve: {
     extensions: ['.js', '.json', '.vue'],
     alias: {
@@ -22,7 +24,7 @@ module.exports = {
 
   module: {
     rules: [
-      utils.withCacheLoader({
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
@@ -30,19 +32,19 @@ module.exports = {
             preserveWhitespace: false,
           },
         },
-      }),
-      utils.withCacheLoader({
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         include: ['src', 'docs', 'test'].map(utils.resolve),
-      }),
-      utils.withCacheLoader({
+      },
+      {
         test: /\.pug$/,
         loader: 'pug-loader',
         options: {
           pretty: true,
         },
-      }),
+      },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',

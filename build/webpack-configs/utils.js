@@ -27,7 +27,6 @@ exports.styleLoaders = (options = {}) => {
     }
   ]
 
-  // These should go before `cache-loader`.
   if (options.extract) {
     loaders.unshift(MiniCssExtractPlugin.loader)
   } else {
@@ -37,27 +36,6 @@ exports.styleLoaders = (options = {}) => {
   return {
     test: /\.(css|less)$/,
     use: loaders,
-  }
-
-}
-
-exports.withCacheLoader = rule => {
-
-  // Disable cache-loader when running tests.
-  if (process.env.NODE_ENV === 'testing') {
-    return rule
-  }
-
-  const { loader, options, use, ...rest } = rule
-  const loaders = Array.isArray(use)
-    ? use
-    : typeof loader === 'string' && !options
-      ? [loader]
-      : [{ loader, options }]
-
-  return {
-    use: loaders,
-    ...rest,
   }
 
 }
