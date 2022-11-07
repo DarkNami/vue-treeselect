@@ -6,7 +6,6 @@ const express = require('express')
 const webpack = require('webpack')
 const webpackConfig = require('./webpack-configs/docs/dev')
 const config = require('./config')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // default port where dev server listens for incoming traffic
 const port = process.env.PORT || config.dev.port
@@ -23,17 +22,6 @@ const devMiddleware = require('webpack-dev-middleware')(compiler, {
 
 const hotMiddleware = require('webpack-hot-middleware')(compiler, {
   log: () => { /* empty */ },
-})
-// force page reload when html-webpack-plugin template changes
-compiler.hooks.compilation.tap('compilation', (compilation) => {
-  HtmlWebpackPlugin.getHooks(compilation).afterEmit.tapAsync(
-    'MyPlugin', // <-- Set a meaningful name here for stacktraces
-    (data, cb) => {
-      hotMiddleware.publish({ action: 'reload' })
-      // Tell webpack to move on
-      cb(null, data)
-    }
-  )
 })
 
 // handle fallback for HTML5 history API
