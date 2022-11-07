@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge')
 const TerserPlugin = require('terser-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const WebpackCdnPlugin = require('webpack-cdn-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -81,6 +82,7 @@ const webpackConfig = merge(require('./base'), {
           sourceMap: ENABLE_SOURCE_MAP,
         }
       }),
+      new CssMinimizerPlugin(),
     ],
   },
 

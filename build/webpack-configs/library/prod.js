@@ -1,6 +1,7 @@
 const { merge } = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const { libraryTargetPlaceholder } = require('../../config').library
 const utils = require('../utils')
 
@@ -40,6 +41,7 @@ module.exports = webpackConfig => merge(webpackConfig, {
           sourceMap: ENABLE_SOURCE_MAP,
         }
       }),
+      new CssMinimizerPlugin(),
     ],
   },
 

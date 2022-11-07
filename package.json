@@ -58,6 +58,7 @@
     "connect-history-api-fallback": "^2.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
+    "css-minimizer-webpack-plugin": "^4.2.2",
     "entities": "^4.4.0",
     "eslint": "^8.27.0",
     "eslint-import-resolver-webpack": "^0.13.2",
