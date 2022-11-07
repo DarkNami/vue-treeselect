@@ -8,7 +8,6 @@ exports.resolve = dir => (
 exports.styleLoaders = (options = {}) => {
 
   const loaders = [
-    'cache-loader',
     {
       loader: 'css-loader',
       options: {
@@ -57,7 +56,7 @@ exports.withCacheLoader = rule => {
       : [{ loader, options }]
 
   return {
-    use: ['cache-loader', ...loaders],
+    use: loaders,
     ...rest,
   }
 
