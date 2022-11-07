@@ -55,11 +55,11 @@ module.exports = {
 
   optimization: {
     concatenateModules: true,
-    noEmitOnErrors: true,
+    emitOnErrors: false,
   },
 
   node: {
-    process: false,
+
   },
 
   plugins: [

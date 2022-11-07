@@ -1,5 +1,5 @@
 const ESLintPlugin = require('eslint-webpack-plugin')
-const merge = require('webpack-merge')
+const { merge } = require('webpack-merge')
 const utils = require('../utils')
 const baseWebpackConfig = require('../base')
 
