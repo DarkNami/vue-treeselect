@@ -40,18 +40,19 @@ module.exports = {
       },
       {
         test: /\.pug$/,
-        loader: 'pug-loader',
+        loader: '@webdiscus/pug-loader',
         options: {
           pretty: true,
         },
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-        },
+        type: 'asset/resource'
       },
+      {
+        resourceQuery: /raw/,
+        type: 'asset/source',
+      }
     ],
   },
 

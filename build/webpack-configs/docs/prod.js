@@ -1,4 +1,5 @@
 const { merge } = require('webpack-merge')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const WebpackCdnPlugin = require('webpack-cdn-plugin')
@@ -45,6 +46,24 @@ const webpackConfig = merge(require('./base'), {
     new MiniCssExtractPlugin({
       filename: assetsPath('css/[name].[contenthash].css'),
       chunkFilename: '[id].css',
+    }),
+    // generate dist index.html with correct asset hash for caching.
+    // you can customize output by editing /index.html
+    // see https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      template: utils.resolve('docs/index.pug'),
+      filename: utils.resolve('gh-pages/index.html'),
+      minify: {
+        caseSensitive: true,
+        removeComments: false,
+        collapseWhitespace: false,
+        removeAttributeQuotes: false,
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      templateParameters: {
+        NODE_ENV: 'production',
+      },
     }),
     new WebpackCdnPlugin({
       modules: [{

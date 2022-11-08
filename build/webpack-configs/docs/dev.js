@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const config = require('../../config')
 const utils = require('../utils')
 
@@ -38,6 +39,13 @@ module.exports = merge(require('./base'), {
     }),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
+    // https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      template: utils.resolve('docs/index.pug'),
+      templateParameters: {
+        NODE_ENV: 'development',
+      },
+    }),
   ],
 
 })
