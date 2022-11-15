@@ -15,6 +15,10 @@ module.exports = webpackConfig => merge(webpackConfig, {
 
   module: {
     rules: [
+      {
+        test: /\.png$/,
+        type: 'asset'
+      },
       utils.styleLoaders({
         sourceMap: IS_ENABLE_SOURCE_MAP,
         extract: true,
