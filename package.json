@@ -25,7 +25,7 @@
     "test": "npm run testonly",
     "pretest": "npm run lint",
     "lint:js": "eslint . --ext .js --ext .vue --cache --cache-location \"node_modules/.cache/eslint\"",
-    "lint:css": "stylelint \"**/*.less\" --custom-syntax postcss-less",
+    "lint:css": "stylelint \"**/*.less\"",
     "lint": "npm run lint:js && npm run lint:css",
     "verify-builds": "size-limit && node build/verify-builds.js",
     "finish": "npm test && npm run build-library && npm run verify-builds"
@@ -37,7 +37,6 @@
     "fuzzysearch": "^1.0.3",
     "is-promise": "^4.0.0",
     "lodash": "^4.17.21",
-    "material-colors": "^1.2.6",
     "watch-size": "^2.0.0"
   },
   "devDependencies": {

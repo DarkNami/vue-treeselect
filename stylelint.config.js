@@ -1,5 +1,6 @@
 module.exports = {
   extends: 'stylelint-config-xo-space',
+  customSyntax: 'postcss-less',
   rules: {
     'string-quotes': ['double', { avoidEscape: false }],
     'declaration-empty-line-before': null,

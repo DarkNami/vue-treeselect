@@ -2,7 +2,6 @@
  * Dependencies
  */
 
-@import "~material-colors/dist/colors.less";
 @import "~easings-css/index.less";
 
 /**
@@ -27,13 +26,13 @@
 @treeselect-control-border-color: #ddd;
 @treeselect-control-border-color-hover: #cfcfcf;
 @treeselect-control-border-color-active: @treeselect-control-border-color-hover;
-@treeselect-control-border-color-focus: @md-light-blue-600;
+@treeselect-control-border-color-focus: #039be5;
 @treeselect-control-border-radius: @treeselect-border-radius-lg;
 @treeselect-control-bg: #fff;
 @treeselect-control-box-shadow-focus: 0 0 0 3px fade(@treeselect-control-border-color-focus, 10%);
 @treeselect-control-bg-disabled: #f9f9f9;
 
-@treeselect-placeholder-font-color: @md-grey-400;
+@treeselect-placeholder-font-color: #bdbdbd;
 @treeselect-single-value-font-color: #333;
 @treeselect-single-value-font-color-focused: @treeselect-placeholder-font-color;
 @treeselect-multi-value-margin-x: 0;
@@ -41,24 +40,24 @@
 @treeselect-multi-value-padding-x: @treeselect-padding;
 @treeselect-multi-value-padding-y: 0;
 @treeselect-multi-value-font-size: @treeselect-font-size-sm;
-@treeselect-multi-value-font-color: @md-light-blue-600;
-@treeselect-multi-value-item-bg: @md-blue-50;
-@treeselect-multi-value-item-bg-new: @md-green-50;
+@treeselect-multi-value-font-color: #039be5;
+@treeselect-multi-value-item-bg: #e3f2fd;
+@treeselect-multi-value-item-bg-new: #e8f5e9;
 @treeselect-multi-value-item-border-width: 1px;
 @treeselect-multi-value-item-border-color: transparent;
 @treeselect-multi-value-font-color-hover: @treeselect-multi-value-font-color;
 @treeselect-multi-value-item-bg-hover: @treeselect-multi-value-item-bg;
 @treeselect-multi-value-item-bg-new-hover: @treeselect-multi-value-item-bg-new;
-@treeselect-multi-value-font-color-disabled: @md-grey-600;
-@treeselect-multi-value-item-bg-disabled: @md-grey-100;
+@treeselect-multi-value-font-color-disabled: #757575;
+@treeselect-multi-value-item-bg-disabled: #f5f5f5;
 @treeselect-multi-value-item-font-color-control-disabled: #555;
 @treeselect-multi-value-item-bg-control-disabled: #fff;
 @treeselect-multi-value-item-border-color-control-disabled: #e5e5e5;
 @treeselect-multi-value-remove-color: @treeselect-multi-value-font-color;
-@treeselect-multi-value-remove-color-hover: @md-red-600;
+@treeselect-multi-value-remove-color-hover: #e53935;
 @treeselect-multi-value-remove-size: 6px;
 @treeselect-multi-value-divider-color: #fff;
-@treeselect-limit-tip-font-color: @md-grey-400;
+@treeselect-limit-tip-font-color: #bdbdbd;
 @treeselect-limit-tip-font-size: @treeselect-multi-value-font-size;
 @treeselect-limit-tip-font-weight: 600;
 @treeselect-single-input-font-size: inherit;
@@ -72,20 +71,20 @@
 
 @treeselect-arrow-size: 9px;
 @treeselect-arrow-color: #ccc;
-@treeselect-arrow-color-hover: @md-grey-700;
+@treeselect-arrow-color-hover: #616161;
 @treeselect-arrow-transition-timing-function: @ease-out-expo;
 
 @treeselect-x-size: 8px;
 @treeselect-x-color: @treeselect-arrow-color;
-@treeselect-x-color-hover: @md-red-600;
+@treeselect-x-color-hover: #e53935;
 
-@treeselect-option-bg-highlight: @md-grey-100;
-@treeselect-option-selected-bg: @md-blue-50;
+@treeselect-option-bg-highlight: #f5f5f5;
+@treeselect-option-selected-bg: #e3f2fd;
 @treeselect-option-selected-bg-hover: @treeselect-option-selected-bg;
 @treeselect-checkbox-size: @treeselect-icon-size;
 @treeselect-checkbox-border-radius: @treeselect-border-radius-sm;
-@treeselect-checkbox-color: @md-grey-300;
-@treeselect-checkbox-color-highlight: @md-light-blue-600;
+@treeselect-checkbox-color: #e0e0e0;
+@treeselect-checkbox-color-highlight: #039be5;
 @treeselect-checkbox-border-color: @treeselect-checkbox-color;
 @treeselect-checkbox-bg: #fff;
 @treeselect-checkbox-border-color-hover: @treeselect-checkbox-color-highlight;
@@ -107,14 +106,14 @@
 @treeselect-option-label-color: inherit;
 @treeselect-option-label-color-disabled: rgba(0, 0, 0, 0.25);
 
-@treeselect-loader-color-dark: @md-light-blue-600;
-@treeselect-loader-color-light: @md-light-blue-100;
+@treeselect-loader-color-dark: #039be5;
+@treeselect-loader-color-light: #b3e5fc;
 @treeselect-loader-animation-duration: 1.6s;
-@treeselect-warning-icon-bg: @md-orange-600;
-@treeselect-error-icon-bg: @md-red-600;
-@treeselect-tip-color: @md-grey-600;
+@treeselect-warning-icon-bg: #fb8c00;
+@treeselect-error-icon-bg: #e53935;
+@treeselect-tip-color: #757575;
 @treeselect-tip-font-size: @treeselect-font-size-sm;
-@treeselect-retry-text-color: @md-light-blue-600;
+@treeselect-retry-text-color: #039be5;
 
 
 /**
