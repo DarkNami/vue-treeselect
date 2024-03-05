@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.20.1",
-    "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "easings-css": "^2.1.1",
     "fuzzysearch": "^1.0.3",
     "is-promise": "^4.0.0",
