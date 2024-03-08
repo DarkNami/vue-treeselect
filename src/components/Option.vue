@@ -1,4 +1,4 @@
-<script>
+<script lang="jsx">
   import { UNCHECKED, INDETERMINATE, CHECKED } from '../constants'
   import { onLeftClick } from '../utils'
   import Tip from './Tip'

@@ -34,7 +34,7 @@ module.exports = {
         },
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loader: 'babel-loader',
         include: ['src', 'docs', 'test'].map(utils.resolve),
       },

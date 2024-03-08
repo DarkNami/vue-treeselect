@@ -1,4 +1,4 @@
-<script>
+<script lang="jsx">
   import treeselectMixin from '../mixins/treeselectMixin'
   import HiddenFields from './HiddenFields'
   import Control from './Control'
