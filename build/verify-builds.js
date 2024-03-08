@@ -14,8 +14,8 @@ const expectedDistFiles = [
   'vue-treeselect.cjs.min.js.map',
   'vue-treeselect.umd.min.js',
   'vue-treeselect.umd.min.js.map',
-  // Currently there is no SourceMap for the minified CSS file.
   'vue-treeselect.min.css',
+  'vue-treeselect.min.css.map',
 ]
 const actualFiles = fs.readdirSync(config.library.assetsRoot)
 if (!shallowEqual(expectedDistFiles.sort(), actualFiles.sort())) {
