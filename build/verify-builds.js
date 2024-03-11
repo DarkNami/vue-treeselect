@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const shallowEqual = require('shallow-equal/arrays')
+const shallowEqual = require('shallow-equal')
 const config = require('./config')
 
 const expectedDistFiles = [
@@ -18,7 +18,7 @@ const expectedDistFiles = [
   'vue-treeselect.min.css.map',
 ]
 const actualFiles = fs.readdirSync(config.library.assetsRoot)
-if (!shallowEqual(expectedDistFiles.sort(), actualFiles.sort())) {
+if (!shallowEqual.shallowEqualArrays(expectedDistFiles.sort(), actualFiles.sort())) {
   throw new Error('Built files are not as expected.')
 }
 
