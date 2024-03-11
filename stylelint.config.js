@@ -1,11 +1,8 @@
 module.exports = {
-  extends: 'stylelint-config-xo-space',
   customSyntax: 'postcss-less',
   rules: {
-    'string-quotes': ['double', { avoidEscape: false }],
     'declaration-empty-line-before': null,
     'at-rule-empty-line-before': null,
-    'selector-list-comma-newline-after': null,
     'rule-empty-line-before': null,
     'value-keyword-case': null, // [ 'lower', { ignoreProperties: [ 'font', 'font-family' ] } ],
     'declaration-block-no-duplicate-properties': [true, { ignore: ['consecutive-duplicates'] }],
@@ -16,7 +13,6 @@ module.exports = {
     'no-descending-specificity': null,
     'selector-max-compound-selectors': null,
     'block-no-empty': [true, { ignore: [] }],
-    'linebreaks': (process.platform === 'win32' ? 'windows' : 'unix'),
     'alpha-value-notation': null,
     'color-function-notation': null,
     'function-no-unknown': null
