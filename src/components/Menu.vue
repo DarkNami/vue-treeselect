@@ -1,4 +1,5 @@
 <script lang="jsx">
+  import { nextTick } from 'vue'
   import { MENU_BUFFER } from '../constants'
   import { watchSize, setupResizeAndScrollEventListeners } from '../utils'
   import Option from './Option'
@@ -37,7 +38,9 @@
       'instance.menu.isOpen'(newValue) {
         if (newValue) {
           // In case `openMenu()` is just called and the menu is not rendered yet.
-          this.$nextTick(this.onMenuOpen)
+          nextTick(() => {
+            this.onMenuOpen
+          })
         } else {
           this.onMenuClose()
         }
@@ -52,7 +55,11 @@
     mounted() {
       const { instance } = this
 
-      if (instance.menu.isOpen) this.$nextTick(this.onMenuOpen)
+      if (instance.menu.isOpen) {
+        nextTick(() => {
+          this.onMenuOpen
+        })
+      }
     },
 
     destroyed() {

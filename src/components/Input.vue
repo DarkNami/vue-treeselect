@@ -1,4 +1,5 @@
 <script lang="jsx">
+  import { nextTick } from 'vue'
   import { debounce, deepExtend, includes } from '../utils'
   import { MIN_INPUT_WIDTH, KEY_CODES, INPUT_DEBOUNCE_DELAY } from '../constants'
 
@@ -46,7 +47,11 @@
 
       value() {
         // istanbul ignore else
-        if (this.needAutoSize) this.$nextTick(this.updateInputWidth)
+        if (this.needAutoSize) {
+          nextTick(() => {
+            this.updateInputWidth
+          })
+        }
       },
     },
 

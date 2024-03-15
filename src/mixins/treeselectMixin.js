@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import fuzzysearch from 'fuzzysearch'
 
 import {
@@ -1386,7 +1387,9 @@ export default {
           scrollToOption()
         } else {
           // istanbul ignore next
-          this.$nextTick(scrollToOption)
+          nextTick(() => {
+            scrollToOption
+          })
         }
       }
     },
@@ -1449,8 +1452,10 @@ export default {
     openMenu() {
       if (this.disabled || this.menu.isOpen) return
       this.menu.isOpen = true
-      this.$nextTick(this.resetHighlightedOptionWhenNecessary)
-      this.$nextTick(this.restoreMenuScrollPosition)
+      nextTick(() => {
+        this.resetHighlightedOptionWhenNecessary
+        this.restoreMenuScrollPosition
+      })
       if (!this.options && !this.async) this.loadRootOptions()
       this.toggleClickOutsideEvent(true)
       this.$emit('open', this.getInstanceId())
@@ -1650,7 +1655,7 @@ export default {
         succeed: () => {
           this.rootOptionsStates.isLoaded = true
           // Wait for `options` being re-initialized.
-          this.$nextTick(() => {
+          nextTick(() => {
             this.resetHighlightedOptionWhenNecessary(true)
           })
         },
