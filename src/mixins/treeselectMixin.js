@@ -1949,7 +1949,7 @@ export default {
     if (this.async && this.defaultOptions) this.handleRemoteSearch()
   },
 
-  destroyed() {
+  unmounted() {
     // istanbul ignore next
     this.toggleClickOutsideEvent(false)
   },

@@ -62,7 +62,7 @@
       }
     },
 
-    destroyed() {
+    unmounted() {
       this.onMenuClose()
     },
 
