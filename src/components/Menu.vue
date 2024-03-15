@@ -87,7 +87,7 @@
 
       renderBeforeList() {
         const { instance } = this
-        const beforeListRenderer = instance.$scopedSlots['before-list']
+        const beforeListRenderer = instance.$slots['before-list']
 
         return beforeListRenderer
           ? beforeListRenderer()
@@ -96,7 +96,7 @@
 
       renderAfterList() {
         const { instance } = this
-        const afterListRenderer = instance.$scopedSlots['after-list']
+        const afterListRenderer = instance.$slots['after-list']
 
         return afterListRenderer
           ? afterListRenderer()
