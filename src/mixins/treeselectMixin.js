@@ -639,6 +639,8 @@ export default {
     },
   },
 
+  emits: ['update:modelValue', 'search-change', 'close', 'open', 'select', 'deselect'],
+
   data() {
     return {
       trigger: {

@@ -12,9 +12,8 @@
   export default {
     name: 'vue-treeselect--hidden-fields',
     inject: [ 'instance' ],
-    functional: true,
 
-    render(_, context) {
+    render(props, context) {
       const { instance } = context.injections
 
       if (!instance.name || instance.disabled || !instance.hasValue) return null

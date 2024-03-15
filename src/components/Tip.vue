@@ -1,7 +1,6 @@
 <script lang="jsx">
   export default {
     name: 'vue-treeselect--tip',
-    functional: true,
 
     props: {
       type: {
@@ -14,8 +13,8 @@
       },
     },
 
-    render(_, context) {
-      const { props, children } = context
+    render(props, context) {
+      const { children } = context
 
       return (
         <div class={`vue-treeselect__tip vue-treeselect__${props.type}-tip`}>
