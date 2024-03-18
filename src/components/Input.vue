@@ -17,10 +17,12 @@
     name: 'vue-treeselect--input',
     inject: [ 'instance' ],
 
-    data: () => ({
-      inputWidth: MIN_INPUT_WIDTH,
-      value: '',
-    }),
+    data: function () {
+      return {
+        inputWidth: MIN_INPUT_WIDTH,
+        value: '',
+      }
+    },
 
     computed: {
       needAutoSize() {
