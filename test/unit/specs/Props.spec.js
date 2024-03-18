@@ -347,7 +347,7 @@ describe('Props', () => {
 
       expect(findPortalTarget(vm)).toBeTruthy()
 
-      wrapper.destroy()
+      wrapper.unmount()
       await nextTick()
 
       expect(findPortalTarget(vm)).toBe(null)
@@ -2463,7 +2463,7 @@ describe('Props', () => {
       })
 
       afterEach(() => {
-        wrapper.destroy()
+        wrapper.unmount()
       })
 
       describe('when multiple=false', () => {

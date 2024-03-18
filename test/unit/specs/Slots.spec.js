@@ -23,7 +23,7 @@
 //         } ],
 //         defaultExpandLevel: Infinity,
 //       },
-//       scopedSlots: {
+//       slots: {
 //         'option-label': `
 //           <label slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }" :class="labelClassName">
 //             {{ node.isBranch ? 'Branch' : 'Leaf' }}: {{ node.label }}

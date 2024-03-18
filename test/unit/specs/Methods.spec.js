@@ -113,7 +113,7 @@ describe('Methods', () => {
     }
 
     afterEach(() => {
-      wrapper.destroy()
+      wrapper.unmount()
     })
 
     it('when appendToBody=false', async () => {

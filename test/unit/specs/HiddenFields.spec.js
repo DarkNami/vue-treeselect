@@ -14,7 +14,7 @@ describe('Hidden Fields', () => {
   })
 
   afterEach(() => {
-    wrapper.destroy()
+    wrapper.unmount()
   })
 
   const getHiddenFields = () => wrapper.findAllComponents('input[type="hidden"]')
