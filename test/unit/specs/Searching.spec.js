@@ -9,7 +9,7 @@ describe('Searching', () => {
   describe('local search', () => {
     it('exactly matching', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           searchable: true,
           options: [{
             id: 'a',
@@ -46,7 +46,7 @@ describe('Searching', () => {
 
     it('should be case insensitive', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           searchable: true,
           options: [{
             id: 'a',
@@ -76,7 +76,7 @@ describe('Searching', () => {
       }
 
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           searchable: true,
           options: [{
             id: 'a',
@@ -131,7 +131,7 @@ describe('Searching', () => {
 
     describe('matching branch nodes', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           searchable: true,
           options: [{
             id: 'branch',
@@ -188,7 +188,7 @@ describe('Searching', () => {
 
     it('should highlight first option after search query changes', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -239,7 +239,7 @@ describe('Searching', () => {
   describe('nested search', () => {
     it('when searchNested=false', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           searchable: true,
           searchNested: false,
           options: [{
@@ -267,7 +267,7 @@ describe('Searching', () => {
 
       beforeEach(() => {
         wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             searchable: true,
             searchNested: true,
             disableFuzzyMatching: false,
@@ -317,7 +317,7 @@ describe('Searching', () => {
 
     it('match more properties than only `label`', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           matchKeys: ['label', 'value'],
           searchable: true,
           options: [{
@@ -350,7 +350,7 @@ describe('Searching', () => {
         () => { /* empty */ },
       ]
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           matchKeys: ['value'],
           searchable: true,
           options: specialValues.map((value, index) => ({
@@ -373,7 +373,7 @@ describe('Searching', () => {
 
     it('with `normalizer` prop', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           // here we leave the `matchKeys` prop to its default value `[ 'label' ]`
           searchable: true,
           normalizer: node => ({
@@ -396,7 +396,7 @@ describe('Searching', () => {
 
     it('should reinitialize options after the value of `matchKeys` prop changes', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           searchable: true,
           matchKeys: ['label'],
           options: [{
@@ -446,7 +446,7 @@ describe('Searching', () => {
     }
 
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: [{
           id: 'a',
           label: 'a',
@@ -478,7 +478,7 @@ describe('Searching', () => {
       const DELAY = 50
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           async: true,
           loadOptions({ action, searchQuery, callback }) {
             if (action === 'ASYNC_SEARCH') {
@@ -528,7 +528,7 @@ describe('Searching', () => {
       it('when defaultOptions=option[]', async () => {
         const wrapper = mount(Treeselect, {
           sync: false,
-          propsData: {
+          props: {
             async: true,
             loadOptions({ action, searchQuery, callback }) {
               if (action === 'ASYNC_SEARCH') {
@@ -564,7 +564,7 @@ describe('Searching', () => {
         const DELAY = 20
         const wrapper = mount(Treeselect, {
           sync: false,
-          propsData: {
+          props: {
             async: true,
             loadOptions({ action, searchQuery, callback }) {
               if (action === 'ASYNC_SEARCH') {
@@ -614,7 +614,7 @@ describe('Searching', () => {
         const searchPromptText = '$SEARCH_PROMPT_TEXT$'
         const wrapper = mount(Treeselect, {
           sync: false,
-          propsData: {
+          props: {
             async: true,
             loadOptions({ action, searchQuery, callback }) {
               if (action === 'ASYNC_SEARCH') {
@@ -648,7 +648,7 @@ describe('Searching', () => {
       const called = {}
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           async: true,
           loadOptions({ action, searchQuery, callback }) {
             if (action === 'ASYNC_SEARCH') {
@@ -683,7 +683,7 @@ describe('Searching', () => {
       const DELAY = 50
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           async: true,
           loadOptions({ action, searchQuery, callback }) {
             if (action === 'ASYNC_SEARCH') {
@@ -724,7 +724,7 @@ describe('Searching', () => {
     it('should preserve information of selected options after search query changes (old options will not be in the list)', async () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           async: true,
           multiple: true,
           loadOptions({ action, searchQuery, callback }) {
@@ -785,7 +785,7 @@ describe('Searching', () => {
         expectedCalls = []
         wrapper = mount(Treeselect, {
           sync: false,
-          propsData: {
+          props: {
             async: true,
             loadOptions({ action, searchQuery, callback }) {
               if (action === 'ASYNC_SEARCH') {
@@ -856,7 +856,7 @@ describe('Searching', () => {
       const calls = []
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           async: true,
           cacheOptions: false,
           loadOptions({ action, searchQuery, callback }) {
@@ -921,7 +921,7 @@ describe('Searching', () => {
       const keywords = ['a', 'b', 'c']
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           async: true,
           loadOptions({ action, searchQuery, callback }) {
             if (action === 'ASYNC_SEARCH') {
@@ -951,7 +951,7 @@ describe('Searching', () => {
       const DELAY = 10
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           async: true,
           loadOptions({ action, parentNode, /*searchQuery, */callback }) {
             if (action === 'ASYNC_SEARCH') {

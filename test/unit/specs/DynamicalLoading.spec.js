@@ -18,7 +18,7 @@ describe('Dynamical Loading', () => {
       spyOn(console, 'error')
 
       mount(Treeselect, {
-        propsData: {
+        props: {
           options: null,
         },
       })
@@ -33,7 +33,7 @@ describe('Dynamical Loading', () => {
       spyOn(console, 'error')
 
       mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'id',
             label: 'label',
@@ -53,7 +53,7 @@ describe('Dynamical Loading', () => {
     it('expanding an unloaded branch node should trigger loading its children options', () => {
       const loadOptions = jasmine.createSpy()
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -84,7 +84,7 @@ describe('Dynamical Loading', () => {
       }
       const spyForLoadOptions = jasmine.createSpy('loadOptions', loadOptions).and.callThrough()
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -147,7 +147,7 @@ describe('Dynamical Loading', () => {
       }
       const spyForLoadOptions = jasmine.createSpy('loadOptions', loadOptions).and.callThrough()
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -213,7 +213,7 @@ describe('Dynamical Loading', () => {
       }
       const spyForLoadOptions = jasmine.createSpy('loadOptions', loadOptions).and.callThrough()
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -241,7 +241,7 @@ describe('Dynamical Loading', () => {
       let called = 0
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -320,7 +320,7 @@ describe('Dynamical Loading', () => {
     it('should override fallback nodes', async () => {
       const DELAY = 10
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -363,7 +363,7 @@ describe('Dynamical Loading', () => {
     it('multiple instances share the same `loadOptions` function', () => {
       const loadOptions = jasmine.createSpy('loadOptions')
       const { vm: vm1 } = mount(Treeselect, {
-        propsData: {
+        props: {
           instanceId: 1,
           loadOptions,
           options: [{
@@ -374,7 +374,7 @@ describe('Dynamical Loading', () => {
         },
       })
       const { vm: vm2 } = mount(Treeselect, {
-        propsData: {
+        props: {
           instanceId: 2,
           loadOptions,
           options: [{
@@ -411,7 +411,7 @@ describe('Dynamical Loading', () => {
         callback(new Error('test')) // this will be ignored
       }).and.callThrough()
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -431,7 +431,7 @@ describe('Dynamical Loading', () => {
       let called = false
       const DELAY = 10
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -474,7 +474,7 @@ describe('Dynamical Loading', () => {
         vm.toggleExpanded(vm.forest.nodeMap.a)
       }
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options,
           loadOptions({ action, parentNode, callback }) {
             if (action === 'LOAD_CHILDREN_OPTIONS') {
@@ -541,7 +541,7 @@ describe('Dynamical Loading', () => {
 
     it('should keep the highlighted state after loading children options', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -575,7 +575,7 @@ describe('Dynamical Loading', () => {
 
     it('load children options when doing local search', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'branch',
             label: 'branch',
@@ -618,7 +618,7 @@ describe('Dynamical Loading', () => {
     it('mounting the component should trigger loading root options', () => {
       const loadOptions = jasmine.createSpy()
       mount(Treeselect, {
-        propsData: {
+        props: {
           options: null,
           loadOptions,
         },
@@ -630,7 +630,7 @@ describe('Dynamical Loading', () => {
     it('with autoLoadRootOptions=false, opening the menu should trigger loading root options', async () => {
       const loadOptions = jasmine.createSpy()
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: null,
           loadOptions,
           autoLoadRootOptions: false,
@@ -880,7 +880,7 @@ describe('Dynamical Loading', () => {
     it('multiple instances share the same `loadOptions` function', async () => {
       const loadOptions = jasmine.createSpy('loadOptions')
       const { vm: vm1 } = mount(Treeselect, {
-        propsData: {
+        props: {
           instanceId: 1,
           loadOptions,
           options: null,
@@ -888,7 +888,7 @@ describe('Dynamical Loading', () => {
         },
       })
       const { vm: vm2 } = mount(Treeselect, {
-        propsData: {
+        props: {
           instanceId: 2,
           loadOptions,
           options: null,
@@ -917,7 +917,7 @@ describe('Dynamical Loading', () => {
 
     it('callback can be executed only once', async () => {
       const { vm } = mount(Treeselect, {
-        propsData: {
+        props: {
           loadOptions({ callback }) {
             callback(new Error('test'))
             callback() // this will be ignored

@@ -7,7 +7,7 @@ describe('Methods', () => {
   describe('toggleExpanded()', () => {
     it('basic', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -32,7 +32,7 @@ describe('Methods', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -79,7 +79,7 @@ describe('Methods', () => {
   it('focusInput() & blurInput()', async () => {
     const wrapper = mount(Treeselect, {
       attachTo: document.body,
-      propsData: {
+      props: {
         options: [],
         disabled: false,
         searchable: true,
@@ -103,7 +103,7 @@ describe('Methods', () => {
     const createInstance = appendToBody => {
       wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           appendToBody,
           options: [],
         },
@@ -153,7 +153,7 @@ describe('Methods', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
         },
       })
@@ -178,7 +178,7 @@ describe('Methods', () => {
     it('should close the menu', async () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           options: [],
         },
       })
@@ -199,7 +199,7 @@ describe('Methods', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -228,7 +228,7 @@ describe('Methods', () => {
   describe('removeLastValue()', () => {
     it('single-select', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           value: 'a',
           multiple: false,
           options: [{
@@ -251,7 +251,7 @@ describe('Methods', () => {
 
         beforeEach(() => {
           wrapper = mount(Treeselect, {
-            propsData: {
+            props: {
               flat: true,
               multiple: true,
               value: ['c', 'aaa', 'bb'],
@@ -311,7 +311,7 @@ describe('Methods', () => {
 
         beforeEach(() => {
           wrapper = mount(Treeselect, {
-            propsData: {
+            props: {
               multiple: true,
               value: ['a'],
               options: [{
@@ -391,7 +391,7 @@ describe('Methods', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',

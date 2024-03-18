@@ -7,7 +7,7 @@ describe('Control', () => {
     const wrapper = mount(Treeselect, {
       sync: false,
       attachTo: document.body,
-      propsData: {
+      props: {
         options: [],
       },
     })

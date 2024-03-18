@@ -7,7 +7,7 @@ import { UNCHECKED, INDETERMINATE, CHECKED } from '@src/constants'
 describe('Single-select', () => {
   it('basic', () => {
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         multiple: false,
         options: [{
           id: 'a',
@@ -46,7 +46,7 @@ describe('Single-select', () => {
   it('should blur the input after selecting an option when closeOnSelect=true & searchable=true', async () => {
     const wrapper = mount(Treeselect, {
       sync: false,
-      propsData: {
+      props: {
         options: [{
           id: 'a',
           label: 'a',
@@ -75,7 +75,7 @@ describe('Multi-select', () => {
 
   beforeEach(() => {
     wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         multiple: true,
         sortValueBy: 'ORDER_SELECTED',
         options: [{
@@ -708,7 +708,7 @@ describe('Disable Item Selection', () => {
   describe('Single-select', () => {
     it('basic', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           multiple: false,
           options: [{
             id: 'a',
@@ -731,7 +731,7 @@ describe('Disable Item Selection', () => {
 
     it('nested', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           multiple: false,
           options: [{
             id: 'a',
@@ -803,7 +803,7 @@ describe('Disable Item Selection', () => {
     describe('flat=false', () => {
       it('basic', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             options: [{
               id: 'a',
               label: 'a',
@@ -832,7 +832,7 @@ describe('Disable Item Selection', () => {
 
       it('disabled parent node', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             options: [{
               id: 'a',
               label: 'a',
@@ -945,7 +945,7 @@ describe('Disable Item Selection', () => {
 
       it('disabled child node', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             options: [{
               id: 'a',
               label: 'a',
@@ -1285,7 +1285,7 @@ describe('Disable Item Selection', () => {
 
       it('nested', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             options: [{
               id: 'a',
               label: 'a',
@@ -1381,7 +1381,7 @@ describe('Disable Item Selection', () => {
     describe('flat=true', () => {
       it('basic', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             flat: true,
             multiple: true,
             options: [{
@@ -1424,7 +1424,7 @@ describe('Disable Item Selection', () => {
 
       it('nested', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             flat: true,
             multiple: true,
             options: [{

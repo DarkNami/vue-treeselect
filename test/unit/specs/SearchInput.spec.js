@@ -5,7 +5,7 @@ import Treeselect from '@src/components/Treeselect'
 describe('Search Input', () => {
   it('should disable auto complete', () => {
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: [],
       },
     })
@@ -15,7 +15,7 @@ describe('Search Input', () => {
 
   it('should be unable to focus when disabled=true', () => {
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: [],
         autoFocus: false,
         searchable: true,
@@ -30,7 +30,7 @@ describe('Search Input', () => {
 
   it('when multiple=true, input should fit the width of user-input text', async () => {
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: [],
         multiple: true,
         searchable: true,

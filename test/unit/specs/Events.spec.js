@@ -25,7 +25,7 @@ describe('Events', () => {
 
     beforeEach(async () => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [a],
           instanceId: 'test',
           multiple: true,

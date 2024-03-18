@@ -9,7 +9,7 @@
 //   it('option-label', async () => {
 //     const getLabelText = nodeId => findLabelByNodeId(wrapper, nodeId).element.textContent.trim()
 //     const wrapper = mount(Treeselect, {
-//       propsData: {
+//       props: {
 //         options: [ {
 //           id: 'a',
 //           label: 'a',

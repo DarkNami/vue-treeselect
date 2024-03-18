@@ -31,7 +31,7 @@ describe('Keyboard Support', () => {
 
     keyPressors.forEach(keyPressor => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
         },
       })
@@ -47,7 +47,7 @@ describe('Keyboard Support', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -89,7 +89,7 @@ describe('Keyboard Support', () => {
   describe('enter key', () => {
     async function createInstance() {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           alwaysOpen: true,
           options: [{
             id: 'a',
@@ -175,7 +175,7 @@ describe('Keyboard Support', () => {
     // #208
     it('pressing enter key when there is no options should be no-op', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           alwaysOpen: true,
           options: [],
         },
@@ -193,7 +193,7 @@ describe('Keyboard Support', () => {
     beforeEach(() => {
       wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -230,7 +230,7 @@ describe('Keyboard Support', () => {
 
   describe('(home + end) keys', () => {
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: ['a', 'b', 'c'].map(major => ({
           id: major,
           label: major,
@@ -312,7 +312,7 @@ describe('Keyboard Support', () => {
 
     it('keyboard navigation', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           defaultExpandLevel: Infinity,
           options: [{
             id: 'a',
@@ -356,7 +356,7 @@ describe('Keyboard Support', () => {
 
     it('keyboard navigation when searching', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: ['a', 'b', 'c'].map(major => ({
             id: major,
             label: major,
@@ -386,7 +386,7 @@ describe('Keyboard Support', () => {
     it('keyboard navigation & delayed loading', async () => {
       const DELAY = 10
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -454,7 +454,7 @@ describe('Keyboard Support', () => {
 
     beforeEach(async () => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -598,7 +598,7 @@ describe('Keyboard Support', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -640,7 +640,7 @@ describe('Keyboard Support', () => {
   it('should ignore any key press combined with modifier key', () => {
     ['ctrlKey', 'shiftKey', 'metaKey', 'altKey'].forEach(modifierKey => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -658,7 +658,7 @@ describe('Keyboard Support', () => {
 
   it('any other key press should activate menu', () => {
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: [],
       },
     })

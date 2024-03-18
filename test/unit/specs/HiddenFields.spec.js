@@ -7,7 +7,7 @@ describe('Hidden Fields', () => {
 
   beforeEach(() => {
     wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: [],
       },
     })

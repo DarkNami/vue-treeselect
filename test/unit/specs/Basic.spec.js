@@ -8,7 +8,7 @@ describe('Basic', () => {
   describe('nodeMap', () => {
     it('should be able to obtain normalized node by id', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'id',
             label: 'label',
@@ -26,7 +26,7 @@ describe('Basic', () => {
   describe('normalized', () => {
     it('shape', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             // branch node
             id: 'a',
@@ -87,7 +87,7 @@ describe('Basic', () => {
 
     it('id & label', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -102,7 +102,7 @@ describe('Basic', () => {
 
     it('lowerCased', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'A',
@@ -177,7 +177,7 @@ describe('Basic', () => {
 
       it('flat=false', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             flat: false,
             multiple: true,
             options,
@@ -190,7 +190,7 @@ describe('Basic', () => {
 
       it('flat=true', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             flat: true,
             multiple: true,
             options,
@@ -203,7 +203,7 @@ describe('Basic', () => {
 
       it('should reinitialize options after value of `flat` prop changes', async () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             options,
           },
         })
@@ -222,7 +222,7 @@ describe('Basic', () => {
 
     it('hasDisabledDescendants', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           flat: true,
           multiple: true,
           options: [{
@@ -249,7 +249,7 @@ describe('Basic', () => {
 
     it('isLeaf & isBranch & childrenStates', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             // leaf node
             id: 'a',
@@ -301,7 +301,7 @@ describe('Basic', () => {
 
     it('isDefaultExpanded', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -334,7 +334,7 @@ describe('Basic', () => {
 
     it('isRootNode', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -354,7 +354,7 @@ describe('Basic', () => {
 
     it('parentNode & ancestors & level', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -387,7 +387,7 @@ describe('Basic', () => {
 
     it('index', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -434,7 +434,7 @@ describe('Basic', () => {
 
     it('count', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -491,7 +491,7 @@ describe('Basic', () => {
         children: [rawAa],
       }
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [rawA],
         },
       })
@@ -505,7 +505,7 @@ describe('Basic', () => {
 
   it('rootOptions', () => {
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: [{
           id: 'a',
           label: 'a',
@@ -531,7 +531,7 @@ describe('Basic', () => {
   describe('fallback node', () => {
     it('shape', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
         },
       })
@@ -561,7 +561,7 @@ describe('Basic', () => {
     describe('label', () => {
       it('extract label from value object', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             value: {
               id: 'id',
               label: 'label',
@@ -581,7 +581,7 @@ describe('Basic', () => {
 
       it('default label', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             value: 'a',
             options: [],
           },
@@ -601,7 +601,7 @@ describe('Basic', () => {
     [true, false].forEach(multiple => {
       [undefined, null].forEach(value => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             multiple,
             value,
             options: [{
@@ -628,7 +628,7 @@ describe('Basic', () => {
     spyOn(console, 'error')
 
     mount(Treeselect, {
-      propsData: {
+      props: {
         options: [{
           id: 'branch',
           label: 'branch',
@@ -649,7 +649,7 @@ describe('Basic', () => {
       spyOn(console, 'error')
 
       mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'same_id',
             label: 'a',
@@ -671,7 +671,7 @@ describe('Basic', () => {
       spyOn(console, 'error')
 
       mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'same_id',
             label: 'a',
@@ -733,7 +733,7 @@ describe('Basic', () => {
 
   it('should rebuild state after swithching from single to multiple', async () => {
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: [{
           id: 'a',
           label: 'a',
@@ -755,7 +755,7 @@ describe('Basic', () => {
 
   it('should rebuild state after value changed externally when multiple=true', async () => {
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: [{
           id: 'a',
           label: 'a',
@@ -820,7 +820,7 @@ describe('Basic', () => {
 
   it('an option should be rendered with its id in the markup', async () => {
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: [{
           id: 'a',
           label: 'a',

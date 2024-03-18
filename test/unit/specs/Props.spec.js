@@ -26,7 +26,7 @@ describe('Props', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           multiple: true,
           clearable: true,
           options: [{
@@ -108,7 +108,7 @@ describe('Props', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           multiple: true,
           options: [{
             id: 'a',
@@ -187,7 +187,7 @@ describe('Props', () => {
   describe('alwaysOpen', () => {
     it('should auto open the menu on mount', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           alwaysOpen: true,
         },
@@ -199,7 +199,7 @@ describe('Props', () => {
 
     it('should hide the arrow', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           alwaysOpen: true,
         },
@@ -211,7 +211,7 @@ describe('Props', () => {
 
     it('the menu should be unclosable', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           alwaysOpen: true,
         },
@@ -225,7 +225,7 @@ describe('Props', () => {
 
     it('when disabled=true, should not auto open the menu on mount', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           alwaysOpen: true,
           disabled: true,
@@ -238,7 +238,7 @@ describe('Props', () => {
 
     it('set disabled=true should close the already opened menu', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           alwaysOpen: true,
           disabled: false,
@@ -253,7 +253,7 @@ describe('Props', () => {
 
     it('set `disabled` from true to false should open the menu', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           alwaysOpen: true,
           disabled: true,
@@ -268,7 +268,7 @@ describe('Props', () => {
 
     it('should show the arrow when disabled', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           alwaysOpen: true,
           disabled: true,
@@ -280,7 +280,7 @@ describe('Props', () => {
 
     it('set `alwaysOpen` from `false` to `true` should open the menu and hide the arrow', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           alwaysOpen: false,
         },
@@ -295,7 +295,7 @@ describe('Props', () => {
 
     it('set `alwaysOpen` from `true` to `false` should close the menu and show the arrow', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           alwaysOpen: true,
         },
@@ -316,7 +316,7 @@ describe('Props', () => {
       const wrapper = mount(Treeselect, {
         sync: false,
         attachTo: document.body,
-        propsData: {
+        props: {
           appendToBody: true,
           options: [],
         },
@@ -335,7 +335,7 @@ describe('Props', () => {
       const wrapper = mount(Treeselect, {
         sync: false,
         attachTo: document.body,
-        propsData: {
+        props: {
           appendToBody: true,
           options: [],
         },
@@ -356,7 +356,7 @@ describe('Props', () => {
     it('should remove portal target when set back to `appendToBody: false`', async () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           appendToBody: false,
           options: [],
         },
@@ -379,7 +379,7 @@ describe('Props', () => {
     it('portaled menu should be functional', async () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           appendToBody: true,
           options: [{
             id: 'a',
@@ -406,7 +406,7 @@ describe('Props', () => {
     it('should set `z-index` on menu container when appendToBody=false', async () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           zIndex: 1,
           appendToBody: false,
           options: [],
@@ -425,7 +425,7 @@ describe('Props', () => {
     it('should set `z-index` on portal target when appendToBody=true', async () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           zIndex: 1,
           appendToBody: true,
           options: [],
@@ -450,7 +450,7 @@ describe('Props', () => {
       spyOn(console, 'error')
 
       mount(Treeselect, {
-        propsData: {
+        props: {
           async: true,
           searchable: false,
           loadOptions() { /* empty */ },
@@ -468,7 +468,7 @@ describe('Props', () => {
     it('should focus the search input on mount', () => {
       const wrapper = mount(Treeselect, {
         attachTo: document.body,
-        propsData: {
+        props: {
           options: [],
           autoFocus: true,
           searchable: true,
@@ -484,7 +484,7 @@ describe('Props', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           multiple: true,
           flat: true,
           options: [{
@@ -618,7 +618,7 @@ describe('Props', () => {
 
       function test(propName) {
         mount(Treeselect, {
-          propsData: {
+          props: {
             [propName]: true,
             multiple: true,
             options: [],
@@ -651,7 +651,7 @@ describe('Props', () => {
     it('the returned value determines whether to clear values', async () => {
       let shouldClear
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -674,7 +674,7 @@ describe('Props', () => {
     it('should support the callback returning a promise', async () => {
       let shouldClear
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -698,7 +698,7 @@ describe('Props', () => {
   describe('branchNodesFirst', () => {
     it('should place branch nodes ahead of leaf nodes when branchNodesFirst=true', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           branchNodesFirst: true,
           options: [{
             id: 'a',
@@ -734,7 +734,7 @@ describe('Props', () => {
 
     it('index', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -774,7 +774,7 @@ describe('Props', () => {
 
     it('should resort nodes after value of `branchNodesFirst` changes', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           branchNodesFirst: false,
           options: [{
             id: 'a',
@@ -816,7 +816,7 @@ describe('Props', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           multiple: false,
           clearable: true,
           options: [{ id: 'a', label: 'a' }],
@@ -856,7 +856,7 @@ describe('Props', () => {
   describe('clearAllText', () => {
     it('should be the title of "×" button when multiple=true', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           clearable: true,
           multiple: true,
           clearAllText: '$MULTI_TITLE$',
@@ -873,7 +873,7 @@ describe('Props', () => {
     describe('when multiple=false', () => {
       it('clears the input after selecting when clearOnSelect=true', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             clearOnSelect: true,
             multiple: false,
             options: [{ id: 'a', label: 'a' }],
@@ -889,7 +889,7 @@ describe('Props', () => {
 
       it('still clears the input after selecting even if clearOnSelect!=true', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             clearOnSelect: false,
             multiple: false,
             options: [{ id: 'a', label: 'a' }],
@@ -907,7 +907,7 @@ describe('Props', () => {
     describe('when multiple=true', () => {
       it('clears the input after selecting when clearOnSelect=true', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             clearOnSelect: true,
             multiple: true,
             options: [{ id: 'a', label: 'a' }],
@@ -923,7 +923,7 @@ describe('Props', () => {
 
       it("won't clear the input after selecting when clearOnSelect!=true", () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             clearOnSelect: false,
             multiple: true,
             options: [{ id: 'a', label: 'a' }],
@@ -942,7 +942,7 @@ describe('Props', () => {
   describe('clearValueText', () => {
     it('should be the title of "×" button when multiple=false', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           clearable: true,
           multiple: false,
           clearValueText: '$SINGLE_TITLE$',
@@ -959,7 +959,7 @@ describe('Props', () => {
     it('closes the menu after selecting when closeOnSelect=true', async () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           closeOnSelect: true,
           multiple: false,
           options: [{ id: 'a', label: 'a' }],
@@ -980,7 +980,7 @@ describe('Props', () => {
     it('keeps the menu open after selecting when closeOnSelect=false', async () => {
       const wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           closeOnSelect: false,
           multiple: false,
           searchable: true,
@@ -1004,7 +1004,7 @@ describe('Props', () => {
   describe('defaultExpandLevel', () => {
     it('when defaultExpandLevel=0', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -1021,7 +1021,7 @@ describe('Props', () => {
 
     it('when defaultExpandLevel=1', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -1043,7 +1043,7 @@ describe('Props', () => {
 
     it('when defaultExpandLevel=Infinity', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -1065,7 +1065,7 @@ describe('Props', () => {
 
     it('with `node.isDefaultExpanded`', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -1100,7 +1100,7 @@ describe('Props', () => {
       // TODO: 需要考虑服务端渲染的情况
       const loadOptions = jasmine.createSpy('loadOptions')
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           instanceId: 'test',
           options: [{
             id: 'a',
@@ -1139,7 +1139,7 @@ describe('Props', () => {
     beforeEach(() => {
       wrapper = mount(Treeselect, {
         sync: false,
-        propsData: {
+        props: {
           defaultExpandLevel: Infinity,
           flat: false,
           options: [{
@@ -1310,7 +1310,7 @@ describe('Props', () => {
   describe('disabled', () => {
     it('when disabled=false', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           searchable: true,
           disabled: false,
@@ -1324,7 +1324,7 @@ describe('Props', () => {
     describe('when disabled=true', () => {
       it('should hide the input but keep the input wrapper', () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             options: [],
             searchable: true,
             disabled: true,
@@ -1338,7 +1338,7 @@ describe('Props', () => {
       it('should close the menu when setting disabled from false to true', async () => {
         const wrapper = mount(Treeselect, {
           sync: false,
-          propsData: {
+          props: {
             options: [],
             disabled: false,
           },
@@ -1358,7 +1358,7 @@ describe('Props', () => {
       it('the control should reject all clicks', () => {
         const wrapper = mount(Treeselect, {
           attachTo: document.body,
-          propsData: {
+          props: {
             options: [],
             disabled: true,
           },
@@ -1374,7 +1374,7 @@ describe('Props', () => {
       it('the control should be non-focusable', () => {
         const wrapper = mount(Treeselect, {
           attachTo: document.body,
-          propsData: {
+          props: {
             options: [],
             disabled: true,
           },
@@ -1387,7 +1387,7 @@ describe('Props', () => {
 
       it('should be uanble to open the menu', async () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             options: [],
             disabled: true,
           },
@@ -1406,7 +1406,7 @@ describe('Props', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'jamesblunt',
             label: 'James Blunt',
@@ -1434,7 +1434,7 @@ describe('Props', () => {
       spyOn(console, 'error')
 
       mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           flat: true,
         },
@@ -1451,7 +1451,7 @@ describe('Props', () => {
     it('default value', () => {
       const createInstance = () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             options: [],
           },
         })
@@ -1469,7 +1469,7 @@ describe('Props', () => {
   describe('limit', () => {
     it('when limit=Infinity', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           multiple: true,
           limit: Infinity,
           value: ['a', 'b', 'c', 'd'],
@@ -1497,7 +1497,7 @@ describe('Props', () => {
 
     it('when limit=1', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           multiple: true,
           limit: 1,
           value: ['a', 'b', 'c', 'd'],
@@ -1528,7 +1528,7 @@ describe('Props', () => {
   describe('normalizer', () => {
     it('customizing key names', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             key: 'a',
             name: 'a',
@@ -1555,7 +1555,7 @@ describe('Props', () => {
 
     it('with fallback node', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           value: {
             key: 'a',
             name: 'a',
@@ -1590,7 +1590,7 @@ describe('Props', () => {
         label: node.name,
       })
       const { vm: vm1 } = mount(Treeselect, {
-        propsData: {
+        props: {
           instanceId: 1,
           options: [{
             key: 'a',
@@ -1600,7 +1600,7 @@ describe('Props', () => {
         },
       })
       const { vm: vm2 } = mount(Treeselect, {
-        propsData: {
+        props: {
           instanceId: 2,
           options: [{
             key: 'a',
@@ -1617,7 +1617,7 @@ describe('Props', () => {
     it('provide only the keys that need to be customized', () => {
       const normalizer = node => ({ id: node.key })
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           normalizer,
           options: [{
             key: 'a',
@@ -1643,7 +1643,7 @@ describe('Props', () => {
 
     it('with `loadOptions` prop', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             key: 'a', // customized key
             label: 'a',
@@ -1681,7 +1681,7 @@ describe('Props', () => {
       const wrapper = mount(Treeselect, {
         sync: false,
         attachTo: document.body,
-        propsData: {
+        props: {
           options: [],
           openOnClick: false,
         },
@@ -1705,7 +1705,7 @@ describe('Props', () => {
       const wrapper = mount(Treeselect, {
         sync: false,
         attachTo: document.body,
-        propsData: {
+        props: {
           options: [],
           openOnClick: true,
         },
@@ -1727,7 +1727,7 @@ describe('Props', () => {
       const wrapper = mount(Treeselect, {
         sync: false,
         attachTo: document.body,
-        propsData: {
+        props: {
           options: [],
           openOnFocus: false,
         },
@@ -1751,7 +1751,7 @@ describe('Props', () => {
     it('when openOnFocus=true', () => {
       const wrapper = mount(Treeselect, {
         attachTo: document.body,
-        propsData: {
+        props: {
           options: [],
           openOnFocus: true,
         },
@@ -1771,7 +1771,7 @@ describe('Props', () => {
         const wrapper = mount(Treeselect, {
           sync: false,
           attachTo: document.body,
-          propsData: {
+          props: {
             options: [],
             autoFocus: true,
             openOnFocus: false,
@@ -1787,7 +1787,7 @@ describe('Props', () => {
         const wrapper = mount(Treeselect, {
           sync: false,
           attachTo: document.body,
-          propsData: {
+          props: {
             options: [],
             autoFocus: true,
             openOnFocus: true,
@@ -1804,7 +1804,7 @@ describe('Props', () => {
   describe('options', () => {
     it('show tip when `options` is an empty array', async () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
         },
       })
@@ -1819,7 +1819,7 @@ describe('Props', () => {
     describe('should be reactive', () => {
       it('should override fallback node', async () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             options: [],
             value: 'a', // this creates a fallback node
           },
@@ -1864,7 +1864,7 @@ describe('Props', () => {
 
       it('should keep state', async () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             multiple: true,
             options: [{
               id: 'a',
@@ -1917,7 +1917,7 @@ describe('Props', () => {
 
       it('should keep the state of selected nodes even if they are not present in `nodeMap`', async () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             options: [{
               id: 'a',
               label: 'a',
@@ -1948,7 +1948,7 @@ describe('Props', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [{
             id: 'a',
             label: 'a',
@@ -1984,7 +1984,7 @@ describe('Props', () => {
       describe('when multiple=true', () => {
         it('should show input', () => {
           const wrapper = mount(Treeselect, {
-            propsData: {
+            props: {
               multiple: true,
               searchable: true,
               options: [],
@@ -2003,7 +2003,7 @@ describe('Props', () => {
       describe('when multiple=false', () => {
         it('should show input', () => {
           const wrapper = mount(Treeselect, {
-            propsData: {
+            props: {
               multiple: false,
               searchable: true,
               options: [],
@@ -2016,7 +2016,7 @@ describe('Props', () => {
 
       it('entering search query', async () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             searchable: true,
             options: [],
           },
@@ -2037,7 +2037,7 @@ describe('Props', () => {
 
       it('filtering', async () => {
         const wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             alwaysOpen: true,
             multiple: true,
             searchable: true,
@@ -2080,7 +2080,7 @@ describe('Props', () => {
       describe('when multiple=true', () => {
         it('should not show input but a placeholder', () => {
           const wrapper = mount(Treeselect, {
-            propsData: {
+            props: {
               multiple: true,
               searchable: false,
               options: [],
@@ -2095,7 +2095,7 @@ describe('Props', () => {
       describe('when multiple=false', () => {
         it('should not show input but a placeholder', () => {
           const wrapper = mount(Treeselect, {
-            propsData: {
+            props: {
               multiple: false,
               searchable: false,
               options: [],
@@ -2118,7 +2118,7 @@ describe('Props', () => {
 
     beforeEach(async () => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           alwaysOpen: true,
           options: [{
             id: 'a',
@@ -2185,7 +2185,7 @@ describe('Props', () => {
 
     beforeEach(() => {
       wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: generateOptions(4),
           multiple: true,
           flat: true,
@@ -2279,7 +2279,7 @@ describe('Props', () => {
   describe('tabIndex', () => {
     it('when disabled=false & searchable=true', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           searchable: true,
           disabled: false,
@@ -2294,7 +2294,7 @@ describe('Props', () => {
 
     it('when disabled=false & searchable=false', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           searchable: false,
           disabled: false,
@@ -2307,7 +2307,7 @@ describe('Props', () => {
 
     it('when disabled=true', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           disabled: true,
         },
@@ -2319,7 +2319,7 @@ describe('Props', () => {
 
     it('customized value', () => {
       const wrapper = mount(Treeselect, {
-        propsData: {
+        props: {
           options: [],
           searchable: true,
           disabled: false,
@@ -2338,7 +2338,7 @@ describe('Props', () => {
     describe('get internalValue', () => {
       beforeEach(() => {
         wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             multiple: true,
             options: [{
               id: 'a',
@@ -2431,7 +2431,7 @@ describe('Props', () => {
     describe('set value', () => {
       beforeEach(() => {
         wrapper = mount(Treeselect, {
-          propsData: {
+          props: {
             options: [{
               id: 'a',
               label: 'a',
@@ -3041,7 +3041,7 @@ describe('Props', () => {
   it('zIndex', async () => {
     const wrapper = mount(Treeselect, {
       sync: false,
-      propsData: {
+      props: {
         zIndex: 1,
         options: [],
       },

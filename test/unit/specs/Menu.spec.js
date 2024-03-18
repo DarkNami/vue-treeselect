@@ -13,7 +13,7 @@ describe('Menu', () => {
     const wrapper = mount(Treeselect, {
       sync: false,
       attachTo: document.body,
-      propsData: {
+      props: {
         options: [],
       },
     })
@@ -32,7 +32,7 @@ describe('Menu', () => {
   it('should open the menu after clicking the control when focused', () => {
     const wrapper = mount(Treeselect, {
       attachTo: document.body,
-      propsData: {
+      props: {
         options: [],
       },
     })
@@ -47,7 +47,7 @@ describe('Menu', () => {
     const wrapper = mount(Treeselect, {
       sync: false,
       attachTo: document.body,
-      propsData: {
+      props: {
         options: [{
           id: 'a',
           label: 'a',
@@ -71,7 +71,7 @@ describe('Menu', () => {
 
   it('should highlight the option when the cursor hovering over it', async () => {
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: [{
           id: 'a',
           label: 'a',
@@ -101,7 +101,7 @@ describe('Menu', () => {
   it('retain scroll position on menu reopen', async () => {
     const maxHeight = 100
     const wrapper = mount(Treeselect, {
-      propsData: {
+      props: {
         options: generateOptions(3),
         defaultExpandLevel: Infinity,
         maxHeight,
@@ -129,7 +129,7 @@ describe('Menu', () => {
   it('should reset the search box after closing menu', async () => {
     const wrapper = mount(Treeselect, {
       sync: false,
-      propsData: {
+      props: {
         options: [],
       },
     })
@@ -156,7 +156,7 @@ describe('Menu', () => {
   it('set appendToBody to true when alwaysOpen=true should not throw error', async () => {
     const wrapper = mount(Treeselect, {
       attachTo: document.body,
-      propsData: {
+      props: {
         options: [],
         alwaysOpen: true,
       },
