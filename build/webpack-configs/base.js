@@ -12,9 +12,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.vue'],
     alias: {
-      // use the full development build of Vue
-      // see: https://vuejs.org/v2/guide/installation.html#Explanation-of-Different-Builds
-      'vue$': 'vue/dist/vue',
       // for consistent docs
       '@riophae/vue-treeselect': utils.resolve('src'),
       // for shorter import path in tests
@@ -69,6 +66,9 @@ module.exports = {
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
       PKG_VERSION: JSON.stringify(require('../../package').version),
+      __VUE_OPTIONS_API__: 'true',
+      __VUE_PROD_DEVTOOLS__: 'false',
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false'
     }),
   ],
 
