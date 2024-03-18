@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import { mount } from '@vue/test-utils'
 import sleep from 'yaku/lib/sleep'
 import {
@@ -548,11 +548,13 @@ describe('Keyboard Support', () => {
 
   it('navigate when no options', async () => {
     const DELAY = 10
-    const wrapper = mount(Vue.extend({
+    const wrapper = mount(createApp({
       components: { Treeselect },
-      data: () => ({
-        options: null,
-      }),
+      data: function () {
+        return {
+          options: null,
+        }
+      },
       methods: {
         loadOptions({ callback }) {
           setTimeout(() => {

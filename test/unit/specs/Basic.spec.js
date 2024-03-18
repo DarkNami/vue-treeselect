@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import { mount } from '@vue/test-utils'
 import sleep from 'yaku/lib/sleep'
 import Treeselect from '@src/components/Treeselect'
@@ -695,20 +695,22 @@ describe('Basic', () => {
     spyOn(console, 'error')
 
     const DELAY = 10
-    const app = new Vue({
+    const app = createApp({
       components: { Treeselect },
-      data: {
-        value: 'a', // <- this creates a fallback node
-        options: null,
-        loadOptions({ callback }) {
-          setTimeout(() => {
-            app.options = [{
-              id: 'a',
-              label: 'a',
-            }]
-            callback()
-          }, DELAY)
-        },
+      data: function () {
+        return {
+          value: 'a', // <- this creates a fallback node
+          options: null,
+          loadOptions({ callback }) {
+            setTimeout(() => {
+              app.options = [{
+                id: 'a',
+                label: 'a',
+              }]
+              callback()
+            }, DELAY)
+          },
+        }
       },
       template: `
         <div>
@@ -719,7 +721,7 @@ describe('Basic', () => {
           />
         </div>
       `,
-    }).$mount()
+    }).mount()
     const vm = app.$children[0]
 
     expect(vm.forest.nodeMap.a.isFallbackNode).toBe(true)
@@ -782,17 +784,19 @@ describe('Basic', () => {
   it('v-model support', async () => {
     // vue-test-utils doesn't support testing v-model
     // so here we write vanila vue code
-    const vm = new Vue({
+    const vm = createApp({
       components: { Treeselect },
-      data: {
-        value: [],
-        options: [{
-          id: 'a',
-          label: 'a',
-        }, {
-          id: 'b',
-          label: 'b',
-        }],
+      data: function () {
+        return {
+          value: [],
+          options: [{
+            id: 'a',
+            label: 'a',
+          }, {
+            id: 'b',
+            label: 'b',
+          }],
+        }
       },
       template: `
         <div>
@@ -803,7 +807,7 @@ describe('Basic', () => {
           />
         </div>
       `,
-    }).$mount()
+    }).mount()
     const comp = vm.$children[0]
 
     comp.select(comp.forest.nodeMap.a)

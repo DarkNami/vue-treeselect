@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import { mount } from '@vue/test-utils'
 import sleep from 'yaku/lib/sleep'
 import {
@@ -665,12 +665,14 @@ describe('Dynamical Loading', () => {
         }, DELAY)
       }
       const spyForLoadOptions = jasmine.createSpy('loadOptions', loadOptions).and.callThrough()
-      const app = new Vue({
+      const app = createApp({
         components: { Treeselect },
-        data: {
-          options: null,
-          loadOptions: spyForLoadOptions,
-        },
+        data: function () {
+          return {
+            options: null,
+            loadOptions: spyForLoadOptions,
+          }
+        } ,
         template: `
           <div>
             <treeselect
@@ -680,7 +682,7 @@ describe('Dynamical Loading', () => {
               />
           </div>
         `,
-      }).$mount()
+      }).mount()
       const vm = app.$children[0]
 
       expect(vm.rootOptionsStates.isLoading).toBe(false)
@@ -733,11 +735,13 @@ describe('Dynamical Loading', () => {
         }, DELAY)
       }
       const spyForLoadOptions = jasmine.createSpy('loadOptions', loadOptions).and.callThrough()
-      const app = new Vue({
+      const app = createApp({
         components: { Treeselect },
-        data: {
-          options: null,
-          loadOptions: spyForLoadOptions,
+        data: function () {
+          return {
+            options: null,
+            loadOptions: spyForLoadOptions,
+          }
         },
         template: `
           <div>
@@ -748,7 +752,7 @@ describe('Dynamical Loading', () => {
               />
           </div>
         `,
-      }).$mount()
+      }).mount()
       const vm = app.$children[0]
       let menu
 
@@ -793,11 +797,13 @@ describe('Dynamical Loading', () => {
         }, DELAY)
       }
       const spyForLoadOptions = jasmine.createSpy('loadOptions', loadOptions).and.callThrough()
-      const app = new Vue({
+      const app = createApp({
         components: { Treeselect },
-        data: {
-          options: null,
-          loadOptions: spyForLoadOptions,
+        data: function () {
+          return {
+            options: null,
+            loadOptions: spyForLoadOptions,
+          }
         },
         template: `
           <div>
@@ -808,7 +814,7 @@ describe('Dynamical Loading', () => {
               />
           </div>
         `,
-      }).$mount()
+      }).mount()
       const vm = app.$children[0]
 
       vm.openMenu()
@@ -826,20 +832,22 @@ describe('Dynamical Loading', () => {
 
     it('should override fallback nodes', async () => {
       const DELAY = 10
-      const app = new Vue({
+      const app = createApp({
         components: { Treeselect },
-        data: {
-          options: null,
-          value: 'a', // <- this creates a fallback node
-          loadOptions({ callback }) {
-            setTimeout(() => {
-              app.options = [{
-                id: 'a',
-                label: 'a',
-              }]
-              callback()
-            }, DELAY)
-          },
+        data: function () {
+          return {
+            options: null,
+            value: 'a', // <- this creates a fallback node
+            loadOptions({ callback }) {
+              setTimeout(() => {
+                app.options = [{
+                  id: 'a',
+                  label: 'a',
+                }]
+                callback()
+              }, DELAY)
+            },
+          }
         },
         template: `
           <div>
@@ -851,7 +859,7 @@ describe('Dynamical Loading', () => {
               />
           </div>
         `,
-      }).$mount()
+      }).mount()
       const vm = app.$children[0]
 
       expect(vm.rootOptionsStates.isLoading).toBe(true)
@@ -927,22 +935,24 @@ describe('Dynamical Loading', () => {
     it('should accept promises', async () => {
       let called = false
       const DELAY = 10
-      const app = new Vue({
+      const app = createApp({
         components: { Treeselect },
-        data: {
-          options: null,
-          async loadOptions() {
-            await sleep(DELAY)
-            if (called) {
-              app.options = [{
-                id: 'a',
-                label: 'a',
-              }]
-            } else {
-              called = true
-              throw new Error('test')
-            }
-          },
+        data: function () {
+          return {
+            options: null,
+            async loadOptions() {
+              await sleep(DELAY)
+              if (called) {
+                app.options = [{
+                  id: 'a',
+                  label: 'a',
+                }]
+              } else {
+                called = true
+                throw new Error('test')
+              }
+            },
+          }
         },
         template: `
           <div>
@@ -953,7 +963,7 @@ describe('Dynamical Loading', () => {
               />
           </div>
         `,
-      }).$mount()
+      }).mount()
       const vm = app.$children[0]
 
       vm.openMenu()
@@ -971,21 +981,23 @@ describe('Dynamical Loading', () => {
 
     it('should highlight first option after loading root options', async () => {
       const DELAY = 10
-      const app = new Vue({
+      const app = createApp({
         components: { Treeselect },
-        data: {
-          options: null,
-          loadOptions({ action, callback }) {
-            if (action === 'LOAD_ROOT_OPTIONS') {
-              setTimeout(() => {
-                app.options = ['a', 'b', 'c'].map(option => ({
-                  id: option,
-                  label: option,
-                }))
-                callback()
-              }, DELAY)
-            }
-          },
+        data: function () {
+          return {
+            options: null,
+            loadOptions({ action, callback }) {
+              if (action === 'LOAD_ROOT_OPTIONS') {
+                setTimeout(() => {
+                  app.options = ['a', 'b', 'c'].map(option => ({
+                    id: option,
+                    label: option,
+                  }))
+                  callback()
+                }, DELAY)
+              }
+            },
+          }
         },
         template: `
           <div>
@@ -996,7 +1008,7 @@ describe('Dynamical Loading', () => {
               />
           </div>
         `,
-      }).$mount()
+      }).mount()
       const vm = app.$children[0]
 
       vm.openMenu()

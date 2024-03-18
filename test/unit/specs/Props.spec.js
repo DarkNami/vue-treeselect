@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import { mount } from '@vue/test-utils'
 import sleep from 'yaku/lib/sleep'
 import {
@@ -1842,16 +1842,18 @@ describe('Props', () => {
       })
 
       it('directly modify `options` prop should trigger reinitializing', async () => {
-        const vm = new Vue({
+        const vm = createApp({
           components: { Treeselect },
-          data: {
-            options: [{
-              id: 'a',
-              label: 'a',
-            }],
+          data: function () {
+            return {
+              options: [{
+                id: 'a',
+                label: 'a',
+              }],
+            }
           },
           template: `<div><treeselect :options="options" /></div>`,
-        }).$mount()
+        }).mount()
         const comp = vm.$children[0]
 
         // note that, this is directly modifying the original `options` array,
@@ -2834,17 +2836,19 @@ describe('Props', () => {
   describe('valueFormat', () => {
     describe('when valueFormat=id', () => {
       it('single-select', async () => {
-        const vm = new Vue({
+        const vm = createApp({
           components: { Treeselect },
-          data: {
-            value: 'a',
-            options: [{
-              id: 'a',
-              label: 'a',
-            }, {
-              id: 'b',
-              label: 'b',
-            }],
+          data: function () {
+            return {
+              value: 'a',
+              options: [{
+                id: 'a',
+                label: 'a',
+              }, {
+                id: 'b',
+                label: 'b',
+              }],
+            }
           },
           template: `
             <div>
@@ -2855,7 +2859,7 @@ describe('Props', () => {
               />
             </div>
           `,
-        }).$mount()
+        }).mount()
         const comp = vm.$children[0]
 
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
@@ -2867,17 +2871,19 @@ describe('Props', () => {
       })
 
       it('multi-select', async () => {
-        const vm = new Vue({
+        const vm = createApp({
           components: { Treeselect },
-          data: {
-            value: ['a'],
-            options: [{
-              id: 'a',
-              label: 'a',
-            }, {
-              id: 'b',
-              label: 'b',
-            }],
+          data: function () {
+            return {
+              value: ['a'],
+              options: [{
+                id: 'a',
+                label: 'a',
+              }, {
+                id: 'b',
+                label: 'b',
+              }],
+            }
           },
           template: `
             <div>
@@ -2889,7 +2895,7 @@ describe('Props', () => {
               />
             </div>
           `,
-        }).$mount()
+        }).mount()
         const comp = vm.$children[0]
 
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
@@ -2903,20 +2909,22 @@ describe('Props', () => {
 
     describe('when valueFormat=object', () => {
       it('single-select', async () => {
-        const vm = new Vue({
+        const vm = createApp({
           components: { Treeselect },
-          data: {
-            value: {
-              id: 'a',
-              label: 'a',
-            },
-            options: [{
-              id: 'a',
-              label: 'a',
-            }, {
-              id: 'b',
-              label: 'b',
-            }],
+          data: function () {
+            return {
+              value: {
+                id: 'a',
+                label: 'a',
+              },
+              options: [{
+                id: 'a',
+                label: 'a',
+              }, {
+                id: 'b',
+                label: 'b',
+              }],
+            }
           },
           template: `
             <div>
@@ -2927,7 +2935,7 @@ describe('Props', () => {
               />
             </div>
           `,
-        }).$mount()
+        }).mount()
         const comp = vm.$children[0]
 
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
@@ -2942,20 +2950,22 @@ describe('Props', () => {
       })
 
       it('multi-select', async () => {
-        const vm = new Vue({
+        const vm = createApp({
           components: { Treeselect },
-          data: {
-            value: [{
-              id: 'a',
-              label: 'a',
-            }],
-            options: [{
-              id: 'a',
-              label: 'a',
-            }, {
-              id: 'b',
-              label: 'b',
-            }],
+          data: function () {
+            return {
+              value: [{
+                id: 'a',
+                label: 'a',
+              }],
+              options: [{
+                id: 'a',
+                label: 'a',
+              }, {
+                id: 'b',
+                label: 'b',
+              }],
+            }
           },
           template: `
             <div>
@@ -2967,7 +2977,7 @@ describe('Props', () => {
               />
             </div>
           `,
-        }).$mount()
+        }).mount()
         const comp = vm.$children[0]
 
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
@@ -2985,22 +2995,24 @@ describe('Props', () => {
       })
 
       it('should return raw node object', async () => {
-        const vm = new Vue({
+        const vm = createApp({
           components: { Treeselect },
-          data: {
-            value: {
-              id: 'a',
-              label: 'a',
-            },
-            options: [{
-              id: 'a',
-              label: 'a',
-              _extra: 'a',
-            }, {
-              id: 'b',
-              label: 'b',
-              _extra: 'b',
-            }],
+          data: function () {
+            return {
+              value: {
+                id: 'a',
+                label: 'a',
+              },
+              options: [{
+                id: 'a',
+                label: 'a',
+                _extra: 'a',
+              }, {
+                id: 'b',
+                label: 'b',
+                _extra: 'b',
+              }],
+            }
           },
           template: `
             <div>
@@ -3011,7 +3023,7 @@ describe('Props', () => {
               />
             </div>
           `,
-        }).$mount()
+        }).mount()
         const comp = vm.$children[0]
 
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
