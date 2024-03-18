@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { leftClick, findCheckboxByNodeId, findLabelContainerByNodeId } from './shared'
 import Treeselect from '@src/components/Treeselect'
@@ -32,7 +33,7 @@ describe('Events', () => {
         },
       })
       wrapper.vm.openMenu()
-      await wrapper.vm.$nextTick()
+      await nextTick()
     })
 
     it('click on option label or checkbox', () => {

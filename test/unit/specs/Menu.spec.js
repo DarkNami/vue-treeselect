@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import {
   generateOptions,
@@ -19,7 +20,7 @@ describe('Menu', () => {
     const { vm } = wrapper
 
     vm.openMenu()
-    await vm.$nextTick()
+    await nextTick()
 
     const event = new Event('mousedown', { 'bubbles': true, 'cancelable': true })
 
@@ -58,7 +59,7 @@ describe('Menu', () => {
     const { a } = vm.forest.nodeMap
 
     vm.openMenu()
-    await vm.$nextTick()
+    await nextTick()
 
     expect(a.isExpanded).toBe(false)
     const optionArrow = findOptionByNodeId(wrapper, 'a').findComponent('.vue-treeselect__option-arrow-container')
@@ -83,7 +84,7 @@ describe('Menu', () => {
     const { vm } = wrapper
 
     vm.openMenu()
-    await vm.$nextTick()
+    await nextTick()
 
     expect(vm.menu.current).toBe('a')
     expect(vm.forest.nodeMap.a.isHighlighted).toBe(true)
@@ -114,14 +115,14 @@ describe('Menu', () => {
     const step = 20
     while (i--) {
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       const menu = findMenu(wrapper)
       expect(menu.element.scrollHeight).toBeGreaterThan(maxHeight)
       expect(menu.element.scrollTop).toBe(pos)
       pos += step
       menu.element.scrollBy(0, step)
       vm.closeMenu()
-      await vm.$nextTick()
+      await nextTick()
     }
   })
 
@@ -142,13 +143,13 @@ describe('Menu', () => {
     }
 
     vm.openMenu()
-    await vm.$nextTick()
+    await nextTick()
 
     await typeSearchText(wrapper, 'a')
     assertInputValue('a')
 
     vm.closeMenu()
-    await vm.$nextTick()
+    await nextTick()
     assertInputValue('')
   })
 

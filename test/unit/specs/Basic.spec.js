@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import sleep from 'yaku/lib/sleep'
 import Treeselect from '@src/components/Treeselect'
@@ -811,10 +811,10 @@ describe('Basic', () => {
     const comp = vm.$children[0]
 
     comp.select(comp.forest.nodeMap.a)
-    await comp.$nextTick()
+    await nextTick()
     expect(vm.value).toEqual(['a'])
     comp.select(comp.forest.nodeMap.a)
-    await comp.$nextTick()
+    await nextTick()
     expect(vm.value).toEqual([])
   })
 
@@ -834,7 +834,7 @@ describe('Basic', () => {
     })
 
     wrapper.vm.openMenu()
-    await wrapper.vm.$nextTick()
+    await nextTick()
 
     const optionsWrappers = wrapper.findAllComponents(Option).wrappers
     const a = optionsWrappers.find(optionWrapper => optionWrapper.vm.node.id === 'a')

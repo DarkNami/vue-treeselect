@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { typeSearchText } from './shared'
 import Treeselect from '@src/components/Treeselect'
@@ -89,10 +90,10 @@ describe('Methods', () => {
 
     expect(vm.trigger.isFocused).toBe(false)
     vm.focusInput()
-    await vm.$nextTick()
+    await nextTick()
     expect(vm.trigger.isFocused).toBe(true)
     vm.blurInput()
-    await vm.$nextTick()
+    await nextTick()
     expect(vm.trigger.isFocused).toBe(false)
   })
 
@@ -119,7 +120,7 @@ describe('Methods', () => {
       createInstance(false)
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       expect(vm.getMenu().classList).toContain('vue-treeselect__menu')
     })
@@ -128,7 +129,7 @@ describe('Methods', () => {
       createInstance(true)
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       expect(vm.getMenu().classList).toContain('vue-treeselect__menu')
     })
@@ -138,11 +139,11 @@ describe('Methods', () => {
       expect(vm.getMenu()).toBe(null)
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       expect(vm.getMenu().classList).toContain('vue-treeselect__menu')
 
       vm.closeMenu()
-      await vm.$nextTick()
+      await nextTick()
       expect(vm.getMenu()).toBe(null)
     })
   })
@@ -161,14 +162,14 @@ describe('Methods', () => {
 
     it('should activate the menu', async () => {
       wrapper.vm.openMenu()
-      await wrapper.vm.$nextTick()
+      await nextTick()
       expect(wrapper.vm.menu.isOpen).toBe(true)
     })
 
     it('should ignore when disabled=true', async () => {
       await wrapper.setProps({ disabled: true })
       wrapper.vm.openMenu()
-      await wrapper.vm.$nextTick()
+      await nextTick()
       expect(wrapper.vm.menu.isOpen).toBe(false)
     })
   })
@@ -184,11 +185,11 @@ describe('Methods', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       expect(wrapper.vm.menu.isOpen).toBe(true)
 
       vm.closeMenu()
-      await vm.$nextTick()
+      await nextTick()
       expect(wrapper.vm.menu.isOpen).toBe(false)
     })
   })
@@ -427,7 +428,7 @@ describe('Methods', () => {
 
     it('when current highlighted option not present in the list', async () => {
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       expect(vm.menu.current).toBe('a')
 

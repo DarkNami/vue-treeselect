@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import sleep from 'yaku/lib/sleep'
 import {
@@ -72,7 +72,7 @@ describe('Props', () => {
 
         it('clear() should only remove undisabled value', async () => {
           vm.clear()
-          await vm.$nextTick()
+          await nextTick()
           expect(vm.internalValue).toEqual(['a'])
           expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
         })
@@ -95,7 +95,7 @@ describe('Props', () => {
 
         it('clear() should completely reset value', async () => {
           vm.clear()
-          await vm.$nextTick()
+          await nextTick()
           expect(vm.internalValue).toEqual([])
           expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
         })
@@ -204,9 +204,8 @@ describe('Props', () => {
           alwaysOpen: true,
         },
       })
-      const { vm } = wrapper
 
-      await vm.$nextTick() // the arrow exists on first render
+      await nextTick() // the arrow exists on first render
       expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(false)
     })
 
@@ -220,7 +219,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       vm.closeMenu()
-      await vm.$nextTick()
+      await nextTick()
       expect(vm.menu.isOpen).toBe(true)
     })
 
@@ -325,7 +324,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       const portalTarget = findPortalTarget(vm)
       expect(portalTarget.classList).toContain('vue-treeselect')
@@ -344,12 +343,12 @@ describe('Props', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       expect(findPortalTarget(vm)).toBeTruthy()
 
       wrapper.destroy()
-      await vm.$nextTick()
+      await nextTick()
 
       expect(findPortalTarget(vm)).toBe(null)
     })
@@ -392,7 +391,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       const portalTarget = findPortalTarget(vm)
       const label = $('.vue-treeselect__label', portalTarget)
@@ -417,7 +416,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       const menuContainer = findMenuContainer(wrapper)
       expect(menuContainer.element.style.zIndex).toBe('1')
@@ -436,7 +435,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       const portalTarget = findPortalTarget(vm)
       expect(portalTarget.style.zIndex).toBe('1')
@@ -969,7 +968,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       const labelContainer = findLabelContainerByNodeId(wrapper, 'a')
 
@@ -991,7 +990,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       const labelContainer = findLabelContainerByNodeId(wrapper, 'a')
 
@@ -1158,14 +1157,14 @@ describe('Props', () => {
 
     const getLabelContainerOfBranchNode = async () => {
       vm.openMenu() // ensure the menu is opened otherwise the options won't be displayed
-      await vm.$nextTick()
+      await nextTick()
 
       return findLabelContainerByNodeId(wrapper, 'branch')
     }
 
     const getLabelContainerOfLeafNode = async () => {
       vm.openMenu() // ensure the menu is opened otherwise the options won't be displayed
-      await vm.$nextTick()
+      await nextTick()
 
       return findLabelContainerByNodeId(wrapper, 'leaf')
     }
@@ -1217,7 +1216,7 @@ describe('Props', () => {
       it('click on label of a branch node should close the dropdown when multiple=false & closeOnSelect=true', async () => {
         await wrapper.setProps({ multiple: false, closeOnSelect: true })
         vm.openMenu()
-        await vm.$nextTick()
+        await nextTick()
 
         expect(vm.menu.isOpen).toBe(true)
         await clickOnLabelOfBranchNode()
@@ -1265,7 +1264,7 @@ describe('Props', () => {
       it('click on label of a branch node should not close the dropdown when multiple=false & closeOnSelect=true', async () => {
         await wrapper.setProps({ multiple: false, closeOnSelect: true })
         vm.openMenu()
-        await vm.$nextTick()
+        await nextTick()
 
         expect(vm.menu.isOpen).toBe(true)
         await clickOnLabelOfBranchNode()
@@ -1274,7 +1273,7 @@ describe('Props', () => {
 
       it('should not auto-select ancestor nodes like flat mode', async () => {
         await wrapper.setProps({ multiple: true })
-        await vm.$nextTick()
+        await nextTick()
 
         vm.select(vm.forest.nodeMap.leaf)
         expect(vm.forest.checkedStateMap).toEqual({ branch: UNCHECKED, leaf: CHECKED })
@@ -1347,7 +1346,7 @@ describe('Props', () => {
         const { vm } = wrapper
 
         vm.openMenu()
-        await vm.$nextTick()
+        await nextTick()
 
         expect(wrapper.vm.menu.isOpen).toBe(true)
 
@@ -1396,7 +1395,7 @@ describe('Props', () => {
         const { vm } = wrapper
 
         wrapper.vm.openMenu()
-        await wrapper.vm.$nextTick()
+        await nextTick()
         expect(vm.menu.isOpen).toBe(false)
       })
     })
@@ -1672,7 +1671,7 @@ describe('Props', () => {
       const { vm } = wrapper
 
       vm.toggleExpanded(vm.forest.nodeMap.a)
-      await vm.$nextTick()
+      await nextTick()
       expect(vm.forest.nodeMap.a.children).toBeNonEmptyArray()
     })
   })
@@ -1740,7 +1739,7 @@ describe('Props', () => {
       expect(vm.menu.isOpen).toBe(false)
 
       wrapper.vm.focusInput()
-      await vm.$nextTick()
+      await nextTick()
       expect(vm.trigger.isFocused).toBe(true)
       expect(vm.menu.isOpen).toBe(false)
 
@@ -1859,7 +1858,7 @@ describe('Props', () => {
         // note that, this is directly modifying the original `options` array,
         // not creating a new `options` array.
         vm.options[0].label = 'xxx'
-        await vm.$nextTick()
+        await nextTick()
         expect(comp.forest.nodeMap.a.label).toBe('xxx')
       })
 
@@ -2060,7 +2059,7 @@ describe('Props', () => {
         })
         const { vm } = wrapper
 
-        await vm.$nextTick()
+        await nextTick()
 
         expect(vm.localSearch.noResults).toBe(true)
 
@@ -2146,7 +2145,7 @@ describe('Props', () => {
         },
       })
 
-      await wrapper.vm.$nextTick()
+      await nextTick()
     })
 
     it('when showCountOnSearch=false', async () => {
@@ -2865,7 +2864,7 @@ describe('Props', () => {
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
 
         comp.select(comp.forest.nodeMap.b)
-        await comp.$nextTick()
+        await nextTick()
         expect(comp.forest.selectedNodeIds).toEqual(['b'])
         expect(vm.value).toEqual('b')
       })
@@ -2901,7 +2900,7 @@ describe('Props', () => {
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
 
         comp.select(comp.forest.nodeMap.b)
-        await comp.$nextTick()
+        await nextTick()
         expect(comp.forest.selectedNodeIds).toEqual(['a', 'b'])
         expect(vm.value).toEqual(['a', 'b'])
       })
@@ -2941,7 +2940,7 @@ describe('Props', () => {
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
 
         comp.select(comp.forest.nodeMap.b)
-        await comp.$nextTick()
+        await nextTick()
         expect(comp.forest.selectedNodeIds).toEqual(['b'])
         expect(vm.value).toEqual({
           id: 'b',
@@ -2983,7 +2982,7 @@ describe('Props', () => {
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
 
         comp.select(comp.forest.nodeMap.b)
-        await comp.$nextTick()
+        await nextTick()
         expect(comp.forest.selectedNodeIds).toEqual(['a', 'b'])
         expect(vm.value).toEqual([{
           id: 'a',
@@ -3029,7 +3028,7 @@ describe('Props', () => {
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
 
         comp.select(comp.forest.nodeMap.b)
-        await comp.$nextTick()
+        await nextTick()
         expect(vm.value).toEqual({
           id: 'b',
           label: 'b',
@@ -3051,7 +3050,7 @@ describe('Props', () => {
     const { vm } = wrapper
 
     vm.openMenu()
-    await vm.$nextTick()
+    await nextTick()
 
     const menuContainer = findMenuContainer(wrapper)
 

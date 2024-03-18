@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import sleep from 'yaku/lib/sleep'
 import {
@@ -97,7 +97,7 @@ describe('Dynamical Loading', () => {
       let childrenOptionList
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       // children awaits to be loaded
       expect(vm.forest.nodeMap.a.children).toBeEmptyArray()
@@ -110,7 +110,7 @@ describe('Dynamical Loading', () => {
       vm.toggleExpanded(vm.forest.nodeMap.a)
       expect(spyForLoadOptions).toHaveBeenCalled()
       expect(vm.forest.nodeMap.a.childrenStates.isLoading).toBe(true)
-      await vm.$nextTick()
+      await nextTick()
       childrenOptionList = findChildrenOptionListByNodeId(wrapper, 'a')
       // show loading spinner
       expect(childrenOptionList.findComponent('.vue-treeselect__loading-tip').exists()).toBe(true)
@@ -161,7 +161,7 @@ describe('Dynamical Loading', () => {
       let childrenOptionList
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       // 1st try
       optionArrowContainer = findOptionArrowContainerByNodeId(wrapper, 'a')
@@ -294,7 +294,7 @@ describe('Dynamical Loading', () => {
 
       vm.toggleExpanded(vm.forest.nodeMap.a)
       expect(called).toBe(1)
-      await vm.$nextTick()
+      await nextTick()
       expect(vm.internalValue).toEqual(['a'])
       expect(vm.forest.selectedNodeIds).toEqual(['a', 'aa', 'ab'])
       expect(vm.forest.checkedStateMap).toEqual({
@@ -306,7 +306,7 @@ describe('Dynamical Loading', () => {
       vm.toggleExpanded(vm.forest.nodeMap.aa)
       expect(called).toBe(2)
       expect(vm.internalValue).toEqual(['a'])
-      await vm.$nextTick()
+      await nextTick()
       expect(vm.forest.selectedNodeIds).toEqual(['a', 'aa', 'ab', 'aaa', 'aab'])
       expect(vm.forest.checkedStateMap).toEqual({
         a: CHECKED,
@@ -508,7 +508,7 @@ describe('Dynamical Loading', () => {
 
       // reset branch node `a` to unloaded state by setting `children: null`
       options[0].children = null
-      await vm.$nextTick()
+      await nextTick()
       // the branch node `a` will be automatically collapsed by vue-treeselect
       expect(vm.forest.nodeMap.a.isExpanded).toBe(false)
       expect(vm.forest.nodeMap.a.childrenStates).toEqual({
@@ -530,7 +530,7 @@ describe('Dynamical Loading', () => {
       // reset the branch node `a` again, but this time it's no-op since the
       // branch node `a` is already at unloaded state
       options[0].children = null
-      await vm.$nextTick()
+      await nextTick()
       expect(vm.forest.nodeMap.a.isExpanded).toBe(true)
       expect(vm.forest.nodeMap.a.childrenStates).toEqual({
         isLoaded: false,
@@ -562,7 +562,7 @@ describe('Dynamical Loading', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       vm.setCurrentHighlightedOption(vm.forest.nodeMap.b)
       expect(vm.menu.current).toBe('b')
@@ -596,14 +596,14 @@ describe('Dynamical Loading', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       const menu = findMenu(wrapper)
 
       await typeSearchText(wrapper, 'branch')
       expect(vm.visibleOptionIds).toEqual(['branch'])
 
       vm.toggleExpanded(vm.forest.nodeMap.branch)
-      await vm.$nextTick()
+      await nextTick()
 
       expect(vm.forest.nodeMap.branch.childrenStates.isLoaded).toBe(true)
       expect(vm.visibleOptionIds).toEqual(['branch', 'leaf'])
@@ -640,7 +640,7 @@ describe('Dynamical Loading', () => {
 
       expect(loadOptions).not.toHaveBeenCalled()
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       expect(loadOptions).toHaveBeenCalled()
     })
 
@@ -688,7 +688,7 @@ describe('Dynamical Loading', () => {
       expect(vm.rootOptionsStates.isLoading).toBe(false)
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       const menu = vm.getMenu()
       expect(vm.rootOptionsStates.isLoading).toBe(true)
@@ -758,7 +758,7 @@ describe('Dynamical Loading', () => {
 
       // 1st try
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       expect(spyForLoadOptions.calls.count()).toBe(1)
       await sleep(DELAY)
       expect(vm.rootOptionsStates.isLoading).toBe(false)
@@ -770,9 +770,9 @@ describe('Dynamical Loading', () => {
 
       // 2nd try
       vm.closeMenu()
-      await vm.$nextTick()
+      await nextTick()
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       // reset state
       expect(vm.rootOptionsStates.loadingError).toBe('')
       await sleep(DELAY)
@@ -818,15 +818,15 @@ describe('Dynamical Loading', () => {
       const vm = app.$children[0]
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       expect(spyForLoadOptions.calls.count()).toBe(1)
 
       await sleep(DELAY / 2)
       expect(vm.rootOptionsStates.isLoading).toBe(true)
       vm.closeMenu()
-      await vm.$nextTick()
+      await nextTick()
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       expect(spyForLoadOptions.calls.count()).toBe(1)
     })
 
@@ -897,7 +897,7 @@ describe('Dynamical Loading', () => {
       })
 
       vm1.openMenu()
-      await vm1.$nextTick()
+      await nextTick()
       expect(loadOptions.calls.argsFor(0)).toEqual([{
         id: 1,
         instanceId: 1,
@@ -906,7 +906,7 @@ describe('Dynamical Loading', () => {
       }])
 
       vm2.openMenu()
-      await vm2.$nextTick()
+      await nextTick()
       expect(loadOptions.calls.argsFor(1)).toEqual([{
         id: 2,
         instanceId: 2,
@@ -928,7 +928,7 @@ describe('Dynamical Loading', () => {
       })
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       expect(vm.rootOptionsStates.loadingError).toBe('test')
     })
 
@@ -967,14 +967,14 @@ describe('Dynamical Loading', () => {
       const vm = app.$children[0]
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       await sleep(DELAY)
       expect(vm.rootOptionsStates.loadingError).toBe('test')
 
       vm.closeMenu()
-      await vm.$nextTick()
+      await nextTick()
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       await sleep(DELAY)
       expect(vm.rootOptionsStates.isLoaded).toBe(true)
     })
@@ -1012,7 +1012,7 @@ describe('Dynamical Loading', () => {
       const vm = app.$children[0]
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       expect(vm.rootOptionsStates.isLoading).toBe(true)
 

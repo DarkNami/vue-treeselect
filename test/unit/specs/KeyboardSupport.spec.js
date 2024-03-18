@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import sleep from 'yaku/lib/sleep'
 import {
@@ -110,7 +110,7 @@ describe('Keyboard Support', () => {
       })
       const { vm } = wrapper
 
-      await vm.$nextTick()
+      await nextTick()
 
       expect(vm.menu.isOpen).toBe(true)
       expect(vm.menu.current).toBe('a')
@@ -180,9 +180,8 @@ describe('Keyboard Support', () => {
           options: [],
         },
       })
-      const { vm } = wrapper
 
-      await vm.$nextTick()
+      await nextTick()
 
       pressEnterKey(wrapper)
     })
@@ -218,7 +217,7 @@ describe('Keyboard Support', () => {
 
     it('should close the menu if input is empty', async () => {
       wrapper.vm.openMenu()
-      await wrapper.vm.$nextTick()
+      await nextTick()
       expect(vm.trigger.searchQuery).toBe('')
       expect(vm.forest.selectedNodeIds).toEqual(['a', 'b'])
 
@@ -246,7 +245,7 @@ describe('Keyboard Support', () => {
 
     it('preparation', async () => {
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       vm.setCurrentHighlightedOption(vm.forest.nodeMap.b)
       expect(vm.menu.current).toBe('b')
     })
@@ -349,7 +348,7 @@ describe('Keyboard Support', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       expect(vm.menu.current).toBe('a')
       moveAround(wrapper, ['a', 'aa', 'ab', 'aba', 'abb', 'b', 'ba', 'baa'])
@@ -371,7 +370,7 @@ describe('Keyboard Support', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       expect(vm.menu.current).toBe('a')
 
@@ -412,7 +411,7 @@ describe('Keyboard Support', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       expect(vm.menu.current).toBe('a')
 
@@ -423,7 +422,7 @@ describe('Keyboard Support', () => {
       expect(vm.menu.current).toBe('a')
 
       pressArrowRight(wrapper)
-      await vm.$nextTick()
+      await nextTick()
       expect(vm.forest.nodeMap.a.childrenStates.isLoading).toBe(true)
 
       pressArrowDown(wrapper)
@@ -476,7 +475,7 @@ describe('Keyboard Support', () => {
       vm = wrapper.vm
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       expect(vm.menu.current).toBe('a')
     })
@@ -578,7 +577,7 @@ describe('Keyboard Support', () => {
     const { vm } = wrapper.findComponent(Treeselect)
 
     vm.openMenu()
-    await vm.$nextTick()
+    await nextTick()
 
     // operate before delayed loading completes
     pressHomeKey(wrapper)

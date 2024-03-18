@@ -1,3 +1,4 @@
+// import { nextTick } from 'vue'
 // import { mount } from '@vue/test-utils'
 // import Treeselect from '@src/components/Treeselect'
 // import { findLabelByNodeId } from './shared'
@@ -34,7 +35,7 @@
 //     const { vm } = wrapper
 //
 //     vm.openMenu()
-//     await vm.$nextTick()
+//     await nextTick()
 //
 //     expect(getLabelText('a')).toBe('Branch: a')
 //     expect(getLabelText('aa')).toBe('Leaf: aa')

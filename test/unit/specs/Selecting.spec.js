@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { leftClick, findLabelContainerByNodeId } from './shared'
 import Treeselect from '@src/components/Treeselect'
@@ -58,7 +59,7 @@ describe('Single-select', () => {
     const { vm } = wrapper
 
     vm.openMenu()
-    await vm.$nextTick()
+    await nextTick()
 
     const labelContainer = findLabelContainerByNodeId(wrapper, 'a')
 

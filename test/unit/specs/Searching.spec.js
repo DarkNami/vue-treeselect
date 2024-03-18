@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import sleep from 'yaku/lib/sleep'
 import { typeSearchText, findMenu, findVisibleOptions, findOptionByNodeId, findOptionArrowByNodeId } from './shared'
@@ -90,7 +91,7 @@ describe('Searching', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       // not rotated by default
       expectArrowToBeRotatedOrNot(false)
@@ -106,7 +107,7 @@ describe('Searching', () => {
 
       // manually toggle
       vm.toggleExpanded(vm.forest.nodeMap.a)
-      await vm.$nextTick()
+      await nextTick()
       expectArrowToBeRotatedOrNot(true)
 
       // search again
@@ -115,7 +116,7 @@ describe('Searching', () => {
 
       // manually toggle
       vm.toggleExpanded(vm.forest.nodeMap.a)
-      await vm.$nextTick()
+      await nextTick()
       expectArrowToBeRotatedOrNot(false)
 
       // exit search mode again
@@ -156,7 +157,7 @@ describe('Searching', () => {
 
       it('preparation', async () => {
         vm.openMenu()
-        await vm.$nextTick()
+        await nextTick()
         expect(vm.menu.isOpen).toBe(true)
       })
 
@@ -174,13 +175,13 @@ describe('Searching', () => {
         expect(vm.menu.isOpen).toBe(true)
         vm.toggleExpanded(vm.forest.nodeMap.branch)
         expect(vm.forest.nodeMap.branch.isExpandedOnSearch).toBe(true)
-        await vm.$nextTick()
+        await nextTick()
         expect(wrapper.findComponent('.vue-treeselect__option[data-id="aa"]').exists()).toBe(true)
         expect(wrapper.findComponent('.vue-treeselect__option[data-id="ab"]').exists()).toBe(true)
         expect(wrapper.findComponent('.vue-treeselect__option[data-id="ac"]').exists()).toBe(true)
         expect(vm.forest.nodeMap.ac.isExpandedOnSearch).toBe(false)
         vm.toggleExpanded(vm.forest.nodeMap.ac)
-        await vm.$nextTick()
+        await nextTick()
         expect(wrapper.findComponent('.vue-treeselect__option[data-id="aca"]').exists()).toBe(true)
       })
     })
@@ -207,7 +208,7 @@ describe('Searching', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       expect(vm.menu.current).toBe('a')
 
@@ -465,7 +466,7 @@ describe('Searching', () => {
     })
 
     wrapper.vm.openMenu()
-    await wrapper.vm.$nextTick()
+    await nextTick()
     await typeAndAssert('a', ['a', 'aa', 'ab'])
     await typeAndAssert('ab', ['ab'])
     await typeAndAssert('b', ['ab', 'b'])
@@ -494,7 +495,7 @@ describe('Searching', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       const menu = findMenu(wrapper)
 
       expect(menu.text().trim()).toBe('Type to search...')
@@ -546,7 +547,7 @@ describe('Searching', () => {
         const { vm } = wrapper
 
         vm.openMenu()
-        await vm.$nextTick()
+        await nextTick()
         const menu = findMenu(wrapper)
 
         expect(menu.text().includes('Type to search...')).toBe(false)
@@ -591,7 +592,7 @@ describe('Searching', () => {
         })
 
         vm.openMenu()
-        await vm.$nextTick()
+        await nextTick()
         const menu = findMenu(wrapper)
 
         expect(menu.text().trim()).toBe('Loading...')
@@ -630,7 +631,7 @@ describe('Searching', () => {
         const { vm } = wrapper
 
         vm.openMenu()
-        await vm.$nextTick()
+        await nextTick()
         const menu = findMenu(wrapper)
 
         expect(menu.text().trim()).toBe(searchPromptText)
@@ -667,14 +668,14 @@ describe('Searching', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       const menu = findMenu(wrapper)
 
       await typeSearchText(wrapper, 'keyword')
       expect(menu.text().trim().includes('test error')).toBe(true)
 
       menu.findComponent('.vue-treeselect__retry').trigger('click')
-      await vm.$nextTick()
+      await nextTick()
       expect(menu.text().trim().includes('keyword')).toBe(true)
     })
 
@@ -699,7 +700,7 @@ describe('Searching', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
       const menu = findMenu(wrapper)
 
       await typeSearchText(wrapper, 'a')
@@ -753,7 +754,7 @@ describe('Searching', () => {
       expect(vm.remoteSearch.b.isLoaded).toBe(true)
 
       vm.select(vm.forest.nodeMap.b)
-      await vm.$nextTick()
+      await nextTick()
       expect(vm.forest.selectedNodeIds).toEqual(['a', 'b'])
       expect(vm.forest.nodeMap.a).toEqual(jasmine.objectContaining({
         id: 'a',
@@ -873,20 +874,20 @@ describe('Searching', () => {
       await run([
         [0, async () => {
           const p = typeSearchText(wrapper, 'a')
-          await vm.$nextTick()
+          await nextTick()
           expect(calls).toEqual(['a'])
           return p
         }],
         [1 / 3, async () => {
           const p = typeSearchText(wrapper, 'b')
-          await vm.$nextTick()
+          await nextTick()
           expect(calls).toEqual(['a', 'b'])
           return p
         }],
         [2 / 3, async () => {
           expect(vm.remoteSearch.a.isLoading).toBe(true)
           const p = typeSearchText(wrapper, 'a')
-          await vm.$nextTick()
+          await nextTick()
           expect(calls).toEqual(['a', 'b'])
           return p
         }],
@@ -894,20 +895,20 @@ describe('Searching', () => {
           expect(vm.remoteSearch.a.isLoaded).toBe(true)
           expect(vm.remoteSearch.b.isLoading).toBe(true)
           const p = typeSearchText(wrapper, 'b')
-          await vm.$nextTick()
+          await nextTick()
           expect(calls).toEqual(['a', 'b'])
           return p
         }],
         [4 / 3, async () => {
           expect(vm.remoteSearch.b.isLoaded).toBe(true)
           const p = typeSearchText(wrapper, 'a')
-          await vm.$nextTick()
+          await nextTick()
           expect(calls).toEqual(['a', 'b', 'a'])
           return p
         }],
         [5 / 3, async () => {
           const p = typeSearchText(wrapper, 'b')
-          await vm.$nextTick()
+          await nextTick()
           expect(calls).toEqual(['a', 'b', 'a', 'b'])
           return p
         }],
@@ -937,7 +938,7 @@ describe('Searching', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       for (const keyword of keywords) {
         await typeSearchText(wrapper, keyword)
@@ -979,7 +980,7 @@ describe('Searching', () => {
       const { vm } = wrapper
 
       vm.openMenu()
-      await vm.$nextTick()
+      await nextTick()
 
       await typeSearchText(wrapper, 'random search query')
       await sleep(DELAY)
