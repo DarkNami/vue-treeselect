@@ -718,7 +718,7 @@ describe('Disable Item Selection', () => {
             id: 'b',
             label: 'b',
           }],
-          value: 'a',
+          modelValue: 'a',
         },
       })
       const { vm } = wrapper
@@ -817,7 +817,7 @@ describe('Disable Item Selection', () => {
               label: 'c',
             }],
             multiple: true,
-            value: ['a'],
+            modelValue: ['a'],
           },
         })
         const { vm } = wrapper
@@ -868,7 +868,7 @@ describe('Disable Item Selection', () => {
               }],
             }],
             multiple: true,
-            value: ['ba', 'c'],
+            modelValue: ['ba', 'c'],
           },
         })
         const { vm } = wrapper
@@ -998,7 +998,7 @@ describe('Disable Item Selection', () => {
               }],
             }],
             multiple: true,
-            value: ['aa', 'b', 'da'],
+            modelValue: ['aa', 'b', 'da'],
           },
         })
         const { vm } = wrapper
@@ -1314,7 +1314,7 @@ describe('Disable Item Selection', () => {
               }],
             }],
             multiple: true,
-            value: ['aa', 'aba'],
+            modelValue: ['aa', 'aba'],
           },
         })
         const { vm } = wrapper

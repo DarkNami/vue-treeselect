@@ -52,12 +52,12 @@ describe('Methods', () => {
     it('when multiple=false', async () => {
       await wrapper.setProps({ multiple: false })
 
-      await wrapper.setProps({ value: 'a' })
+      await wrapper.setProps({ modelValue: 'a' })
       vm.clear()
       expect(vm.internalValue).toEqual([])
 
       // Should clear disabled value.
-      await wrapper.setProps({ value: 'c' })
+      await wrapper.setProps({ modelValue: 'c' })
       vm.clear()
       expect(vm.internalValue).toEqual([])
     })
@@ -65,12 +65,12 @@ describe('Methods', () => {
     it('when multiple=true', async () => {
       await wrapper.setProps({ multiple: true })
 
-      await wrapper.setProps({ value: ['a', 'b'] })
+      await wrapper.setProps({ modelValue: ['a', 'b'] })
       vm.clear()
       expect(vm.internalValue).toEqual([])
 
       // Should not clear disabled value.
-      await wrapper.setProps({ value: ['a', 'b', 'c'] })
+      await wrapper.setProps({ modelValue: ['a', 'b', 'c'] })
       vm.clear()
       expect(vm.internalValue).toEqual(['c'])
     })
@@ -229,7 +229,7 @@ describe('Methods', () => {
     it('single-select', () => {
       const wrapper = mount(Treeselect, {
         props: {
-          value: 'a',
+          modelValue: 'a',
           multiple: false,
           options: [{
             id: 'a',
@@ -254,7 +254,7 @@ describe('Methods', () => {
             props: {
               flat: true,
               multiple: true,
-              value: ['c', 'aaa', 'bb'],
+              modelValue: ['c', 'aaa', 'bb'],
               options: ['a', 'b', 'c'].map(letter => ({
                 id: letter,
                 label: letter,
@@ -313,7 +313,7 @@ describe('Methods', () => {
           wrapper = mount(Treeselect, {
             props: {
               multiple: true,
-              value: ['a'],
+              modelValue: ['a'],
               options: [{
                 id: 'a',
                 label: 'a',

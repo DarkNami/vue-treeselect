@@ -498,8 +498,8 @@ describe('Basic', () => {
       const { vm } = wrapper
       const { a, aa } = vm.forest.nodeMap
 
-      expect(a.raw).toBe(rawA)
-      expect(aa.raw).toBe(rawAa)
+      expect(a.raw).toEqual(rawA)
+      expect(aa.raw).toEqual(rawAa)
     })
   })
 
@@ -538,7 +538,7 @@ describe('Basic', () => {
       const { vm } = wrapper
 
       expect(vm.forest.nodeMap).toBeEmptyObject()
-      await wrapper.setProps({ value: 'test' })
+      await wrapper.setProps({ modelValue: 'test' })
       expect(vm.forest.nodeMap.test).toEqual({
         id: jasmine.any(String),
         label: jasmine.any(String),
@@ -562,7 +562,7 @@ describe('Basic', () => {
       it('extract label from value object', () => {
         const wrapper = mount(Treeselect, {
           props: {
-            value: {
+            modelValue: {
               id: 'id',
               label: 'label',
             },
@@ -582,7 +582,7 @@ describe('Basic', () => {
       it('default label', () => {
         const wrapper = mount(Treeselect, {
           props: {
-            value: 'a',
+            modelValue: 'a',
             options: [],
           },
         })
@@ -743,7 +743,7 @@ describe('Basic', () => {
           }],
         }],
         multiple: false,
-        value: ['a'],
+        modelValue: ['a'],
       },
     })
     const { vm } = wrapper
@@ -765,7 +765,7 @@ describe('Basic', () => {
           }],
         }],
         multiple: true,
-        value: [],
+        modelValue: [],
       },
     })
     const { vm } = wrapper
@@ -774,7 +774,7 @@ describe('Basic', () => {
       a: 0,
       aa: 0,
     })
-    await wrapper.setProps({ value: ['a'] })
+    await wrapper.setProps({ modelValue: ['a'] })
     expect(vm.forest.checkedStateMap).toEqual({
       a: 2,
       aa: 2,

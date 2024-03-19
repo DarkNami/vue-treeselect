@@ -57,7 +57,7 @@ describe('Keyboard Support', () => {
           }],
           multiple: true,
           backspaceRemoves: true,
-          value: ['a', 'b'],
+          modelValue: ['a', 'b'],
         },
       })
 
@@ -202,7 +202,7 @@ describe('Keyboard Support', () => {
             label: 'b',
           }],
           multiple: true,
-          value: ['a', 'b'],
+          modelValue: ['a', 'b'],
         },
       })
       vm = wrapper.vm
@@ -608,7 +608,7 @@ describe('Keyboard Support', () => {
           }],
           multiple: true,
           deleteRemoves: true,
-          value: ['a', 'b'],
+          modelValue: ['a', 'b'],
         },
       })
 
@@ -647,7 +647,7 @@ describe('Keyboard Support', () => {
           }],
           multiple: true,
           escapeClearsValue: true,
-          value: ['a'],
+          modelValue: ['a'],
         },
       })
 

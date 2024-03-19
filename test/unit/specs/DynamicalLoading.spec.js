@@ -326,7 +326,7 @@ describe('Dynamical Loading', () => {
             label: 'a',
             children: null,
           }],
-          value: 'aa', // <- this creates a fallback node
+          modelValue: 'aa', // <- this creates a fallback node
           loadOptions({ parentNode, callback }) {
             setTimeout(() => {
               parentNode.children = [{

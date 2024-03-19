@@ -53,7 +53,7 @@ describe('Props', () => {
 
       describe('when all selected nodes are disabled', () => {
         beforeEach(async () => {
-          await wrapper.setProps({ value: ['a', 'c'] })
+          await wrapper.setProps({ modelValue: ['a', 'c'] })
         })
 
         it('should hide "×" button', () => {
@@ -63,7 +63,7 @@ describe('Props', () => {
 
       describe('when not all selected nodes are disabled', () => {
         beforeEach(async () => {
-          await wrapper.setProps({ value: ['a', 'b'] })
+          await wrapper.setProps({ modelValue: ['a', 'b'] })
         })
 
         it('should show "×" button ', () => {
@@ -86,7 +86,7 @@ describe('Props', () => {
 
       describe('when all selected nodes are disabled', () => {
         beforeEach(async () => {
-          await wrapper.setProps({ value: ['a', 'c'] })
+          await wrapper.setProps({ modelValue: ['a', 'c'] })
         })
 
         it('should show "×" button', () => {
@@ -141,13 +141,13 @@ describe('Props', () => {
       })
 
       it('should not also select disabled descendants', async () => {
-        await wrapper.setProps({ value: [] })
+        await wrapper.setProps({ modelValue: [] })
         vm.select(vm.forest.nodeMap.a)
         expect(vm.internalValue).toEqual(['ac'])
       })
 
       it('should not also deselect disabled descendants', async () => {
-        await wrapper.setProps({ value: ['a'] })
+        await wrapper.setProps({ modelValue: ['a'] })
         vm.select(vm.forest.nodeMap.a)
         expect(vm.internalValue).toEqual(['aa', 'ab'])
       })
@@ -159,25 +159,25 @@ describe('Props', () => {
       })
 
       it('should also select disabled descendants', async () => {
-        await wrapper.setProps({ value: [] })
+        await wrapper.setProps({ modelValue: [] })
         vm.select(vm.forest.nodeMap.a)
         expect(vm.internalValue).toEqual(['a'])
       })
 
       it('should also deselect disabled descendants', async () => {
-        await wrapper.setProps({ value: ['a'] })
+        await wrapper.setProps({ modelValue: ['a'] })
         vm.select(vm.forest.nodeMap.a)
         expect(vm.internalValue).toEqual([])
       })
 
       it('disabled branch nodes are still unselectable', async () => {
-        await wrapper.setProps({ value: [] })
+        await wrapper.setProps({ modelValue: [] })
         vm.select(vm.forest.nodeMap.aa)
         expect(vm.internalValue).toEqual([])
       })
 
       it('disabled branch nodes are still undeselectable', async () => {
-        await wrapper.setProps({ value: ['aa'] })
+        await wrapper.setProps({ modelValue: ['aa'] })
         vm.select(vm.forest.nodeMap.aa)
         expect(vm.internalValue).toEqual(['aa'])
       })
@@ -528,7 +528,7 @@ describe('Props', () => {
     it('autoSelectAncestors', async () => {
       await wrapper.setProps({
         autoSelectAncestors: true,
-        value: ['aa'],
+        modelValue: ['aa'],
       })
       expect(vm.internalValue).toEqual(['aa'])
 
@@ -539,7 +539,7 @@ describe('Props', () => {
     it('autoSelectAncestors + disabled nodes', async () => {
       await wrapper.setProps({
         autoSelectAncestors: true,
-        value: [],
+        modelValue: [],
       })
       expect(vm.internalValue).toEqual([])
 
@@ -550,7 +550,7 @@ describe('Props', () => {
     it('autoSelectDescendants', async () => {
       await wrapper.setProps({
         autoSelectDescendants: true,
-        value: ['aa'],
+        modelValue: ['aa'],
       })
       expect(vm.internalValue).toEqual(['aa'])
 
@@ -561,7 +561,7 @@ describe('Props', () => {
     it('autoSelectDescendants + disabled nodes', async () => {
       await wrapper.setProps({
         autoSelectDescendants: true,
-        value: [],
+        modelValue: [],
       })
       expect(vm.internalValue).toEqual([])
 
@@ -572,7 +572,7 @@ describe('Props', () => {
     it('autoDeselectAncestors', async () => {
       await wrapper.setProps({
         autoDeselectAncestors: true,
-        value: ['aa', 'aaa', 'aab'],
+        modelValue: ['aa', 'aaa', 'aab'],
       })
       expect(vm.internalValue).toEqual(['aa', 'aaa', 'aab'])
 
@@ -583,7 +583,7 @@ describe('Props', () => {
     it('autoDeselectAncestors + disabled nodes', async () => {
       await wrapper.setProps({
         autoDeselectAncestors: true,
-        value: ['b', 'ba', 'baa'],
+        modelValue: ['b', 'ba', 'baa'],
       })
       expect(vm.internalValue).toEqual(['b', 'ba', 'baa'])
 
@@ -594,7 +594,7 @@ describe('Props', () => {
     it('autoDeselectDescendants', async () => {
       await wrapper.setProps({
         autoDeselectDescendants: true,
-        value: ['a', 'aaa', 'aab'],
+        modelValue: ['a', 'aaa', 'aab'],
       })
       expect(vm.internalValue).toEqual(['a', 'aaa', 'aab'])
 
@@ -605,7 +605,7 @@ describe('Props', () => {
     it('autoDeselectDescendants + disabled nodes', async () => {
       await wrapper.setProps({
         autoDeselectDescendants: true,
-        value: ['b', 'ba', 'baa'],
+        modelValue: ['b', 'ba', 'baa'],
       })
       expect(vm.internalValue).toEqual(['b', 'ba', 'baa'])
 
@@ -656,7 +656,7 @@ describe('Props', () => {
             id: 'a',
             label: 'a',
           }],
-          value: 'a',
+          modelValue: 'a',
           beforeClearAll: () => shouldClear,
         },
       })
@@ -679,7 +679,7 @@ describe('Props', () => {
             id: 'a',
             label: 'a',
           }],
-          value: 'a',
+          modelValue: 'a',
           beforeClearAll: () => Promise.resolve(shouldClear),
         },
       })
@@ -820,7 +820,7 @@ describe('Props', () => {
           multiple: false,
           clearable: true,
           options: [{ id: 'a', label: 'a' }],
-          value: 'a',
+          modelValue: 'a',
         },
       })
       vm = wrapper.vm
@@ -838,7 +838,7 @@ describe('Props', () => {
     })
 
     it('should hide when no options selected', async () => {
-      await wrapper.setProps({ value: null })
+      await wrapper.setProps({ modelValue: null })
       expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
     })
 
@@ -861,7 +861,7 @@ describe('Props', () => {
           multiple: true,
           clearAllText: '$MULTI_TITLE$',
           options: [{ id: 'a', label: 'a' }],
-          value: ['a'],
+          modelValue: ['a'],
         },
       })
 
@@ -947,7 +947,7 @@ describe('Props', () => {
           multiple: false,
           clearValueText: '$SINGLE_TITLE$',
           options: [{ id: 'a', label: 'a' }],
-          value: 'a',
+          modelValue: 'a',
         },
       })
 
@@ -1294,7 +1294,7 @@ describe('Props', () => {
             await wrapper.setProps({
               multiple: true,
               valueConsistsOf,
-              value: ['leaf'],
+              modelValue: ['leaf'],
             })
             expect(vm.forest.checkedStateMap).toEqual({ branch: UNCHECKED, leaf: CHECKED })
             expect(vm.forest.selectedNodeMap).toEqual({ leaf: true })
@@ -1472,7 +1472,7 @@ describe('Props', () => {
         props: {
           multiple: true,
           limit: Infinity,
-          value: ['a', 'b', 'c', 'd'],
+          modelValue: ['a', 'b', 'c', 'd'],
           options: [{
             id: 'a',
             label: 'a',
@@ -1500,7 +1500,7 @@ describe('Props', () => {
         props: {
           multiple: true,
           limit: 1,
-          value: ['a', 'b', 'c', 'd'],
+          modelValue: ['a', 'b', 'c', 'd'],
           options: [{
             id: 'a',
             label: 'a',
@@ -1556,7 +1556,7 @@ describe('Props', () => {
     it('with fallback node', () => {
       const wrapper = mount(Treeselect, {
         props: {
-          value: {
+          modelValue: {
             key: 'a',
             name: 'a',
           },
@@ -1821,7 +1821,7 @@ describe('Props', () => {
         const wrapper = mount(Treeselect, {
           props: {
             options: [],
-            value: 'a', // this creates a fallback node
+            modelValue: 'a', // this creates a fallback node
           },
         })
         const { vm } = wrapper
@@ -1874,7 +1874,7 @@ describe('Props', () => {
                 label: 'aa',
               }],
             }],
-            value: ['a'],
+            modelValue: ['a'],
           },
         })
         const { vm } = wrapper
@@ -1922,7 +1922,7 @@ describe('Props', () => {
               id: 'a',
               label: 'a',
             }],
-            value: 'a',
+            modelValue: 'a',
           },
         })
         const { vm } = wrapper
@@ -1966,14 +1966,14 @@ describe('Props', () => {
       })
 
       it('the input should not have `required` attribute if value is present', async () => {
-        await wrapper.setProps({ value: 'a', required: true })
+        await wrapper.setProps({ modelValue: 'a', required: true })
         expect(input.attributes()).not.toHaveMember('required')
       })
     })
 
     describe('when required=false', () => {
       it('the input should not have `required` attribute even if value is present', async () => {
-        await wrapper.setProps({ value: 'a', required: false })
+        await wrapper.setProps({ modelValue: 'a', required: false })
         expect(input.attributes()).not.toHaveMember('required')
       })
     })
@@ -2238,7 +2238,7 @@ describe('Props', () => {
     it('should re-sort value after prop value changes', async () => {
       await wrapper.setProps({
         sortValueBy: 'ORDER_SELECTED',
-        value: ['bb', 'c', 'aaa'],
+        modelValue: ['bb', 'c', 'aaa'],
       })
 
       await wrapper.setProps({ sortValueBy: 'INDEX' })
@@ -2252,25 +2252,25 @@ describe('Props', () => {
     it('more cases', async () => {
       await wrapper.setProps({
         sortValueBy: 'INDEX',
-        value: ['aa', 'aaa'],
+        modelValue: ['aa', 'aaa'],
       })
       expect(vm.internalValue).toEqual(['aa', 'aaa'])
 
       await wrapper.setProps({
         sortValueBy: 'INDEX',
-        value: ['aaa', 'aa'],
+        modelValue: ['aaa', 'aa'],
       })
       expect(vm.internalValue).toEqual(['aa', 'aaa'])
 
       await wrapper.setProps({
         sortValueBy: 'INDEX',
-        value: ['aa', 'bb'],
+        modelValue: ['aa', 'bb'],
       })
       expect(vm.internalValue).toEqual(['aa', 'bb'])
 
       await wrapper.setProps({
         sortValueBy: 'INDEX',
-        value: ['bb', 'aa'],
+        modelValue: ['bb', 'aa'],
       })
       expect(vm.internalValue).toEqual(['aa', 'bb'])
     })
@@ -2372,7 +2372,7 @@ describe('Props', () => {
               label: 'b',
               children: [],
             }],
-            value: ['aa'],
+            modelValue: ['aa'],
           },
         })
         vm = wrapper.vm
@@ -2474,7 +2474,7 @@ describe('Props', () => {
             await wrapper.setProps({ multiple: false })
             const values = ['aaa', 'aa', 'ab', 'a', 'b', 'c']
             for (let i = 0; i < values.length; ++i) {
-              await wrapper.setProps({ value: values[i] })
+              await wrapper.setProps({ modelValue: values[i] })
               expect(vm.internalValue).toEqual([values[i]])
               expect(vm.forest.selectedNodeIds).toEqual([values[i]])
             }
@@ -2490,7 +2490,7 @@ describe('Props', () => {
         it('when valueConsistsOf=ALL', async () => {
           await wrapper.setProps({ valueConsistsOf: ALL })
 
-          await wrapper.setProps({ value: [] })
+          await wrapper.setProps({ modelValue: [] })
           expect(vm.internalValue).toEqual([])
           expect(vm.forest.selectedNodeIds).toEqual([])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2503,7 +2503,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['ab'] })
+          await wrapper.setProps({ modelValue: ['ab'] })
           expect(vm.internalValue).toEqual(['ab'])
           expect(vm.forest.selectedNodeIds).toEqual(['ab'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2516,7 +2516,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['aa', 'aaa', 'aab'] })
+          await wrapper.setProps({ modelValue: ['aa', 'aaa', 'aab'] })
           expect(vm.internalValue).toEqual(['aa', 'aaa', 'aab'])
           expect(vm.forest.selectedNodeIds).toEqual(['aa', 'aaa', 'aab'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2529,7 +2529,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['b', 'aa', 'aaa', 'aab', 'a', 'ab'] })
+          await wrapper.setProps({ modelValue: ['b', 'aa', 'aaa', 'aab', 'a', 'ab'] })
           expect(vm.internalValue).toEqual(['b', 'aa', 'aaa', 'aab', 'a', 'ab'])
           expect(vm.forest.selectedNodeIds).toEqual(['b', 'aa', 'aaa', 'aab', 'a', 'ab'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2542,7 +2542,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['c'] })
+          await wrapper.setProps({ modelValue: ['c'] })
           expect(vm.internalValue).toEqual(['c'])
           expect(vm.forest.selectedNodeIds).toEqual(['c'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2559,7 +2559,7 @@ describe('Props', () => {
         it('when valueConsistsOf=BRANCH_PRIORITY', async () => {
           await wrapper.setProps({ valueConsistsOf: BRANCH_PRIORITY })
 
-          await wrapper.setProps({ value: [] })
+          await wrapper.setProps({ modelValue: [] })
           expect(vm.internalValue).toEqual([])
           expect(vm.forest.selectedNodeIds).toEqual([])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2572,7 +2572,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['ab'] })
+          await wrapper.setProps({ modelValue: ['ab'] })
           expect(vm.internalValue).toEqual(['ab'])
           expect(vm.forest.selectedNodeIds).toEqual(['ab'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2585,7 +2585,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['aaa'] })
+          await wrapper.setProps({ modelValue: ['aaa'] })
           expect(vm.internalValue).toEqual(['aaa'])
           expect(vm.forest.selectedNodeIds).toEqual(['aaa'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2598,7 +2598,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['aa'] })
+          await wrapper.setProps({ modelValue: ['aa'] })
           expect(vm.internalValue).toEqual(['aa'])
           expect(vm.forest.selectedNodeIds).toEqual(['aa', 'aaa', 'aab'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2611,7 +2611,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['a'] })
+          await wrapper.setProps({ modelValue: ['a'] })
           expect(vm.internalValue).toEqual(['a'])
           expect(vm.forest.selectedNodeIds).toEqual(['a', 'aa', 'ab', 'aaa', 'aab'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2624,7 +2624,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['aaa', 'ab', 'b'] })
+          await wrapper.setProps({ modelValue: ['aaa', 'ab', 'b'] })
           expect(vm.internalValue).toEqual(['aaa', 'ab', 'b'])
           expect(vm.forest.selectedNodeIds).toEqual(['aaa', 'ab', 'b'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2637,7 +2637,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['b', 'aa'] })
+          await wrapper.setProps({ modelValue: ['b', 'aa'] })
           expect(vm.internalValue).toEqual(['b', 'aa'])
           expect(vm.forest.selectedNodeIds).toEqual(['b', 'aa', 'aaa', 'aab'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2650,7 +2650,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['b', 'aab'] })
+          await wrapper.setProps({ modelValue: ['b', 'aab'] })
           expect(vm.internalValue).toEqual(['b', 'aab'])
           expect(vm.forest.selectedNodeIds).toEqual(['b', 'aab'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2663,7 +2663,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['c'] })
+          await wrapper.setProps({ modelValue: ['c'] })
           expect(vm.internalValue).toEqual(['c'])
           expect(vm.forest.selectedNodeIds).toEqual(['c'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2680,7 +2680,7 @@ describe('Props', () => {
         it('when valueConsistsOf=LEAF_PRIORITY', async () => {
           await wrapper.setProps({ valueConsistsOf: LEAF_PRIORITY })
 
-          await wrapper.setProps({ value: [] })
+          await wrapper.setProps({ modelValue: [] })
           expect(vm.internalValue).toEqual([])
           expect(vm.forest.selectedNodeIds).toEqual([])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2693,7 +2693,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['ab'] })
+          await wrapper.setProps({ modelValue: ['ab'] })
           expect(vm.internalValue).toEqual(['ab'])
           expect(vm.forest.selectedNodeIds).toEqual(['ab'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2706,7 +2706,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['aab'] })
+          await wrapper.setProps({ modelValue: ['aab'] })
           expect(vm.internalValue).toEqual(['aab'])
           expect(vm.forest.selectedNodeIds).toEqual(['aab'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2719,7 +2719,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['aab', 'aaa'] })
+          await wrapper.setProps({ modelValue: ['aab', 'aaa'] })
           expect(vm.internalValue).toEqual(['aab', 'aaa'])
           expect(vm.forest.selectedNodeIds).toEqual(['aab', 'aaa', 'aa'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2732,7 +2732,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['aaa', 'ab', 'aab'] })
+          await wrapper.setProps({ modelValue: ['aaa', 'ab', 'aab'] })
           expect(vm.internalValue).toEqual(['aaa', 'ab', 'aab'])
           expect(vm.forest.selectedNodeIds).toEqual(['aaa', 'ab', 'aab', 'aa', 'a'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2745,7 +2745,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['c'] })
+          await wrapper.setProps({ modelValue: ['c'] })
           expect(vm.internalValue).toEqual(['c'])
           expect(vm.forest.selectedNodeIds).toEqual(['c'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2762,7 +2762,7 @@ describe('Props', () => {
         it('when valueConsistsOf=ALL_WITH_INDETERMINATE', async () => {
           await wrapper.setProps({ valueConsistsOf: ALL_WITH_INDETERMINATE })
 
-          await wrapper.setProps({ value: [] })
+          await wrapper.setProps({ modelValue: [] })
           expect(vm.internalValue).toEqual([])
           expect(vm.forest.selectedNodeIds).toEqual([])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2775,7 +2775,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['ab'] })
+          await wrapper.setProps({ modelValue: ['ab'] })
           expect(vm.internalValue).toEqual(['ab', 'a'])
           expect(vm.forest.selectedNodeIds).toEqual(['ab'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2788,7 +2788,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['aa', 'aaa', 'a'] })
+          await wrapper.setProps({ modelValue: ['aa', 'aaa', 'a'] })
           expect(vm.internalValue).toEqual(['aaa', 'aa', 'a'])
           expect(vm.forest.selectedNodeIds).toEqual(['aaa'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2801,7 +2801,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['a', 'aa', 'aaa', 'aab'] })
+          await wrapper.setProps({ modelValue: ['a', 'aa', 'aaa', 'aab'] })
           expect(vm.internalValue).toEqual(['aaa', 'aab', 'aa', 'a'])
           expect(vm.forest.selectedNodeIds).toEqual(['aaa', 'aab', 'aa'])
           expect(vm.forest.checkedStateMap).toEqual({
@@ -2814,7 +2814,7 @@ describe('Props', () => {
             c: UNCHECKED,
           })
 
-          await wrapper.setProps({ value: ['c'] })
+          await wrapper.setProps({ modelValue: ['c'] })
           expect(vm.internalValue).toEqual(['c'])
           expect(vm.forest.selectedNodeIds).toEqual(['c'])
           expect(vm.forest.checkedStateMap).toEqual({

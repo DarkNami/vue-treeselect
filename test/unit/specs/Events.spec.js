@@ -29,7 +29,7 @@ describe('Events', () => {
           options: [a],
           instanceId: 'test',
           multiple: true,
-          value: ['ab'],
+          modelValue: ['ab'],
         },
       })
       wrapper.vm.openMenu()
@@ -54,7 +54,7 @@ describe('Events', () => {
     })
 
     it('click on value remove icon', async () => {
-      await wrapper.setProps({ value: ['a'] })
+      await wrapper.setProps({ modelValue: ['a'] })
 
       // click on "×" of a
       leftClick(wrapper.findComponent('.vue-treeselect__value-remove'))
@@ -64,5 +64,4 @@ describe('Events', () => {
     })
   })
 
-  // TODO
 })
