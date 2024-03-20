@@ -13,8 +13,9 @@
       },
     },
 
-    render(props, context) {
-      const { children } = context
+    render() {
+      const props = this.$props;
+      const children = this.$slots.default();
 
       return (
         <div class={`vue-treeselect__tip vue-treeselect__${props.type}-tip`}>

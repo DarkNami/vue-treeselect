@@ -47,11 +47,11 @@
         this.value = newValue
       },
 
-      value() {
+      modelValue() {
         // istanbul ignore else
         if (this.needAutoSize) {
           nextTick(() => {
-            this.updateInputWidth
+            this.updateInputWidth()
           })
         }
       },

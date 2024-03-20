@@ -873,7 +873,7 @@ export default {
       this.$emit('search-change', this.trigger.searchQuery, this.getInstanceId())
     },
 
-    value() {
+    modelValue() {
       const nodeIdsFromValue = this.extractCheckedNodeIdsFromValue()
       const hasChanged = quickDiff(nodeIdsFromValue, this.internalValue)
       if (hasChanged) this.fixSelectedNodeIds(nodeIdsFromValue)
@@ -1390,7 +1390,7 @@ export default {
         } else {
           // istanbul ignore next
           nextTick(() => {
-            scrollToOption
+            scrollToOption()
           })
         }
       }
@@ -1455,8 +1455,10 @@ export default {
       if (this.disabled || this.menu.isOpen) return
       this.menu.isOpen = true
       nextTick(() => {
-        this.resetHighlightedOptionWhenNecessary
-        this.restoreMenuScrollPosition
+        this.resetHighlightedOptionWhenNecessary()
+      })
+      nextTick(() => {
+        this.restoreMenuScrollPosition()
       })
       if (!this.options && !this.async) this.loadRootOptions()
       this.toggleClickOutsideEvent(true)

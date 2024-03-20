@@ -1,5 +1,5 @@
 <script lang="jsx">
-  import { nextTick } from 'vue'
+  import { nextTick, Transition } from 'vue'
   import { MENU_BUFFER } from '../constants'
   import { watchSize, setupResizeAndScrollEventListeners } from '../utils'
   import Option from './Option'
@@ -15,7 +15,7 @@
   export default {
     name: 'vue-treeselect--menu',
     inject: [ 'instance' ],
-
+    components: { Transition },
     computed: {
       menuStyle() {
         const { instance } = this
@@ -39,7 +39,7 @@
         if (newValue) {
           // In case `openMenu()` is just called and the menu is not rendered yet.
           nextTick(() => {
-            this.onMenuOpen
+            this.onMenuOpen()
           })
         } else {
           this.onMenuClose()
@@ -57,7 +57,7 @@
 
       if (instance.menu.isOpen) {
         nextTick(() => {
-          this.onMenuOpen
+          this.onMenuOpen()
         })
       }
     },

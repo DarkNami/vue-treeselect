@@ -13,8 +13,8 @@
     name: 'vue-treeselect--hidden-fields',
     inject: [ 'instance' ],
 
-    render(props, context) {
-      const { instance } = context.injections
+    render() {
+      const { instance } = this
 
       if (!instance.name || instance.disabled || !instance.hasValue) return null
 
