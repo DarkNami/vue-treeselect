@@ -7,20 +7,6 @@
     name: 'vue-treeselect--portal-target',
     inject: [ 'instance' ],
 
-    watch: {
-      'instance.menu.isOpen'(newValue) {
-        if (newValue) {
-          this.setupHandlers()
-        } else {
-          this.removeHandlers()
-        }
-      },
-
-      'instance.menu.placement'() {
-        this.updateMenuContainerOffset()
-      },
-    },
-
     created() {
       this.controlResizeAndScrollEventListeners = null
       this.controlSizeWatcher = null
@@ -28,8 +14,17 @@
 
     mounted() {
       const { instance } = this
-
       if (instance.menu.isOpen) this.setupHandlers()
+      this.$watch('instance.menu.isOpen', (newValue) => {
+        if (newValue) {
+          this.setupHandlers()
+        } else {
+          this.removeHandlers()
+        }
+      })
+      this.$watch('instance.menu.placement', () => {
+        this.updateMenuContainerOffset()
+      })
     },
 
     methods: {
@@ -135,32 +130,23 @@
     inject: [ 'instance' ],
 
     created() {
+      this.portalEl = null
       this.portalTarget = null
     },
 
     mounted() {
-      this.setup()
+      this.portalEl = document.createElement('div')
+      document.body.appendChild(this.portalEl)
+      const app = createApp({...PortalTarget})
+      app.provide('instance', this.instance)
+      app.mount(this.portalEl)
+      this.portalTarget = app
     },
 
     unmounted() {
-      this.teardown()
-    },
-
-    methods: {
-      setup() {
-        const el = document.createElement('div')
-        document.body.appendChild(el)
-        const app = createApp(PortalTarget)
-        app.provide('instance', this.instance)
-        this.portalTarget = app.mount(el)
-      },
-
-      teardown() {
-        document.body.removeChild(this.portalTarget.$el)
-        this.portalTarget.$el.innerHTML = ''
-
-        this.portalTarget = null
-      },
+      this.portalTarget.unmount()
+      document.body.removeChild(this.portalEl)
+      this.portalTarget = null
     },
 
     render() {
