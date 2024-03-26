@@ -34,19 +34,6 @@
       },
     },
 
-    watch: {
-      'instance.menu.isOpen'(newValue) {
-        if (newValue) {
-          // In case `openMenu()` is just called and the menu is not rendered yet.
-          nextTick(() => {
-            this.onMenuOpen()
-          })
-        } else {
-          this.onMenuClose()
-        }
-      },
-    },
-
     created() {
       this.menuSizeWatcher = null
       this.menuResizeAndScrollEventListeners = null
@@ -60,6 +47,16 @@
           this.onMenuOpen()
         })
       }
+      this.$watch('instance.menu.isOpen', (newValue) => {
+        if (newValue) {
+          // In case `openMenu()` is just called and the menu is not rendered yet.
+          nextTick(() => {
+            this.onMenuOpen()
+          })
+        } else {
+          this.onMenuClose()
+        }
+      })
     },
 
     unmounted() {
