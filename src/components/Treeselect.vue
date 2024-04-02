@@ -1,9 +1,10 @@
 <script lang="jsx">
+  import { Teleport } from 'vue'
   import treeselectMixin from '../mixins/treeselectMixin'
   import HiddenFields from './HiddenFields'
   import Control from './Control'
   import Menu from './Menu'
-  import MenuPortal from './MenuPortal'
+  import PortalTarget from './PortalTarget'
 
   export default {
     name: 'vue-treeselect',
@@ -33,7 +34,15 @@
         <div ref="wrapper" class={this.wrapperClass}>
           <HiddenFields />
           <Control ref="control" />
-          {this.appendToBody ? <MenuPortal ref="portal" /> : <Menu ref="menu" />}
+          {
+            this.appendToBody ? (
+              <div class="vue-treeselect__menu-placeholder">
+                <Teleport to="body"><PortalTarget ref="portaltarget" /></Teleport>
+              </div>
+            ) : (
+              <Menu ref="menu" />
+            )
+          }
         </div>
       )
     },
