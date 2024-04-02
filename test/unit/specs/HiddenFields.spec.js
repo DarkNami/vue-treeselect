@@ -17,7 +17,7 @@ describe('Hidden Fields', () => {
     wrapper.unmount()
   })
 
-  const getHiddenFields = () => wrapper.findAllComponents('input[type="hidden"]')
+  const getHiddenFields = () => wrapper.findAll('input[type="hidden"]')
 
   it('must have value & name', async () => {
     await wrapper.setProps({ modelValue: 'value' })
@@ -39,7 +39,7 @@ describe('Hidden Fields', () => {
     await wrapper.setProps({ name: 'multiple', multiple: true, modelValue: [1, 2, 3] })
     const hiddenFields = getHiddenFields()
     expect(hiddenFields.length).toBe(3)
-    expect(hiddenFields.wrappers.map(hf => hf.html())).toEqual([
+    expect(hiddenFields.map(hf => hf.html())).toEqual([
       '<input type="hidden" name="multiple" value="1">',
       '<input type="hidden" name="multiple" value="2">',
       '<input type="hidden" name="multiple" value="3">',

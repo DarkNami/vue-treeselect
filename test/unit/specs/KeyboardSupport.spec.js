@@ -1,4 +1,4 @@
-import { createApp, nextTick } from 'vue'
+import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import sleep from 'yaku/lib/sleep'
 import {
@@ -547,7 +547,7 @@ describe('Keyboard Support', () => {
 
   it('navigate when no options', async () => {
     const DELAY = 10
-    const wrapper = mount(createApp({
+    const wrapper = mount({
       components: { Treeselect },
       data: function () {
         return {
@@ -571,7 +571,7 @@ describe('Keyboard Support', () => {
           />
         </div>
       `,
-    }), {
+    }, {
       sync: false,
     })
     const { vm } = wrapper.findComponent(Treeselect)

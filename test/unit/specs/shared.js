@@ -116,19 +116,19 @@ export async function typeSearchText(wrapper, text) {
 }
 
 export function findInputContainer(wrapper) {
-  return wrapper.findComponent('.vue-treeselect__input-container')
+  return wrapper.find('.vue-treeselect__input-container')
 }
 
 export function findInput(wrapper) {
-  return wrapper.findComponent('.vue-treeselect__input')
+  return wrapper.find('.vue-treeselect__input')
 }
 
 export function findMenuContainer(wrapper) {
-  return wrapper.findComponent('.vue-treeselect__menu-container')
+  return wrapper.find('.vue-treeselect__menu-container')
 }
 
 export function findMenu(wrapper) {
-  return wrapper.findComponent('.vue-treeselect__menu')
+  return wrapper.find('.vue-treeselect__menu')
 }
 
 export function findVisibleOptions(wrapper) {
@@ -136,31 +136,31 @@ export function findVisibleOptions(wrapper) {
 }
 
 export function findOptionByNodeId(wrapper, nodeId) {
-  return wrapper.findComponent(`.vue-treeselect__option[data-id="${nodeId}"]`)
+  return wrapper.find(`.vue-treeselect__option[data-id="${nodeId}"]`)
 }
 
 export function findOptionArrowContainerByNodeId(wrapper, nodeId) {
-  return findOptionByNodeId(wrapper, nodeId).findComponent('.vue-treeselect__option-arrow-container')
+  return findOptionByNodeId(wrapper, nodeId).find('.vue-treeselect__option-arrow-container')
 }
 
 export function findOptionArrowByNodeId(wrapper, nodeId) {
-  return findOptionByNodeId(wrapper, nodeId).findComponent('.vue-treeselect__option-arrow')
+  return findOptionByNodeId(wrapper, nodeId).find('.vue-treeselect__option-arrow')
 }
 
 export function findCheckboxByNodeId(wrapper, nodeId) {
-  return findOptionByNodeId(wrapper, nodeId).findComponent('.vue-treeselect__checkbox')
+  return findOptionByNodeId(wrapper, nodeId).find('.vue-treeselect__checkbox')
 }
 
 export function findLabelContainerByNodeId(wrapper, nodeId) {
-  return findOptionByNodeId(wrapper, nodeId).findComponent('.vue-treeselect__label-container')
+  return findOptionByNodeId(wrapper, nodeId).find('.vue-treeselect__label-container')
 }
 
 export function findLabelByNodeId(wrapper, nodeId) {
-  return findOptionByNodeId(wrapper, nodeId).findComponent('.vue-treeselect__label')
+  return findOptionByNodeId(wrapper, nodeId).find('.vue-treeselect__label')
 }
 
 export function findChildrenOptionListByNodeId(wrapper, nodeId) {
-  return wrapper.findAllComponents(Option).wrappers
+  return wrapper.findAllComponents(Option)
     .find(optionWrapper => optionWrapper.vm.node.id === nodeId)
-    .findComponent('.vue-treeselect__list')
+    .find('.vue-treeselect__list')
 }

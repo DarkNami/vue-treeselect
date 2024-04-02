@@ -113,7 +113,7 @@ describe('Dynamical Loading', () => {
       await nextTick()
       childrenOptionList = findChildrenOptionListByNodeId(wrapper, 'a')
       // show loading spinner
-      expect(childrenOptionList.findComponent('.vue-treeselect__loading-tip').exists()).toBe(true)
+      expect(childrenOptionList.find('.vue-treeselect__loading-tip').exists()).toBe(true)
 
       // wait for `callback()` to be called
       await sleep(DELAY)
@@ -123,7 +123,7 @@ describe('Dynamical Loading', () => {
       expect(vm.forest.nodeMap.a.childrenStates.isLoading).toBe(false)
       childrenOptionList = findChildrenOptionListByNodeId(wrapper, 'a')
       // loading spinner should be hidden
-      expect(childrenOptionList.findComponent('.vue-treeselect__loading-tip').exists()).toBe(false)
+      expect(childrenOptionList.find('.vue-treeselect__loading-tip').exists()).toBe(false)
       // children options just loaded should be rendered
       expect(childrenOptionList.element.contains(findOptionByNodeId(wrapper, 'aa').element)).toBe(true)
     })
@@ -170,13 +170,13 @@ describe('Dynamical Loading', () => {
       await sleep(DELAY)
       childrenOptionList = findChildrenOptionListByNodeId(wrapper, 'a')
       // should show error tip
-      expect(childrenOptionList.findComponent('.vue-treeselect__error-tip').exists()).toBe(true)
-      const errorText = childrenOptionList.findComponent('.vue-treeselect__error-tip-text').text()
+      expect(childrenOptionList.find('.vue-treeselect__error-tip').exists()).toBe(true)
+      const errorText = childrenOptionList.find('.vue-treeselect__error-tip-text').text()
       expect(errorText.includes(ERROR_MESSAGE)).toBe(true)
       expect(vm.forest.nodeMap.a.childrenStates.loadingError).toBe(ERROR_MESSAGE)
 
       // 2nd try - click on retry
-      const retry = wrapper.findComponent('.vue-treeselect__retry')
+      const retry = wrapper.find('.vue-treeselect__retry')
       leftClick(retry)
       expect(spyForLoadOptions.calls.count()).toBe(2)
       // should reset state
@@ -185,7 +185,7 @@ describe('Dynamical Loading', () => {
       await sleep(DELAY)
       childrenOptionList = findChildrenOptionListByNodeId(wrapper, 'a')
       // still shows the error tip
-      expect(childrenOptionList.findComponent('.vue-treeselect__error-tip').exists()).toBe(true)
+      expect(childrenOptionList.find('.vue-treeselect__error-tip').exists()).toBe(true)
 
       // 3nd try - collapse & re-expand
       optionArrowContainer = findOptionArrowContainerByNodeId(wrapper, 'a')
@@ -195,7 +195,7 @@ describe('Dynamical Loading', () => {
       await sleep(DELAY)
       childrenOptionList = findChildrenOptionListByNodeId(wrapper, 'a')
       // the error tip should be hidden
-      expect(childrenOptionList.findComponent('.vue-treeselect__error-tip').exists()).toBe(false)
+      expect(childrenOptionList.find('.vue-treeselect__error-tip').exists()).toBe(false)
       // the children options just loaded should be shown
       expect(childrenOptionList.element.contains(findOptionByNodeId(wrapper, 'aa').element)).toBe(true)
     })
@@ -342,7 +342,7 @@ describe('Dynamical Loading', () => {
         },
       })
       const { vm } = wrapper
-      const getValueText = () => wrapper.findComponent('.vue-treeselect__single-value').text().trim()
+      const getValueText = () => wrapper.find('.vue-treeselect__single-value').text().trim()
 
       expect(vm.forest.nodeMap.aa).toEqual(jasmine.objectContaining({
         id: 'aa',
@@ -609,7 +609,7 @@ describe('Dynamical Loading', () => {
       expect(vm.visibleOptionIds).toEqual(['branch', 'leaf'])
 
       const labels = menu.findAll('.vue-treeselect__option:not(.vue-treeselect__option--hide) .vue-treeselect__label')
-        .wrappers.map(label => label.text().trim())
+        .map(label => label.text().trim())
       expect(labels).toEqual(['branch', 'leaf'])
     })
   })
@@ -665,6 +665,8 @@ describe('Dynamical Loading', () => {
         }, DELAY)
       }
       const spyForLoadOptions = jasmine.createSpy('loadOptions', loadOptions).and.callThrough()
+      const div = document.createElement('div')
+      document.body.appendChild(div)
       const app = createApp({
         components: { Treeselect },
         data: function () {
@@ -678,12 +680,13 @@ describe('Dynamical Loading', () => {
             <treeselect
               :options="options"
               :load-options="loadOptions"
-              :auto-load-root-options= "false"
+              :auto-load-root-options="false"
+              ref="treeselect"
               />
           </div>
         `,
-      }).mount()
-      const vm = app.$children[0]
+      }).mount(div)
+      const vm = app.$refs.treeselect
 
       expect(vm.rootOptionsStates.isLoading).toBe(false)
 
@@ -735,6 +738,8 @@ describe('Dynamical Loading', () => {
         }, DELAY)
       }
       const spyForLoadOptions = jasmine.createSpy('loadOptions', loadOptions).and.callThrough()
+      const div = document.createElement('div')
+      document.body.appendChild(div)
       const app = createApp({
         components: { Treeselect },
         data: function () {
@@ -748,12 +753,13 @@ describe('Dynamical Loading', () => {
             <treeselect
               :options="options"
               :load-options="loadOptions"
-              :auto-load-root-options= "false"
+              :auto-load-root-options="false"
+              ref="treeselect"
               />
           </div>
         `,
-      }).mount()
-      const vm = app.$children[0]
+      }).mount(div)
+      const vm = app.$refs.treeselect
       let menu
 
       // 1st try
@@ -797,6 +803,8 @@ describe('Dynamical Loading', () => {
         }, DELAY)
       }
       const spyForLoadOptions = jasmine.createSpy('loadOptions', loadOptions).and.callThrough()
+      const div = document.createElement('div')
+      document.body.appendChild(div)
       const app = createApp({
         components: { Treeselect },
         data: function () {
@@ -810,12 +818,13 @@ describe('Dynamical Loading', () => {
             <treeselect
               :options="options"
               :load-options="loadOptions"
-              :auto-load-root-options= "false"
+              :auto-load-root-options="false"
+              ref="treeselect"
               />
           </div>
         `,
-      }).mount()
-      const vm = app.$children[0]
+      }).mount(div)
+      const vm = app.$refs.treeselect
 
       vm.openMenu()
       await nextTick()
@@ -832,6 +841,8 @@ describe('Dynamical Loading', () => {
 
     it('should override fallback nodes', async () => {
       const DELAY = 10
+      const div = document.createElement('div')
+      document.body.appendChild(div)
       const app = createApp({
         components: { Treeselect },
         data: function () {
@@ -855,12 +866,13 @@ describe('Dynamical Loading', () => {
               v-model="value"
               :options="options"
               :load-options="loadOptions"
-              :auto-load-root-options= "true"
+              :auto-load-root-options="true"
+              ref="treeselect"
               />
           </div>
         `,
-      }).mount()
-      const vm = app.$children[0]
+      }).mount(div)
+      const vm = app.$refs.treeselect
 
       expect(vm.rootOptionsStates.isLoading).toBe(true)
       expect(vm.forest.nodeMap.a).toEqual(jasmine.objectContaining({
@@ -935,6 +947,8 @@ describe('Dynamical Loading', () => {
     it('should accept promises', async () => {
       let called = false
       const DELAY = 10
+      const div = document.createElement('div')
+      document.body.appendChild(div)
       const app = createApp({
         components: { Treeselect },
         data: function () {
@@ -959,12 +973,13 @@ describe('Dynamical Loading', () => {
             <treeselect
               :options="options"
               :load-options="loadOptions"
-              :auto-load-root-options= "false"
+              :auto-load-root-options="false"
+              ref="treeselect"
               />
           </div>
         `,
-      }).mount()
-      const vm = app.$children[0]
+      }).mount(div)
+      const vm = app.$refs.treeselect
 
       vm.openMenu()
       await nextTick()
@@ -981,6 +996,8 @@ describe('Dynamical Loading', () => {
 
     it('should highlight first option after loading root options', async () => {
       const DELAY = 10
+      const div = document.createElement('div')
+      document.body.appendChild(div)
       const app = createApp({
         components: { Treeselect },
         data: function () {
@@ -1004,12 +1021,13 @@ describe('Dynamical Loading', () => {
             <treeselect
               :options="options"
               :load-options="loadOptions"
-              :auto-load-root-options= "false"
+              :auto-load-root-options="false"
+              ref="treeselect"
               />
           </div>
         `,
-      }).mount()
-      const vm = app.$children[0]
+      }).mount(div)
+      const vm = app.$refs.treeselect
 
       vm.openMenu()
       await nextTick()

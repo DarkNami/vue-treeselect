@@ -57,7 +57,7 @@ describe('Props', () => {
         })
 
         it('should hide "×" button', () => {
-          expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
+          expect(wrapper.find('.vue-treeselect__x').exists()).toBe(false)
         })
       })
 
@@ -67,14 +67,14 @@ describe('Props', () => {
         })
 
         it('should show "×" button ', () => {
-          expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(true)
+          expect(wrapper.find('.vue-treeselect__x').exists()).toBe(true)
         })
 
         it('clear() should only remove undisabled value', async () => {
           vm.clear()
           await nextTick()
           expect(vm.internalValue).toEqual(['a'])
-          expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
+          expect(wrapper.find('.vue-treeselect__x').exists()).toBe(false)
         })
       })
     })
@@ -90,14 +90,14 @@ describe('Props', () => {
         })
 
         it('should show "×" button', () => {
-          expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(true)
+          expect(wrapper.find('.vue-treeselect__x').exists()).toBe(true)
         })
 
         it('clear() should completely reset value', async () => {
           vm.clear()
           await nextTick()
           expect(vm.internalValue).toEqual([])
-          expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
+          expect(wrapper.find('.vue-treeselect__x').exists()).toBe(false)
         })
       })
     })
@@ -206,7 +206,7 @@ describe('Props', () => {
       })
 
       await nextTick() // the arrow exists on first render
-      expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(false)
+      expect(wrapper.find('.vue-treeselect__control-arrow-container').exists()).toBe(false)
     })
 
     it('the menu should be unclosable', async () => {
@@ -275,7 +275,7 @@ describe('Props', () => {
         },
       })
 
-      expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(true)
+      expect(wrapper.find('.vue-treeselect__control-arrow-container').exists()).toBe(true)
     })
 
     it('set `alwaysOpen` from `false` to `true` should open the menu and hide the arrow', async () => {
@@ -290,7 +290,7 @@ describe('Props', () => {
       expect(vm.menu.isOpen).toBe(false)
       await wrapper.setProps({ alwaysOpen: true })
       expect(vm.menu.isOpen).toBe(true)
-      expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(false)
+      expect(wrapper.find('.vue-treeselect__control-arrow-container').exists()).toBe(false)
     })
 
     it('set `alwaysOpen` from `true` to `false` should close the menu and show the arrow', async () => {
@@ -305,7 +305,7 @@ describe('Props', () => {
       expect(vm.menu.isOpen).toBe(true)
       await wrapper.setProps({ alwaysOpen: false })
       expect(vm.menu.isOpen).toBe(false)
-      expect(wrapper.findComponent('.vue-treeselect__control-arrow-container').exists()).toBe(true)
+      expect(wrapper.find('.vue-treeselect__control-arrow-container').exists()).toBe(true)
     })
   })
 
@@ -641,7 +641,7 @@ describe('Props', () => {
 
   describe('beforeClearAll', () => {
     async function clickOnX(wrapper) {
-      const x = wrapper.findComponent('.vue-treeselect__x-container')
+      const x = wrapper.find('.vue-treeselect__x-container')
       leftClick(x)
       // the `beforeClearAll` callback is always called async
       // we have to wait here
@@ -827,29 +827,29 @@ describe('Props', () => {
     })
 
     it('should show "×" button', () => {
-      expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(true)
+      expect(wrapper.find('.vue-treeselect__x').exists()).toBe(true)
     })
 
     it('should reset value on mousedown', async () => {
       expect(vm.forest.selectedNodeIds).toEqual(['a'])
-      leftClick(wrapper.findComponent('.vue-treeselect__x-container'))
+      leftClick(wrapper.find('.vue-treeselect__x-container'))
       await sleep(1)
       expect(vm.forest.selectedNodeIds).toEqual([])
     })
 
     it('should hide when no options selected', async () => {
       await wrapper.setProps({ modelValue: null })
-      expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
+      expect(wrapper.find('.vue-treeselect__x').exists()).toBe(false)
     })
 
     it('should hide when disabled=true', async () => {
       await wrapper.setProps({ disabled: true })
-      expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
+      expect(wrapper.find('.vue-treeselect__x').exists()).toBe(false)
     })
 
     it('should hide when clearable=false', async () => {
       await wrapper.setProps({ clearable: false })
-      expect(wrapper.findComponent('.vue-treeselect__x').exists()).toBe(false)
+      expect(wrapper.find('.vue-treeselect__x').exists()).toBe(false)
     })
   })
 
@@ -865,7 +865,7 @@ describe('Props', () => {
         },
       })
 
-      expect(wrapper.findComponent('.vue-treeselect__x-container').attributes().title).toBe('$MULTI_TITLE$')
+      expect(wrapper.find('.vue-treeselect__x-container').attributes().title).toBe('$MULTI_TITLE$')
     })
   })
 
@@ -951,7 +951,7 @@ describe('Props', () => {
         },
       })
 
-      expect(wrapper.findComponent('.vue-treeselect__x-container').attributes().title).toBe('$SINGLE_TITLE$')
+      expect(wrapper.find('.vue-treeselect__x-container').attributes().title).toBe('$SINGLE_TITLE$')
     })
   })
 
@@ -1184,7 +1184,7 @@ describe('Props', () => {
 
         const labelContainerOfBranchNode = await getLabelContainerOfBranchNode()
 
-        expect(labelContainerOfBranchNode.findComponent('.vue-treeselect__checkbox').exists()).toBe(true)
+        expect(labelContainerOfBranchNode.find('.vue-treeselect__checkbox').exists()).toBe(true)
       })
 
       it('a leaf node should have checkbox too when multiple=true', async () => {
@@ -1192,7 +1192,7 @@ describe('Props', () => {
 
         const labelContainerOfLeafNode = await getLabelContainerOfLeafNode()
 
-        expect(labelContainerOfLeafNode.findComponent('.vue-treeselect__checkbox').exists()).toBe(true)
+        expect(labelContainerOfLeafNode.find('.vue-treeselect__checkbox').exists()).toBe(true)
       })
 
       it('click on label of a branch node should toggle checking state when multiple=true', async () => {
@@ -1233,14 +1233,14 @@ describe('Props', () => {
         await wrapper.setProps({ multiple: true })
         const labelContainerOfBranchNode = await getLabelContainerOfBranchNode()
 
-        expect(labelContainerOfBranchNode.findComponent('.vue-treeselect__checkbox').exists()).toBe(false)
+        expect(labelContainerOfBranchNode.find('.vue-treeselect__checkbox').exists()).toBe(false)
       })
 
       it('a leaf node should have checkbox when multiple=true', async () => {
         await wrapper.setProps({ multiple: true })
         const labelContainerOfLeafNode = await getLabelContainerOfLeafNode()
 
-        expect(labelContainerOfLeafNode.findComponent('.vue-treeselect__checkbox').exists()).toBe(true)
+        expect(labelContainerOfLeafNode.find('.vue-treeselect__checkbox').exists()).toBe(true)
       })
 
       it('click on label of a branch node should not toggle checking state when multiple=true', async () => {
@@ -1317,8 +1317,8 @@ describe('Props', () => {
         },
       })
 
-      expect(wrapper.findComponent('.vue-treeselect__input-container').exists()).toBe(true)
-      expect(wrapper.findComponent('.vue-treeselect__input').exists()).toBe(true)
+      expect(wrapper.find('.vue-treeselect__input-container').exists()).toBe(true)
+      expect(wrapper.find('.vue-treeselect__input').exists()).toBe(true)
     })
 
     describe('when disabled=true', () => {
@@ -1331,8 +1331,8 @@ describe('Props', () => {
           },
         })
 
-        expect(wrapper.findComponent('.vue-treeselect__input-container').exists()).toBe(true)
-        expect(wrapper.findComponent('.vue-treeselect__input').exists()).toBe(false)
+        expect(wrapper.find('.vue-treeselect__input-container').exists()).toBe(true)
+        expect(wrapper.find('.vue-treeselect__input').exists()).toBe(false)
       })
 
       it('should close the menu when setting disabled from false to true', async () => {
@@ -1364,7 +1364,7 @@ describe('Props', () => {
           },
         })
         const { vm } = wrapper
-        const valeContainer = wrapper.findComponent('.vue-treeselect__value-container')
+        const valeContainer = wrapper.find('.vue-treeselect__value-container')
 
         leftClick(valeContainer)
         expect(vm.trigger.isFocused).toBe(false)
@@ -1492,7 +1492,7 @@ describe('Props', () => {
 
       expect(vm.forest.selectedNodeIds).toEqual(['a', 'b', 'c', 'd'])
       expect(wrapper.findAllComponents(MultiValueItem).length).toBe(4)
-      expect(wrapper.findComponent('.vue-treeselect__limit-tip').exists()).toBe(false)
+      expect(wrapper.find('.vue-treeselect__limit-tip').exists()).toBe(false)
     })
 
     it('when limit=1', () => {
@@ -1520,8 +1520,8 @@ describe('Props', () => {
 
       expect(vm.forest.selectedNodeIds).toEqual(['a', 'b', 'c', 'd'])
       expect(wrapper.findAllComponents(MultiValueItem).length).toBe(1)
-      expect(wrapper.findComponent('.vue-treeselect__limit-tip').exists()).toBe(true)
-      expect(wrapper.findComponent('.vue-treeselect__limit-tip').text()).toBe('and 3 more')
+      expect(wrapper.find('.vue-treeselect__limit-tip').exists()).toBe(true)
+      expect(wrapper.find('.vue-treeselect__limit-tip').text()).toBe('and 3 more')
     })
   })
 
@@ -1687,7 +1687,7 @@ describe('Props', () => {
         },
       })
       const { vm } = wrapper
-      const valeContainer = wrapper.findComponent('.vue-treeselect__value-container')
+      const valeContainer = wrapper.find('.vue-treeselect__value-container')
 
       expect(vm.trigger.isFocused).toBe(false)
       expect(vm.menu.isOpen).toBe(false)
@@ -1711,7 +1711,7 @@ describe('Props', () => {
         },
       })
       const { vm } = wrapper
-      const valeContainer = wrapper.findComponent('.vue-treeselect__value-container')
+      const valeContainer = wrapper.find('.vue-treeselect__value-container')
 
       expect(vm.trigger.isFocused).toBe(false)
       expect(vm.menu.isOpen).toBe(false)
@@ -1733,7 +1733,7 @@ describe('Props', () => {
         },
       })
       const { vm } = wrapper
-      const valeContainer = wrapper.findComponent('.vue-treeselect__value-container')
+      const valeContainer = wrapper.find('.vue-treeselect__value-container')
 
       expect(vm.trigger.isFocused).toBe(false)
       expect(vm.menu.isOpen).toBe(false)
@@ -1811,8 +1811,8 @@ describe('Props', () => {
 
       await wrapper.vm.openMenu()
 
-      const menu = wrapper.findComponent('.vue-treeselect__menu')
-      const noOptionsTip = menu.findComponent('.vue-treeselect__no-options-tip')
+      const menu = wrapper.find('.vue-treeselect__menu')
+      const noOptionsTip = menu.find('.vue-treeselect__no-options-tip')
       expect(noOptionsTip.text().trim()).toBe('No options available.')
     })
 
@@ -1841,6 +1841,8 @@ describe('Props', () => {
       })
 
       it('directly modify `options` prop should trigger reinitializing', async () => {
+        const div = document.createElement('div')
+        document.body.appendChild(div)
         const vm = createApp({
           components: { Treeselect },
           data: function () {
@@ -1851,9 +1853,9 @@ describe('Props', () => {
               }],
             }
           },
-          template: `<div><treeselect :options="options" /></div>`,
-        }).mount()
-        const comp = vm.$children[0]
+          template: `<div><treeselect :options="options" ref="treeselect" /></div>`,
+        }).mount(div)
+        const comp = vm.$refs.treeselect
 
         // note that, this is directly modifying the original `options` array,
         // not creating a new `options` array.
@@ -1991,7 +1993,7 @@ describe('Props', () => {
             },
           })
 
-          expect(wrapper.findComponent('.vue-treeselect__input-container .vue-treeselect__input').exists()).toBe(true)
+          expect(wrapper.find('.vue-treeselect__input-container .vue-treeselect__input').exists()).toBe(true)
         })
 
         it('should auto resize when length of input value changes', () => {
@@ -2010,7 +2012,7 @@ describe('Props', () => {
             },
           })
 
-          expect(wrapper.findComponent('.vue-treeselect__input-container .vue-treeselect__input').exists()).toBe(true)
+          expect(wrapper.find('.vue-treeselect__input-container .vue-treeselect__input').exists()).toBe(true)
         })
       })
 
@@ -2087,8 +2089,8 @@ describe('Props', () => {
             },
           })
 
-          expect(wrapper.findComponent('.vue-treeselect__input-container').exists()).toBe(true)
-          expect(wrapper.findComponent('.vue-treeselect__input-container').element.innerHTML).toBe('')
+          expect(wrapper.find('.vue-treeselect__input-container').exists()).toBe(true)
+          expect(wrapper.find('.vue-treeselect__input-container').element.innerHTML).toBe('')
         })
       })
 
@@ -2102,8 +2104,8 @@ describe('Props', () => {
             },
           })
 
-          expect(wrapper.findComponent('.vue-treeselect__input-container').exists()).toBe(true)
-          expect(wrapper.findComponent('.vue-treeselect__input-container').element.innerHTML).toBe('')
+          expect(wrapper.find('.vue-treeselect__input-container').exists()).toBe(true)
+          expect(wrapper.find('.vue-treeselect__input-container').element.innerHTML).toBe('')
         })
       })
     })
@@ -2152,31 +2154,31 @@ describe('Props', () => {
       await wrapper.setProps({ showCountOnSearch: false })
 
       await typeSearchText(wrapper, 'a')
-      expect(wrapper.findComponent('.vue-treeselect__count').exists()).toBe(false)
+      expect(wrapper.find('.vue-treeselect__count').exists()).toBe(false)
     })
 
     it('when showCountOnSearch=true', async () => {
       await wrapper.setProps({ showCountOnSearch: true })
 
       await typeSearchText(wrapper, 'a')
-      expect(wrapper.findComponent('.vue-treeselect__count').exists()).toBe(true)
+      expect(wrapper.find('.vue-treeselect__count').exists()).toBe(true)
     })
 
     it('when showCountOnSearch not specified', async () => {
       await typeSearchText(wrapper, 'a')
-      expect(wrapper.findComponent('.vue-treeselect__count').exists()).toBe(true)
+      expect(wrapper.find('.vue-treeselect__count').exists()).toBe(true)
     })
 
     it('should refresh count number after search changes', async () => {
       await wrapper.setProps({ showCountOnSearch: true })
 
       await typeSearchText(wrapper, 'a')
-      expect(findOptionByNodeId(wrapper, 'a').findComponent('.vue-treeselect__count').text()).toEqual('(2)')
-      expect(findOptionByNodeId(wrapper, 'b').findComponent('.vue-treeselect__count').text()).toEqual('(1)')
+      expect(findOptionByNodeId(wrapper, 'a').find('.vue-treeselect__count').text()).toEqual('(2)')
+      expect(findOptionByNodeId(wrapper, 'b').find('.vue-treeselect__count').text()).toEqual('(1)')
 
       await typeSearchText(wrapper, 'b')
-      expect(findOptionByNodeId(wrapper, 'a').findComponent('.vue-treeselect__count').text()).toEqual('(1)')
-      expect(findOptionByNodeId(wrapper, 'b').findComponent('.vue-treeselect__count').text()).toEqual('(2)')
+      expect(findOptionByNodeId(wrapper, 'a').find('.vue-treeselect__count').text()).toEqual('(1)')
+      expect(findOptionByNodeId(wrapper, 'b').find('.vue-treeselect__count').text()).toEqual('(2)')
     })
   })
 
@@ -2835,6 +2837,8 @@ describe('Props', () => {
   describe('valueFormat', () => {
     describe('when valueFormat=id', () => {
       it('single-select', async () => {
+        const div = document.createElement('div')
+        document.body.appendChild(div)
         const vm = createApp({
           components: { Treeselect },
           data: function () {
@@ -2855,11 +2859,12 @@ describe('Props', () => {
                 v-model="value"
                 :options="options"
                 value-format="id"
+                ref="treeselect"
               />
             </div>
           `,
-        }).mount()
-        const comp = vm.$children[0]
+        }).mount(div)
+        const comp = vm.$refs.treeselect
 
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
 
@@ -2870,6 +2875,8 @@ describe('Props', () => {
       })
 
       it('multi-select', async () => {
+        const div = document.createElement('div')
+        document.body.appendChild(div)
         const vm = createApp({
           components: { Treeselect },
           data: function () {
@@ -2891,11 +2898,12 @@ describe('Props', () => {
                 :options="options"
                 :multiple="true"
                 value-format="id"
+                ref="treeselect"
               />
             </div>
           `,
-        }).mount()
-        const comp = vm.$children[0]
+        }).mount(div)
+        const comp = vm.$refs.treeselect
 
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
 
@@ -2908,6 +2916,8 @@ describe('Props', () => {
 
     describe('when valueFormat=object', () => {
       it('single-select', async () => {
+        const div = document.createElement('div')
+        document.body.appendChild(div)
         const vm = createApp({
           components: { Treeselect },
           data: function () {
@@ -2931,11 +2941,12 @@ describe('Props', () => {
                 v-model="value"
                 :options="options"
                 value-format="object"
+                ref="treeselect"
               />
             </div>
           `,
-        }).mount()
-        const comp = vm.$children[0]
+        }).mount(div)
+        const comp = vm.$refs.treeselect
 
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
 
@@ -2949,6 +2960,8 @@ describe('Props', () => {
       })
 
       it('multi-select', async () => {
+        const div = document.createElement('div')
+        document.body.appendChild(div)
         const vm = createApp({
           components: { Treeselect },
           data: function () {
@@ -2973,11 +2986,12 @@ describe('Props', () => {
                 :options="options"
                 :multiple="true"
                 value-format="object"
+                ref="treeselect"
               />
             </div>
           `,
-        }).mount()
-        const comp = vm.$children[0]
+        }).mount(div)
+        const comp = vm.$refs.treeselect
 
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
 
@@ -2994,6 +3008,8 @@ describe('Props', () => {
       })
 
       it('should return raw node object', async () => {
+        const div = document.createElement('div')
+        document.body.appendChild(div)
         const vm = createApp({
           components: { Treeselect },
           data: function () {
@@ -3019,11 +3035,12 @@ describe('Props', () => {
                 v-model="value"
                 :options="options"
                 value-format="object"
+                ref="treeselect"
               />
             </div>
           `,
-        }).mount()
-        const comp = vm.$children[0]
+        }).mount(div)
+        const comp = vm.$refs.treeselect
 
         expect(comp.forest.selectedNodeIds).toEqual(['a'])
 

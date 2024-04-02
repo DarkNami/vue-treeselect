@@ -57,7 +57,7 @@ describe('Events', () => {
       await wrapper.setProps({ modelValue: ['a'] })
 
       // click on "×" of a
-      leftClick(wrapper.findComponent('.vue-treeselect__value-remove'))
+      leftClick(wrapper.find('.vue-treeselect__value-remove'))
       expect(wrapper.emitted().deselect).toEqual([
         [a, 'test'],
       ])

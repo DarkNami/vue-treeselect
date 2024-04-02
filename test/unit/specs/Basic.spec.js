@@ -694,6 +694,9 @@ describe('Basic', () => {
   it('fallback nodes should not be considered duplicate', async () => {
     spyOn(console, 'error')
 
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+
     const DELAY = 10
     const app = createApp({
       components: { Treeselect },
@@ -718,11 +721,13 @@ describe('Basic', () => {
             v-model="value"
             :options="options"
             :load-options="loadOptions"
+            ref="treeselect"
           />
         </div>
       `,
-    }).mount()
-    const vm = app.$children[0]
+    }).mount(div)
+
+    const vm = app.$refs.treeselect
 
     expect(vm.forest.nodeMap.a.isFallbackNode).toBe(true)
 
@@ -784,6 +789,10 @@ describe('Basic', () => {
   it('v-model support', async () => {
     // vue-test-utils doesn't support testing v-model
     // so here we write vanila vue code
+
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+
     const vm = createApp({
       components: { Treeselect },
       data: function () {
@@ -804,11 +813,12 @@ describe('Basic', () => {
             v-model="value"
             :options="options"
             :multiple="true"
+            ref="treeselect"
           />
         </div>
       `,
-    }).mount()
-    const comp = vm.$children[0]
+    }).mount(div)
+    const comp = vm.$refs.treeselect
 
     comp.select(comp.forest.nodeMap.a)
     await nextTick()
@@ -836,11 +846,12 @@ describe('Basic', () => {
     wrapper.vm.openMenu()
     await nextTick()
 
-    const optionsWrappers = wrapper.findAllComponents(Option).wrappers
+    const optionsWrappers = wrapper.findAllComponents(Option)
+
     const a = optionsWrappers.find(optionWrapper => optionWrapper.vm.node.id === 'a')
-      .findComponent('.vue-treeselect__option')
+      .find('.vue-treeselect__option')
     const aa = optionsWrappers.find(optionWrapper => optionWrapper.vm.node.id === 'aa')
-      .findComponent('.vue-treeselect__option')
+      .find('.vue-treeselect__option')
 
     expect(a.attributes()['data-id']).toBe('a')
     expect(aa.attributes()['data-id']).toBe('aa')
