@@ -1964,7 +1964,7 @@ describe('Props', () => {
     describe('when required=true', () => {
       it('the input should have `required` attribute if having no value', async () => {
         await wrapper.setProps({ required: true })
-        expect(input.attributes().required).toBe('required')
+        expect(input.attributes()).toHaveMember('required')
       })
 
       it('the input should not have `required` attribute if value is present', async () => {
@@ -2071,7 +2071,7 @@ describe('Props', () => {
         const expectedMatchedNodeIds = ['ab', 'b']
         const options = wrapper.findAllComponents(Option)
         expect(options.length).toBe(4)
-        options.wrappers.forEach(option => {
+        options.forEach(option => {
           const { node } = option.vm
           expect(node.isMatched).toBe(expectedMatchedNodeIds.includes(node.id))
         })

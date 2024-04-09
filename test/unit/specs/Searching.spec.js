@@ -434,7 +434,7 @@ describe('Searching', () => {
   it('flatten search results', async () => {
     async function typeAndAssert(searchText, idListOfNodesThatShouldBeVisible) {
       await typeSearchText(wrapper, searchText)
-      const visibleOptionWrappers = findVisibleOptions(wrapper).wrappers
+      const visibleOptionWrappers = findVisibleOptions(wrapper)
       const visibleOptionIds = visibleOptionWrappers.map(optionWrapper => {
         return optionWrapper.element.dataset.id
       })
@@ -551,6 +551,7 @@ describe('Searching', () => {
         const menu = findMenu(wrapper)
 
         expect(menu.text().includes('Type to search...')).toBe(false)
+        await nextTick()
         expect(menu.text().includes('default')).toBe(true)
 
         await typeSearchText(wrapper, 'test')
@@ -739,7 +740,7 @@ describe('Searching', () => {
       })
       const { vm } = wrapper
       const assertMultiValueItemLabels = labels => {
-        const actualLabels = wrapper.findAll('.vue-treeselect__multi-value-label').wrappers
+        const actualLabels = wrapper.findAll('.vue-treeselect__multi-value-label')
           .map(labelWrapper => labelWrapper.text().trim())
         expect(actualLabels).toEqual(labels)
       }
