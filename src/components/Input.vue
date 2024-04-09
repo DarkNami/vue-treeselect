@@ -241,9 +241,7 @@
 
         if (!instance.searchable && !instance.disabled) {
           deepExtend(props, {
-            attrs: {
-              tabIndex: instance.tabIndex,
-            },
+            tabIndex: instance.tabIndex,
           })
         }
 
