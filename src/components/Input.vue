@@ -43,11 +43,7 @@
     },
 
     watch: {
-      'instance.trigger.searchQuery'(newValue) {
-        this.value = newValue
-      },
-
-      modelValue() {
+      value() {
         // istanbul ignore else
         if (this.needAutoSize) {
           nextTick(() => {
@@ -63,6 +59,12 @@
         INPUT_DEBOUNCE_DELAY,
         { leading: true, trailing: true },
       )
+    },
+
+    mounted() {
+      this.$watch('instance.trigger.searchQuery', (newValue) => {
+        this.value = newValue
+      })
     },
 
     methods: {

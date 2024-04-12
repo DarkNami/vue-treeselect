@@ -1,4 +1,4 @@
-import { nextTick } from 'vue'
+import { nextTick, reactive, isProxy, toRaw } from 'vue'
 import fuzzysearch from 'fuzzysearch'
 
 import {
@@ -932,7 +932,11 @@ export default {
         const prevNodeMap = this.forest.nodeMap
         this.forest.nodeMap = createMap()
         this.keepDataOfSelectedNodes(prevNodeMap)
-        this.forest.normalizedOptions = this.normalize(NO_PARENT_NODE, options, prevNodeMap)
+        this.forest.normalizedOptions = this.normalize(
+          NO_PARENT_NODE
+          , (isProxy(options) ? toRaw(options) : options)
+          , prevNodeMap
+        )
         // Cases that need fixing `selectedNodeIds`:
         //   1) Children options of a checked node have been delayed loaded,
         //      we should also mark these children as checked. (multi-select mode)
@@ -1302,10 +1306,13 @@ export default {
 
     getRemoteSearchEntry() {
       const { searchQuery } = this.trigger
-      const entry = this.remoteSearch[searchQuery] || {
-        ...createAsyncOptionsStates(),
-        options: [],
+
+      if (Object.prototype.hasOwnProperty.call(this.remoteSearch, searchQuery)) {
+        return this.remoteSearch[searchQuery]
       }
+
+      const raw = { ...createAsyncOptionsStates(), options: [] }
+      const entry = reactive(raw)
 
       // Vue doesn't support directly watching on objects.
       this.$watch(
@@ -1319,18 +1326,17 @@ export default {
 
       if (searchQuery === '') {
         if (Array.isArray(this.defaultOptions)) {
-          entry.options = this.defaultOptions
-          entry.isLoaded = true
-          return entry
+          // simulate remote fetch
+          nextTick(() => {
+            entry.options = this.defaultOptions
+            entry.isLoaded = true
+          })
         } else if (this.defaultOptions !== true) {
           entry.isLoaded = true
-          return entry
         }
       }
 
-      if (!this.remoteSearch[searchQuery]) {
-        this.remoteSearch[searchQuery] = entry
-      }
+      this.remoteSearch[searchQuery] = entry
 
       return entry
     },
