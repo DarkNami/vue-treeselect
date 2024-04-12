@@ -12,6 +12,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.vue'],
     alias: {
+      'vue': 'vue/dist/vue.esm-bundler.js',
       // for consistent docs
       '@riophae/vue-treeselect': utils.resolve('src'),
       // for shorter import path in tests
