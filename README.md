@@ -18,7 +18,7 @@
 - Supports a wide range of browsers (see [below](#browser-compatibility))
 - RTL support
 
-*Requires Vue 2.2+*
+*Requires Vue 3.4+*
 
 ### Getting Started
 
@@ -80,11 +80,11 @@ If you just don't want to use webpack or any other bundlers, you can simply incl
 ```html
 <html>
   <head>
-    <!-- include Vue 2.x -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@^2"></script>
+    <!-- include Vue 3.x -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@^3"></script>
     <!-- include vue-treeselect & its styles. you can change the version tag to better suit your needs. -->
-    <script src="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@^0.4.0/dist/vue-treeselect.umd.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@^0.4.0/dist/vue-treeselect.min.css">
+    <script src="./dist/vue-treeselect.umd.min.js"></script>
+    <link rel="stylesheet" href="./dist/vue-treeselect.min.css">
   </head>
   <body>
     <div id="app">
@@ -92,11 +92,9 @@ If you just don't want to use webpack or any other bundlers, you can simply incl
     </div>
   </body>
   <script>
-    // register the component
-    Vue.component('treeselect', VueTreeselect.Treeselect)
+    const { createApp } = window.Vue;
 
-    new Vue({
-      el: '#app',
+    const myApp = createApp({
       data: {
         // define the default value
         value: null,
@@ -119,7 +117,11 @@ If you just don't want to use webpack or any other bundlers, you can simply incl
           label: 'c',
         } ],
       },
-    })
+    });
+
+    // register the component
+    myApp.component('treeselect', VueTreeselect.Treeselect)
+    myApp.mount('#app');
   </script>
 </html>
 ```
