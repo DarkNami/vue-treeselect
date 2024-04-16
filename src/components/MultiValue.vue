@@ -38,11 +38,9 @@
     render() {
       const { renderValueContainer } = this.$parent
       const transitionGroupProps = {
-        props: {
-          tag: 'div',
-          name: 'vue-treeselect__multi-value-item--transition',
-          appear: true,
-        },
+        tag: 'div',
+        name: 'vue-treeselect__multi-value-item--transition',
+        appear: true,
       }
 
       return renderValueContainer(
