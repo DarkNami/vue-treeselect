@@ -24,6 +24,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
+        resourceQuery: { not: [/raw/] },
         loader: 'vue-loader',
         options: {
           compilerOptions: {
