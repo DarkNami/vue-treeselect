@@ -2,7 +2,7 @@
   <treeselect
     :multiple="true"
     :options="options"
-    :value="value"
+    :modelValue="value"
     />
 </template>
 

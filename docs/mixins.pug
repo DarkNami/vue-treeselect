@@ -43,10 +43,11 @@ mixin component(name)
 
 mixin demo(name)
   demo
-    #{kebabCase(name)}(slot="demo")
-    template(slot="html")
+    template(v-slot:demo)
+      #{kebabCase(name)}
+    template(v-slot:html)
       code(v-pre)=loadSFCSource(name, 'template')
-    template(slot="javascript")
+    template(v-slot:javascript)
       code(v-pre)=loadSFCSource(name, 'script')
 
 mixin renderToc()

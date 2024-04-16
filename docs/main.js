@@ -1,56 +1,23 @@
 import 'script-loader!../static/prism.min.js'
 import 'regenerator-runtime/runtime'
 import 'yaku/lib/global'
-import Vue from 'vue'
+import { createApp } from 'vue'
 import Treeselect from '../src'
+import { store } from './components/VuexStore.js'
 
 import './styles/docs.less'
 import './styles/prism.less'
 
-Vue.config.productionTip = false
-Vue.component('treeselect', Treeselect)
-
-let sections
-
-function calculateNavPositions() {
-  sections = [].map.call(document.querySelectorAll('[data-section]'), section => ({
-    id: section.id,
-    offset: section.getBoundingClientRect().top + window.pageYOffset - 50,
-  }))
-}
-
-function loadComponents() {
-  const loadContext = context => {
-    context.keys().forEach(key => {
-      const componentName = key.replace(/^\.\/|\.vue$/g, '')
-      const component = context(key).default
-
-      Vue.component(componentName, component)
-    })
-  }
-
-  loadContext(require.context('./components', false, /\.vue$/))
-
-  if (process.env.NODE_ENV !== 'production') {
-    loadContext(require.context('./components/dev', false, /\.vue$/))
-  }
-}
-loadComponents()
-
-new Vue({
-  el: '#app',
-
+const myApp = createApp({
   data: () => ({
     currentPosition: '',
     isNavSticky: false,
   }),
-
   mounted() {
     this.adjustNav()
     window.addEventListener('scroll', this.adjustNav)
     setTimeout(calculateNavPositions, 1000)
   },
-
   methods: {
     adjustNav() {
       const sidebar = document.getElementById('sidebar')
@@ -67,3 +34,34 @@ new Vue({
     },
   },
 })
+
+myApp.component('treeselect', Treeselect)
+
+let sections
+
+function calculateNavPositions() {
+  sections = [].map.call(document.querySelectorAll('[data-section]'), section => ({
+    id: section.id,
+    offset: section.getBoundingClientRect().top + window.scrollY - 50,
+  }))
+}
+
+function loadComponents() {
+  const loadContext = context => {
+    context.keys().forEach(key => {
+      const componentName = key.replace(/^\.\/|\.vue$/g, '')
+      const component = context(key).default
+      myApp.component(componentName, component)
+    })
+  }
+  loadContext(require.context('./components', false, /\.vue$/))
+  if (process.env.NODE_ENV !== 'production') {
+    loadContext(require.context('./components/dev', false, /\.vue$/))
+  }
+}
+
+loadComponents()
+
+myApp.use(store)
+
+myApp.mount('#app')

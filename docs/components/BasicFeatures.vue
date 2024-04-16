@@ -6,7 +6,7 @@
       placeholder="Select your favourite(s)..."
       v-model="value"
       />
-    <treeselect-value :value="value" />
+    <treeselect-value :modelValue="value" />
   </div>
 </template>
 

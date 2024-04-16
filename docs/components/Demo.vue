@@ -3,7 +3,7 @@
     <div class="example-demo">
       <label class="example-label">Demo</label>
       <div class="example-inner">
-        <slot name="demo" />
+        <slot name="demo"></slot>
       </div>
     </div>
     <div class="example-code">
@@ -16,8 +16,8 @@
         </span>
       </label>
       <div class="example-inner">
-        <pre class="language-html" :class="{ current: current === 'html' }"><slot name="html" /></pre>
-        <pre class="language-javascript" :class="{ current: current === 'javascript' }"><slot name="javascript" /></pre>
+        <pre class="language-html" :class="{ current: current === 'html' }"><slot name="html"></slot></pre>
+        <pre class="language-javascript" :class="{ current: current === 'javascript' }"><slot name="javascript"></slot></pre>
       </div>
     </div>
   </div>

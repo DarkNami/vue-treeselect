@@ -1,7 +1,7 @@
 <template>
   <treeselect
     :options="options"
-    :value="value"
+    :modelValue="value"
     :searchable="false"
     :show-count="true"
     :default-expand-level="1"

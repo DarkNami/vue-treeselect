@@ -1,7 +1,7 @@
 <template>
   <treeselect
     :options="options"
-    :value="value"
+    :modelValue="value"
     :normalizer="normalizer"
     />
 </template>

@@ -5,11 +5,11 @@
 <script>
   export default {
     // eslint-disable-next-line vue/require-prop-types
-    props: [ 'value' ],
+    props: [ 'modelValue' ],
 
     computed: {
       stringifiedValue() {
-        const rawValue = this.value
+        const rawValue = this.modelValue
 
         return rawValue === undefined
           ? 'undefined'

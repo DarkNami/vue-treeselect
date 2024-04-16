@@ -19,7 +19,7 @@
         v-model="value"
         />
     </div>
-    <treeselect-value :value="value" />
+    <treeselect-value :modelValue="value" />
     <p>
       <label><input type="checkbox" v-model="multiple">Multi-select</label>
       <label><input type="checkbox" v-model="clearable">Clearable</label>
