@@ -1,9 +1,16 @@
 # vue-treeselect
 ![License](https://badgen.net/github/license/DarkNami/vue-treeselect)
 
-> A multi-select component with nested options support for Vue.js
+> A multi-select component with nested options support for Vue 3.
 
 ![Vue-Treeselect Screenshot](https://raw.githubusercontent.com/DarkNami/vue-treeselect/main/screenshot.png)
+
+### Important
+
+This fork does not register on NPM, `@riophae/vue-treeselect` is original author's package name, not this fork.
+
+Branch `main` support Vue 3 only.
+Branch `release/0.x` support Vue 2, but it no longer maintained.
 
 ### Features
 
@@ -26,7 +33,7 @@ It's recommended to install vue-treeselect via npm, and build your app using a b
 npm install --save @riophae/vue-treeselect
 ```
 
-This example shows how to integrate vue-treeselect with your [Vue SFCs](https://vuejs.org/v2/guide/single-file-components.html).
+This example shows how to integrate vue-treeselect with your [Vue SFCs](https://vuejs.org/api/sfc-spec.html).
 
 ```vue
 <!-- Vue SFC -->
@@ -119,6 +126,7 @@ If you just don't want to use webpack or any other bundlers, you can simply incl
 
     // register the component
     myApp.component('treeselect', VueTreeselect.Treeselect)
+
     myApp.mount('#app');
   </script>
 </html>
@@ -137,19 +145,6 @@ Note: please use a desktop browser since the website hasn't been optimized for m
 - Firefox
 - Safari
 
-### Bugs
-
-You can use this [pen](https://codepen.io/riophae/pen/MExgzP) to reproduce bugs and then [open an issue](https://github.com/riophae/vue-treeselect/issues/new).
-
-### Contributing
-
-1. Fork & clone the repo
-2. Install dependencies by `yarn` or `npm install`
-3. Check out a new branch
-4. `npm run dev` & hack
-5. Make sure `npm test` passes
-6. Push your changes & file a pull request
-
 ### Credits
 
 This project is inspired by [vue-multiselect](https://github.com/monterail/vue-multiselect), [react-select](https://github.com/JedWatson/react-select) and [Ant Design](https://github.com/ant-design/ant-design/). Special thanks go to their respective authors!
@@ -166,4 +161,4 @@ Some icons used in this project:
 
 Copyright (c) 2017-present [Riophae Lee](https://github.com/riophae).
 
-Released under the [MIT License](https://github.com/riophae/vue-treeselect/blob/master/LICENSE).
+Released under the [MIT License](https://github.com/DarkNami/vue-treeselect/blob/main/LICENSE).
