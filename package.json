@@ -1,11 +1,22 @@
 {
   "name": "@riophae/vue-treeselect",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "A multi-select component with nested options support for Vue.js",
   "author": "Riophae Lee <riophaelee@gmail.com>",
+  "contributors": [
+    {
+      "name": "Riophae Lee",
+      "email": "riophaelee@gmail.com",
+      "web": "https://github.com/riophae"
+    },
+    {
+      "name": "Dragon",
+      "web": "https://github.com/DarkNami"
+    }
+  ],
   "license": "MIT",
   "homepage": "https://vue-treeselect.js.org/",
-  "repository": "riophae/vue-treeselect",
+  "repository": "DarkNami/vue-treeselect",
   "main": "dist/vue-treeselect.cjs.js",
   "unpkg": "dist/vue-treeselect.umd.min.js",
   "css": "dist/vue-treeselect.min.css",
