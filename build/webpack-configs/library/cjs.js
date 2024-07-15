@@ -6,7 +6,10 @@ module.exports = webpackConfig => merge(webpackConfig, {
 
   output: {
     filename: webpackConfig.output.filename.replace(libraryTargetPlaceholder, 'cjs'),
-    libraryTarget: 'commonjs2',
+    library: {
+      name: 'VueTreeselect',
+      type: 'commonjs2',
+    },
   },
 
   externals: [
