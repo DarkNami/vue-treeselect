@@ -20,9 +20,10 @@
   --treeselect-control-border-color: #ddd;
   --treeselect-control-border-color-hover: #cfcfcf;
   --treeselect-control-border-color-active: var(--treeselect-control-border-color-hover);
+  --treeselect-control-border-color-focus: #039be5;
   --treeselect-control-border-radius: var(--treeselect-border-radius-lg);
   --treeselect-control-bg: #fff;
-  --treeselect-control-box-shadow-focus: 0 0 0 3px fade(@treeselect-control-border-color-focus, 10%);
+  --treeselect-control-box-shadow-focus: 0 0 0 3px color-mix(in srgb, var(--treeselect-control-border-color-focus), transparent 90%);
   --treeselect-control-bg-disabled: #f9f9f9;
   --treeselect-placeholder-font-color: #bdbdbd;
   --treeselect-single-value-font-color: #333;
@@ -69,6 +70,7 @@
   --treeselect-checkbox-color: #e0e0e0;
   --treeselect-checkbox-color-highlight: #039be5;
   --treeselect-checkbox-border-color: var(--treeselect-checkbox-color);
+  --treeselect-checkbox-bg: #fff;
   --treeselect-checkbox-border-color-hover: var(--treeselect-checkbox-color-highlight);
   --treeselect-checkbox-bg-hover: #fff;
   --treeselect-checkbox-indeterminate-border-color: var(--treeselect-checkbox-color-highlight);
@@ -80,7 +82,7 @@
   --treeselect-checkbox-checked-border-color-hover: var(--treeselect-checkbox-color-highlight);
   --treeselect-checkbox-checked-bg-hover: var(--treeselect-checkbox-color-highlight);
   --treeselect-checkbox-disabled-border-color: var(--treeselect-checkbox-border-color);
-  --treeselect-checkbox-disabled-bg-color: darken(@treeselect-checkbox-bg, 3%);
+  --treeselect-checkbox-disabled-bg-color: color-mix(in srgb, var(--treeselect-checkbox-bg), black 3%);
   --treeselect-option-label-color: inherit;
   --treeselect-option-label-color-disabled: rgba(0, 0, 0, 0.25);
   --treeselect-loader-color-dark: #039be5;
@@ -101,7 +103,6 @@
 @treeselect-control-height: 36px;
 @treeselect-control-inner-height: @treeselect-control-height - @treeselect-control-border-width * 2;
 @treeselect-control-border-width: 1px;
-@treeselect-control-border-color-focus: #039be5;
 
 @treeselect-multi-value-margin-x: 0;
 @treeselect-multi-value-margin-y: 2px;
@@ -111,12 +112,10 @@
 
 @treeselect-menu-padding-y: @treeselect-padding;
 
-@treeselect-checkbox-bg: #fff;
 @treeselect-checkbox-indeterminate-icon: "./assets/checkbox-indeterminate.png";
 @treeselect-checkbox-checked-icon: "./assets/checkbox-checked.png";
 @treeselect-checkbox-disabled-indeterminate-icon: "./assets/checkbox-indeterminate-disabled.png";
 @treeselect-checkbox-disabled-checked-icon: "./assets/checkbox-checked-disabled.png";
-
 
 /**
  * Mixins
@@ -367,7 +366,7 @@
   }
 
   .vue-treeselect--focused:not(.vue-treeselect--open) & {
-    border-color: @treeselect-control-border-color-focus;
+    border-color: var(--treeselect-control-border-color-focus);
     box-shadow: var(--treeselect-control-box-shadow-focus);
   }
 
@@ -918,7 +917,7 @@
 
 .vue-treeselect__checkbox--unchecked {
   border-color: var(--treeselect-checkbox-border-color);
-  background: @treeselect-checkbox-bg;
+  background: var(--treeselect-checkbox-bg);
 
   .vue-treeselect__label-container:hover & {
     border-color: var(--treeselect-checkbox-border-color-hover);
