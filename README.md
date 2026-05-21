@@ -1,7 +1,6 @@
 # vue-treeselect
-![License](https://badgen.net/github/license/DarkNami/vue-treeselect)
 
-> A multi-select component with nested options support for Vue 3.
+A multi-select component with nested options support for Vue 3.
 
 ![Vue-Treeselect Screenshot](https://raw.githubusercontent.com/DarkNami/vue-treeselect/main/screenshot.png)
 
@@ -38,45 +37,45 @@ This example shows how to integrate vue-treeselect with your [Vue SFCs](https://
 ```vue
 <!-- Vue SFC -->
 <template>
-  <div id="app">
-    <treeselect v-model="value" :multiple="true" :options="options" />
-  </div>
+	<div id="app">
+		<treeselect v-model="value" :multiple="true" :options="options" />
+	</div>
 </template>
 
 <script>
-  // import the component
-  import Treeselect from '@riophae/vue-treeselect'
-  // import the styles
-  import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+// import the component
+import Treeselect from '@riophae/vue-treeselect'
+// import the styles
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
-  export default {
-    // register the component
-    components: { Treeselect },
-    data() {
-      return {
-        // define the default value
-        value: null,
-        // define options
-        options: [ {
-          id: 'a',
-          label: 'a',
-          children: [ {
-            id: 'aa',
-            label: 'aa',
-          }, {
-            id: 'ab',
-            label: 'ab',
-          } ],
-        }, {
-          id: 'b',
-          label: 'b',
-        }, {
-          id: 'c',
-          label: 'c',
-        } ],
-      }
-    },
-  }
+export default {
+	// register the component
+	components: { Treeselect },
+	data() {
+		return {
+			// define the default value
+			value: null,
+			// define options
+			options: [{
+				id: 'a',
+				label: 'a',
+				children: [{
+					id: 'aa',
+					label: 'aa',
+				}, {
+					id: 'ab',
+					label: 'ab',
+				}],
+			}, {
+				id: 'b',
+				label: 'b',
+			}, {
+				id: 'c',
+				label: 'c',
+			}],
+		}
+	},
+}
 </script>
 ```
 
@@ -84,51 +83,48 @@ If you just don't want to use webpack or any other bundlers, you can simply incl
 
 ```html
 <html>
-  <head>
-    <!-- include Vue 3.x -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@^3"></script>
-    <!-- include vue-treeselect & its styles. you can change the version tag to better suit your needs. -->
-    <script src="./dist/vue-treeselect.umd.min.js"></script>
-    <link rel="stylesheet" href="./dist/vue-treeselect.min.css">
-  </head>
-  <body>
-    <div id="app">
-      <treeselect v-model="value" :multiple="true" :options="options" />
-    </div>
-  </body>
-  <script>
-    const { createApp } = window.Vue;
-
-    const myApp = createApp({
-      data: {
-        // define the default value
-        value: null,
-        // define options
-        options: [ {
-          id: 'a',
-          label: 'a',
-          children: [ {
-            id: 'aa',
-            label: 'aa',
-          }, {
-            id: 'ab',
-            label: 'ab',
-          } ],
-        }, {
-          id: 'b',
-          label: 'b',
-        }, {
-          id: 'c',
-          label: 'c',
-        } ],
-      },
-    });
-
-    // register the component
-    myApp.component('treeselect', VueTreeselect.Treeselect)
-
-    myApp.mount('#app');
-  </script>
+<head>
+	<!-- include Vue 3.x -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@^3"></script>
+	<!-- include vue-treeselect & its styles. you can change the version tag to better suit your needs. -->
+	<script src="./dist/vue-treeselect.umd.min.js"></script>
+	<link rel="stylesheet" href="./dist/vue-treeselect.min.css">
+</head>
+<body>
+	<div id="app">
+		<treeselect v-model="value" :multiple="true" :options="options" />
+	</div>
+</body>
+<script>
+	const { createApp } = window.Vue;
+	const myApp = createApp({
+		data: {
+			// define the default value
+			value: null,
+			// define options
+			options: [{
+				id: 'a',
+				label: 'a',
+				children: [{
+					id: 'aa',
+					label: 'aa',
+				}, {
+					id: 'ab',
+					label: 'ab',
+				}],
+			}, {
+				id: 'b',
+				label: 'b',
+			}, {
+				id: 'c',
+				label: 'c',
+			}],
+		},
+	});
+	// register the component
+	myApp.component('treeselect', VueTreeselect.Treeselect)
+	myApp.mount('#app');
+</script>
 </html>
 ```
 
@@ -147,7 +143,7 @@ Note: please use a desktop browser since the website hasn't been optimized for m
 
 ### Credits
 
-This project is inspired by [vue-multiselect](https://github.com/monterail/vue-multiselect), [react-select](https://github.com/JedWatson/react-select) and [Ant Design](https://github.com/ant-design/ant-design/). Special thanks go to their respective authors!
+This project is based on [vue-treeselect](https://github.com/riophae/vue-treeselect) by [riophae](https://github.com/riophae). Special thanks go to their respective authors!
 
 Some icons used in this project:
 
@@ -158,7 +154,5 @@ Some icons used in this project:
   - "checkmark symbol" & "minus symbol" icons made by [Catalin Fertu](https://www.flaticon.com/authors/catalin-fertu) are licensed under [CC 3.0 BY](https://creativecommons.org/licenses/by/3.0/)
 
 ### License
-
-Copyright (c) 2017-present [Riophae Lee](https://github.com/riophae).
 
 Released under the [MIT License](https://github.com/DarkNami/vue-treeselect/blob/main/LICENSE).
