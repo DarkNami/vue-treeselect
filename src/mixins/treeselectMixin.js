@@ -639,7 +639,7 @@ export default {
     },
   },
 
-  emits: ['update:modelValue', 'search-change', 'close', 'open', 'select', 'deselect'],
+  emits: ['update:modelValue', 'input', 'search-change', 'close', 'open', 'select', 'deselect'],
 
   data() {
     return {
@@ -838,7 +838,10 @@ export default {
       // #122
       // Vue would trigger this watcher when `newValue` and `oldValue` are shallow-equal.
       // We emit the `input` event only when the value actually changes.
-      if (hasChanged) this.$emit('update:modelValue', this.getValue(), this.getInstanceId())
+      if (hasChanged) {
+        this.$emit('update:modelValue', this.getValue())
+        this.$emit('input', this.getValue(), this.getInstanceId())
+      }
     },
 
     matchKeys() {
